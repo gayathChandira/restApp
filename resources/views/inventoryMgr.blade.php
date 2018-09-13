@@ -17,6 +17,7 @@
 
     <!-- Material Design Bootstrap -->
     <link href="{{asset('css/mdb.min.css')}}" rel="stylesheet">
+    <script type="text/javascript" src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
 
 </head>
 <body class="fixed-sn light-blue-skin">
@@ -162,13 +163,12 @@
     </main>
     <!--Main Layout-->
 
-</body>
+
     
         
     <!-- SCRIPTS -->
     <!-- JQuery -->
-    <script type="text/javascript" src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
-
+    
     <!-- Tooltips -->
     <script type="text/javascript" src="{{asset('js/popper.min.js')}}"></script>
 

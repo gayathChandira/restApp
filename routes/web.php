@@ -20,10 +20,12 @@ Route::get('/admin', function () {
 Route::get('/inventory', function () {
     return view('inventoryMgr');
 });
+Route::post('foodItems/fetch', 'FoodItemController@fetch')->name('FoodItemController.fetch');
 Route::get('/inventory/update', 'FoodItemController@indexUpdate');
 Route::get('/inventory/addnew', 'FoodItemController@indexAddNew');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('foodItems/storenew', 'FoodItemController@storenew');
 
 Route::resource('foodItems', 'FoodItemController');

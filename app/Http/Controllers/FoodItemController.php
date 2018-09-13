@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\FoodItem;
 use App\ FoodItemUpdate;
-
+use DB;
+ 
 class FoodItemController extends Controller
 {
     /**
@@ -15,20 +16,15 @@ class FoodItemController extends Controller
      */
     public function indexUpdate()
     {
-        return view('inventory.update');
+        $foodItemsfromDB = FoodItem::all();
+        return view('inventory.update')->with('fooditems', $foodItemsfromDB);
     }
     public function indexAddNew()
     {
         return view('inventory.addnew');
     }
 
-    public function storeItem(Request $request)
-    {   //add new food items into database
-        $foodItem = new  FoodItem;
-        $foodItem->itemName = $request->input('foodItem');
-        $foodItem->unit = $request->input('unit');       
-        $foodItem->save();
-    }
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -38,6 +34,18 @@ class FoodItemController extends Controller
     {
         //
     }
+    public function fetch(Request $request){
+        if($request->get('query')){            
+            $query = $request->get('query');            
+            $data = DB::table('food_items')->where('id', 'like', '%'.$query.'%')->get();            
+            $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+            foreach($data as $row){                
+                $output .= '<li><a href="#">'.$row->id.'</a></li>';
+            }
+            $output .= '</ul>';
+            echo $output;
+        }
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -45,6 +53,13 @@ class FoodItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function storenew(Request $request)
+    {   //add new food items into database
+        $foodItem = new  FoodItem;
+        $foodItem->itemName = $request->input('foodItem');
+        $foodItem->unit = $request->input('unit');       
+        $foodItem->save();
+    }
     public function store(Request $request)
     {   //food items updating to the database food_item_update table
         $foodItemUP = new  FoodItemUpdate;

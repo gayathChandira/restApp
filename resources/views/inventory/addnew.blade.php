@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Add New Food Item</h1>
-    {!! Form::open(['action'=> 'FoodItemController@storeItem', 'method' =>'POST'])!!}
+    {!! Form::open(['action'=> 'FoodItemController@storenew', 'method' =>'POST'])!!}
         <div class="form-group">
             {{Form::label('foodItem', 'Food Item Name')}}
             {{Form::text('foodItem', '', ['class' =>'form-control', 'placeholder'=>'Food Item Name'])}}
