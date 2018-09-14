@@ -21,6 +21,8 @@ Route::get('/inventory', function () {
     return view('inventoryMgr');
 });
 Route::post('foodItems/fetch', 'FoodItemController@fetch')->name('FoodItemController.fetch');
+Route::post('foodItems/fetchItemName', 'FoodItemController@fetchItemName')->name('FoodItemController.fetchItemName');
+
 Route::get('/inventory/update', 'FoodItemController@indexUpdate');
 Route::get('/inventory/addnew', 'FoodItemController@indexAddNew');
 Auth::routes();
