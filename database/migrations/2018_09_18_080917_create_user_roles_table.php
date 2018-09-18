@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class MakeFoodItemUpdateTable extends Migration
+class CreateUserRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class MakeFoodItemUpdateTable extends Migration
      */
     public function up()
     {
-        Schema::create('food_item_update', function(Blueprint $table){
+        Schema::create('user_role', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('item_id');            
-            $table->integer('quantity');            
-            $table->string('vendor_id');
             $table->timestamps();
+            $table->integer('user_id');
+            $table->integer('role_id');
         });
-        
     }
 
     /**
@@ -30,6 +28,6 @@ class MakeFoodItemUpdateTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('user_role');
     }
 }

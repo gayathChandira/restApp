@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use App\FoodItem;
-class ChangeTableName extends Migration
+
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,12 @@ class ChangeTableName extends Migration
      */
     public function up()
     {
-        Schema::rename('food_items', 'foodItemUpdate');
+        Schema::create('roles', function (Blueprint $table) {
+            $table->increments('id');
+            $table->timestamps();
+            $table->string('name');
+            $table->string('description');
+        });
     }
 
     /**
@@ -23,6 +28,6 @@ class ChangeTableName extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('roles');
     }
 }

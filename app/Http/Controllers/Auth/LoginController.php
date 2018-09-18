@@ -28,7 +28,24 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
-
+    public function redirectPath()
+    {
+        // Logic that determines where to send the user
+        if (\Auth::user()->type == 'admin') {
+            return '/admin';
+        }
+        if (\Auth::user()->type == 'Mgr') {
+            return '/inventory';
+        }
+        if (\Auth::user()->type == 'accountant') {
+            return '/accountant';
+        }
+        if (\Auth::user()->type == 'cashier') {
+            return '/cashier';
+        }
+    
+        return '/dashboard';
+    }
     /**
      * Create a new controller instance.
      *
@@ -42,4 +59,5 @@ class LoginController extends Controller
         Auth::logout();
         return redirect('/login');
       }
+   
 }
