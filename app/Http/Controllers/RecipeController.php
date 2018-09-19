@@ -20,11 +20,14 @@ class RecipeController extends Controller
     public function store(Request $request){
         $recipe = new Recipe;
         $recipe->meal_name = $request->recipeName;
-        // $length = $request->input('loopLength');
-        // echo "len".$length;
-        // for($i = 0; $i<$length; $i++){
+        $length = $request->input('loopLength');
+        echo "len".$length;
+        for($i = 0; $i<$length; $i++){
+            echo $i;
             $recipe->ingredients = $request->array1[$i][0];
-            //$recipe->ingredients = $request->array1[$i][1];        }
+            $recipe->ingredients = $request->array1[$i][1];       
+        }
         $recipe->save();
+        return redirect('./inventory/recipe')->with('success', 'New Recipe Created!');
     }
 }

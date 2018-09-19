@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Admin Page</title>
+    <title>Cashier Page</title>
     <link rel="icon" href="{{asset('img/rest_icon.png')}}">
 
     <!-- Font Awesome -->
@@ -89,14 +89,14 @@
                 <a href="#" class="list-group-item active waves-effect">
                     <i class="fa fa-pie-chart mr-3"></i>Dashboard
                 </a>
-            <a href="{{url('/register')}}" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fa fa-user mr-3"></i>User Registration</a>
                 <a href="#" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fa fa-table mr-3"></i>View Accounts</a>
+                    <i class="fa fa-user mr-3"></i>Profile</a>
                 <a href="#" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fa fa-map mr-3"></i>View Reports</a>
+                    <i class="fa fa-table mr-3"></i>Tables</a>
                 <a href="#" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fa fa-money mr-3"></i>Manage Venders</a>
+                    <i class="fa fa-map mr-3"></i>Maps</a>
+                <a href="#" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-money mr-3"></i>Orders</a>
             </div>
 
         </div>
@@ -105,7 +105,7 @@
     <main class="pt-5 mx-lg-5">
         <div class="container-fluid mt-5">
             <div class="card mb-4 wow fadeIn">
-                <h1>Admin Page</h1>
+                <h1>Cashier Page</h1>
             </div>    
         </div>    
     </main>        

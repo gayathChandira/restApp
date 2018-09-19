@@ -13,9 +13,7 @@ class FoodItemController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-    }
-
-    
+    }  
     
     /**
      * Display a listing of the resource.
@@ -28,9 +26,7 @@ class FoodItemController extends Controller
     }
     public function indexAddNew(){
         return view('inventory.addnew');
-    }
-  
-    
+    }    
     /**
      * Show the form for creating a new resource.
      *
@@ -96,6 +92,7 @@ class FoodItemController extends Controller
         $foodItem->itemName = $request->input('foodItem');
         $foodItem->unit = $request->input('unit');       
         $foodItem->save();
+        return redirect('./inventory/addnew')->with('success', 'New Item Created');
     }
     public function store(Request $request)
     {   //food items updating to the database food_item_update table        
@@ -105,20 +102,17 @@ class FoodItemController extends Controller
         $items = FoodItem::where('id', 'like', '%'.$request->input('foodItem_id').'%')->value('quantity');       
 
         //current quantitiy + updated quantity
-        $sum = $items + $request->input('quantity');
-        //$foodItem->quantity =$request->input('quantity');
+        $sum = $items + $request->input('quantity');    
 
         //update new quantity on Food_items table
         FoodItem::where('id', 'like', '%'.$request->input('foodItem_id').'%')->update(['quantity'=>$sum]);         
         FoodItem::where('id', 'like', '%'.$request->input('foodItem_id').'%')->update(['unit_price'=>$request->input('unitPrice')]);
         $foodItemUP->item_id = $request->input('foodItem_id');
         $foodItemUP->quantity = $request->input('quantity');        
-        
         $foodItemUP->vendor_id = $request->input('vendor');
         $foodItemUP->save();
-        //$foodItem->save();
+        return redirect('./inventory/update')->with('success', 'Stock Updated!');
     }
-
     /**
      * Display the specified resource.
      *

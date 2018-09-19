@@ -19,6 +19,12 @@ Route::get('/login', function () {
 Route::get('/admin', function () {
     return view('admin');
 });
+Route::get('/cashier', function () {
+    return view('cashier');
+});
+Route::get('/accountant', function () {
+    return view('accountant');
+});
 Route::get('/inventory','RecipeController@inven');
 Route::post('foodItems/fetch', 'FoodItemController@fetch')->name('FoodItemController.fetch');
 Route::post('foodItems/fetchItemName', 'FoodItemController@fetchItemName')->name('FoodItemController.fetchItemName');

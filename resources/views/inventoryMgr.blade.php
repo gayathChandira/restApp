@@ -24,11 +24,15 @@
             padding-left: 73px;
             padding-right: 410px;
             padding-top: 31px;
-            padding-bottom: 119px;
+            padding-bottom: 502px;
         }
         .container-fluid{
             width: 102%;
             margin-left: -23px;
+        }
+        .btn{
+            padding: 0;
+            font-size: 15px;
         }
         
     </style>    
@@ -188,7 +192,7 @@
             
 
             <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item active waves-effect">
+            <a href="{{url('/inventory')}}" class="list-group-item active waves-effect">
                     <i class="fa fa-pie-chart mr-3"></i>Dashboard
                 </a>
                 <a href="{{url('inventory/update')}}" class="list-group-item list-group-item-action waves-effect">
@@ -205,6 +209,7 @@
     <main class="pt-5 mx-lg-5">
         <div class="container-fluid mt-5">
             <div class="card mb-4 wow fadeIn">
+                @include('inc.messages')
                 @yield('content')
             </div>    
         </div>    

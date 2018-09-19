@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{-- <link rel="stylesheet" href="/project/public/css/bootstrap.min.css">
     <link rel="stylesheet" href="/project/public/css/mdb.min.css"> --}}
+    <title>Nishan Hotel</title>
+    <link rel="icon" href="{{asset('img/rest_icon.png')}}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
@@ -75,9 +77,7 @@
                 <div class="col-md-6 mb-5 mt-md-0 mt-5 white-text text-center text-md-left wow fadeInLeft" data-wow-delay="0.3s">
                   <h1 class="display-4 font-weight-bold">Nishan Hotel Nivithigala</h1>
                   <hr class="hr-light">
-                  <h6 class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem repellendus quasi fuga
-                  nesciunt dolorum nulla magnam veniam sapiente, fugiat! Commodi sequi non animi ea
-                  dolor molestiae, quisquam iste.</h6>
+                  <h6 class="mb-3">Nishan Hotel Started as a small restaurant in 2013 with an ambision of providing quality service to its customers. Today we have become a reputed business in Nivithigala area. Our future vision is to continue providing a good service to the customers while ensuring maximum customer satisfaction.</h6>
                   <a class="btn btn-outline-white">Learn more</a>
                 </div>
                 <!--Grid column-->

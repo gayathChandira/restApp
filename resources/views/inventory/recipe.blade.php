@@ -13,20 +13,20 @@
             <div class="form-row">
                 <div class="col form-group"  >
                     {{Form::label('ingredients', 'Ingredients')}}
-                    {{Form::text('array1[0][0]', '', ['class' =>'form-control', 'placeholder'=>'Recipe'])}}
+                    {{Form::text('array1[0][0]', '', ['class' =>'form-control', 'placeholder'=>'Item'])}}
                                         
                 </div> 
                 <div class="col form-group ">
                     {{Form::label('amounts', 'Amounts')}}
-                    {{Form::text('array1[0][1]', '', ['class' =>'form-control', 'placeholder'=>'Recipe'])}}
+                    {{Form::text('array1[0][1]', '', ['class' =>'form-control', 'placeholder'=>'Amounts'])}}
                 </div> 
             </div>  
         </div>      
-        <input type="button" class="btn btn-danger btn-sm btn-rounded" id="more_fields" onclick="add_fields();" value="Add More" />          
+        <input type="button" class="btn btn-primary" id="more_fields" onclick="add_fields();" value="Add More" />          
          <br><br><br><br><br>
          <input type="hidden" name="loopLength" id="length"/>
         <div style="display:block;">
-            {{Form::submit('Submit', ['class' => 'btn btn-default'])}} 
+            {{Form::submit('Submit', ['class' => 'btn btn-primary'])}} 
         </div>
         
     {!! Form::close() !!}
@@ -37,14 +37,12 @@
             room++;
             var objTo = document.getElementById('room_fileds')
             var divtest = document.createElement("div");
-            divtest.innerHTML = '<div class="form-row"><div class="form-group col"><label>Ingrediants</label><input type ="text" name="array1['+room+'][0]" class="form-control"></div><div class="form-group col"><label>Amounts</label><input type ="text" name="array1['+room+'][1]" class="form-control"></div></div>';
+            divtest.innerHTML = '<div class="form-row"><div class="form-group col"><label>Ingrediants</label><input type ="text" placeholder="Item" name="array1['+room+'][0]" class="form-control"></div><div class="form-group col"><label>Amounts</label><input type ="text" placeholder="Amounts" name="array1['+room+'][1]" class="form-control"></div></div>';
             objTo.appendChild(divtest);
             document.getElementById('length').value = room;
             var hello = document.getElementById("length").value
             console.log(hello);
-        }
-        
-        
+        }    
       
     </script>
     
