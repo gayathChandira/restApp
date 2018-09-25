@@ -40,3 +40,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('foodItems/storenew', 'FoodItemController@storenew');
 
 Route::resource('foodItems', 'FoodItemController');
+
+Route::get('/admin/vendors','VendorController@index');

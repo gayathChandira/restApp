@@ -41,7 +41,7 @@
             objTo.appendChild(divtest);
             document.getElementById('length').value = room;
             var hello = document.getElementById("length").value
-            console.log(hello);
+            //console.log(hello);
         }    
       
     </script>

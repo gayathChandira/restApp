@@ -14,12 +14,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Material Design Bootstrap -->
-    <link href="css/mdb.min.css" rel="stylesheet">
-    <link href="css/style.min.css" rel="stylesheet">
-
+    <link href="{{asset('css/mdb.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/style.min.css')}}" rel="stylesheet">
+    <script type="text/javascript" src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
 </head>
 <body class="grey lighten-3">
 
@@ -37,7 +37,8 @@
                 </button>
 
                 <!-- Links -->
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                {{-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> --}}
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">   
                     <!-- Right -->
                     <ul class="nav navbar-nav nav-flex-icons ml-auto">
                         <li class="nav-item">
@@ -79,7 +80,7 @@
         <!-- Navbar -->
 
         <!-- Sidebar -->
-        <div class="sidebar-fixed position-fixed">
+        <div class="sidebar-fixed position-fixed" >
 
             {{-- <a class="logo-wrapper waves-effect"> --}}
             <img src="{{asset('img/main_logo2.png')}}" class="img-fluid" alt="" style="max-width:64%;margin-left:33px;">
@@ -95,39 +96,40 @@
                     <i class="fa fa-table mr-3"></i>View Accounts</a>
                 <a href="#" class="list-group-item list-group-item-action waves-effect">
                     <i class="fa fa-map mr-3"></i>View Reports</a>
-                <a href="#" class="list-group-item list-group-item-action waves-effect">
+                <a href="{{url('/admin/vendors')}}" class="list-group-item list-group-item-action waves-effect">
                     <i class="fa fa-money mr-3"></i>Manage Venders</a>
             </div>
-
         </div>
         <!-- Sidebar -->
+
     </header>  
+
     <main class="pt-5 mx-lg-5">
         <div class="container-fluid mt-5">
-            <div class="card mb-4 wow fadeIn">
-                <h1>Admin Page</h1>
-            </div>    
+            {{-- <div class="card mb-4 wow fadeIn"> --}}                
+                @include('inc.messages')
+                @yield('content')
+            {{-- </div>     --}}
         </div>    
     </main>        
     <!-- SCRIPTS -->
     <!-- JQuery -->
-    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    
 
     <!-- Tooltips -->
-    <script type="text/javascript" src="js/popper.min.js"></script>
+    <script type="text/javascript" src="{{asset('js/popper.min.js')}}"></script>
 
     <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
 
     <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <script type="text/javascript" src="{{asset('js/mdb.min.js')}}"></script>
     <script>
-
-        // SideNav Initialization
-        $(".button-collapse").sideNav();
-        
-        new WOW().init();
-    
+        // // SideNav Button Initialization
+        // $(".navbar-toggler").sideNav();
+        // // SideNav Scrollbar Initialization
+        // var sideNavScrollbar = document.querySelector('.custom-scrollbar');
+        // Ps.initialize(sideNavScrollbar);   
     </script>
 
 </body>
