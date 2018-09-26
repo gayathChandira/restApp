@@ -42,3 +42,4 @@ Route::post('foodItems/storenew', 'FoodItemController@storenew');
 Route::resource('foodItems', 'FoodItemController');
 
 Route::get('/admin/vendors','VendorController@index');
+Route::post('/admin/vendors','VendorController@setVendor');
