@@ -42,4 +42,5 @@ Route::post('foodItems/storenew', 'FoodItemController@storenew');
 Route::resource('foodItems', 'FoodItemController');
 
 Route::get('/admin/vendors','VendorController@index');
-Route::post('/admin/vendors','VendorController@setVendor');
+Route::post('/admin/vendors','VendorController@setVendor')->name('VendorController.setVendor');
+Route::post('/admin/vendorsEdit','VendorController@fetchID')->name('VendorController.fetchID');

@@ -18,11 +18,12 @@
     <!--Panel 1-->
     <div class="tab-pane fade in show active" id="panel1" role="tabpanel">
         <br>
-        {!! Form::open(['action'=> 'VendorController@setVendor', 'method' =>'POST'])!!}
+        {!! Form::open(['action'=> 'VendorController@setVendor', 'method' =>'POST', 'autocomplete' =>'off'])!!}
         <div class="form-group">
             {{Form::label('fname', 'First Name')}}
             {{Form::text('fname', '', ['class' =>'form-control', 'placeholder'=>'First Name'])}}
         </div>   
+        
         <div class="form-group">
                 {{Form::label('lname', 'Last Name')}}
                 {{Form::text('lname', '', ['class' =>'form-control', 'placeholder'=>'Last Name'])}}
@@ -54,12 +55,24 @@
     <!--Panel 2-->
     <div class="tab-pane fade" id="panel2" role="tabpanel">
         <br>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus
-            reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione
-            porro voluptate odit minima.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus
-            reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione
-            porro voluptate odit minima.</p>
+        <h5>Enter Vendor ID or Name</h5>
+        {!! Form::open([])!!}
+        <div class="form-row">
+            <div class="form-group col">
+                {{Form::label('id', 'ID')}}
+                {{Form::text('id', '', ['class' =>'form-control','id'=>'vendor_id', 'placeholder'=>'Vendor ID'])}}
+                <div id="id_list" style="z-index: 1;position:absolute;"></div> 
+                
+            </div>  
+            {{ csrf_field() }}      
+            <div class="form-group col">
+                    {{Form::label('name', 'Name')}}
+                    {{Form::text('name', '', ['class' =>'form-control', 'placeholder'=>'Vendor Name'])}}
+            </div> 
+        </div>
+         
+        {{Form::submit('Submit', ['class' => 'btn btn-primary'])}} 
+        {!! Form::close() !!} 
     </div>
     <!--/.Panel 2-->
     <!--Panel 3-->
@@ -73,12 +86,15 @@
 </div>
 
 <script>
-    $(document).ready(function(){        
+    $(document).ready(function(){
+        //Add Vendor -------------------------------- 
+        
         //Load the item names when user types the name 
         $('#item_name').keyup(function(){
             var query = $(this).val();                            
             if(query != ''){                    
                 var _token = $('input[name="_token"]').val();
+                console.log( _token ); 
                 $.ajax({
                     url:"{{ route('FoodItemController.fetchNameWhenType')}}",    
                     method:"POST",
@@ -94,27 +110,27 @@
         if($('#item_name').keyup()){
             var count =1;
             var arr = [];
-            $(document).on('click', '#list2', function(){  
+            $(document).on('click', '#list2', function(){ 
+                $('#item_name').val(''); 
                 //food-item list show in the div named div_cover  
                 $('#div_cover').append('<li class="list-group-item"id="item_names'+count+'"></li>');
                 $('#item_names'+count+'').text($(this).text());                
                 count ++;
                 $('#name_list').fadeOut();
                 var query =$(this).text(); 
-                console.log("what is this"+$(this).text());
+                
                 //get item id when given the item name
                 if(query != ''){   
-                    console.log("what inside "+$(this).text());                                 
+                                                   
                     var _token = $('input[name="_token"]').val();
+                   
                     $.ajax({
                         url:"{{ route('FoodItemController.fetchID')}}",   
                         method:"POST",
                         data:{query:query,_token:_token},                        
                         success:function(data){   
                             //create a array of food items' IDs 
-                            arr.push(data);
-                            console.log(count);
-                            console.log(arr);
+                            arr.push(data);                            
                             document.getElementById('food_ids').value = arr;
                             document.getElementById('length').value = (count-1);
                         }        
@@ -122,6 +138,26 @@
                 }               
             });            
         }
+        //Edit Vendor -------------------------------- 
+        $('#vendor_id').keyup(function(){
+                console.log('ell');
+                var query = $(this).val();     
+                                    
+                if(query != ''){                    
+                    var _token = $('input[name="_token"]').val();  
+                    console.log( _token );                   
+                    $.ajax({
+                        url:"{{ route('VendorController.fetchID')}}",    
+                        method:"POST",
+                        data:{query:query, _token:_token},
+                        success:function(data){  
+                            console.log(data);                          
+                            $('#id_list').fadeIn();
+                            $('#id_list').html(data);
+                        }           
+                     })
+                }
+            });
     }); 
 </script>
 @endsection

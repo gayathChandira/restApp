@@ -6,7 +6,7 @@
         <div class="form-group">
             {{Form::label('recipeName', 'Meal Name')}}
             {{Form::text('recipeName', '', ['class' =>'form-control', 'placeholder'=>'Recipe', 'id'=>'item_ID'])}}
-            {{-- <input type="text" class="form-control" id="item_ID"> --}}
+            <!-- {{-- <input type="text" class="form-control" id="item_ID"> --}} -->
             <div id="item_list" style="z-index: 1;position:absolute;"></div>            
         </div>
         <div id="room_fileds">
