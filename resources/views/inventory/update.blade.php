@@ -35,7 +35,7 @@
 
         {{Form::submit('Submit', ['class' => 'btn btn-primary'])}} 
     {!! Form::close() !!}
-
+    
 
     <script>  
         //Load up item_id from the data base when user type in text box
@@ -90,7 +90,7 @@
                      })
                 }
             });
-            //get item-id when user selcts the item name from the dropdown list
+            //set item-id when user selcts the item name from the dropdown list
             if($('#item_name').keyup()){ 
                 $(document).on('click', '#list2', function(){                
                 $('#item_name').val($(this).text());

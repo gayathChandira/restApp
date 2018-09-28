@@ -43,4 +43,10 @@ Route::resource('foodItems', 'FoodItemController');
 
 Route::get('/admin/vendors','VendorController@index');
 Route::post('/admin/vendors','VendorController@setVendor')->name('VendorController.setVendor');
-Route::post('/admin/vendorsEdit','VendorController@fetchID')->name('VendorController.fetchID');
+Route::post('vendors/fetchID','VendorController@fetchID')->name('VendorController.fetchID');
+Route::post('vendors/fetchNameWhenType','VendorController@fetchNameWhenType')->name('VendorController.fetchNameWhenType');
+Route::post('vendors/fetchVendorName','VendorController@fetchVendorName')->name('VendorController.fetchVendorName');
+Route::post('vendors/fetchVendorid','VendorController@fetchvendorID')->name('VendorController.fetchvendorID');
+Route::post('vendors/update','VendorController@updateVendor');
+Route::post('vendors/remove','VendorController@removeVendor');
+Route::post('/admin/vendor/editVendor','VendorController@editVendor')->name('VendorController.editVendor');
