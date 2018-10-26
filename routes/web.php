@@ -50,3 +50,8 @@ Route::post('vendors/fetchVendorid','VendorController@fetchvendorID')->name('Ven
 Route::post('vendors/update','VendorController@updateVendor');
 Route::post('vendors/remove','VendorController@removeVendor');
 Route::post('/admin/vendor/editVendor','VendorController@editVendor')->name('VendorController.editVendor');
+
+Route::get('recipe','RecipeController@store1')->name('RecipeController.store1');
+  
+
+

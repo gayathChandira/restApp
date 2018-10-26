@@ -1,7 +1,7 @@
 @extends('inventoryMgr')
 
 @section('content')
-    <h1>Make a New Recipe</h1>
+    <h1 class="card-title">Make a New Recipe</h1>
     {!! Form::open(['action'=>'RecipeController@store', 'method' =>'POST','autocomplete' =>'off'])!!}
         <div class="form-group">
             {{Form::label('recipeName', 'Meal Name')}}
@@ -12,18 +12,27 @@
         {{ csrf_field() }}  
         <div id="room_fileds">
             <div class="form-row">
-                <div class="col form-group"  >
+                <div class="col-sm-4 form-group"  >
                     {{Form::label('ingredients', 'Ingredients')}}
-                    {{Form::text('ingri[0]', '', ['class' =>'form-control item_name', 'placeholder'=>'Item'])}}
-                    <div id="name_list" style="z-index: 1;position:absolute;"></div>                     
+                    {{Form::text('ingri[0]', '', ['class' =>'form-control item_name0', 'placeholder'=>'Item', 'id'=>'ingri'])}}
+                    <div id="name_list0" style="z-index: 1;position:absolute;"></div>     
+                                        
                 </div> 
-                <div class="col form-group ">
+                <div class="col-sm-4 form-group ">
                     {{Form::label('amounts', 'Amounts')}}
-                    {{Form::text('amount[0]', '', ['class' =>'form-control', 'placeholder'=>'Amounts'])}}
+                    {{Form::text('amount[0]', '', ['class' =>'form-control', 'placeholder'=>'Amounts', 'id'=>'amount'])}}
                 </div> 
+                <input type="button" class="btn btn-primary" id="more_fields" onclick="add_fields();" value="Add More" />
+                <div class="col-sm-4 card mb-4" >
+                    <div class="card-body" id="thelist">
+                        {{-- popup parts --}}
+                    </div>
+                    
+                </div>
             </div>  
-        </div>      
-        <input type="button" class="btn btn-primary" id="more_fields" onclick="add_fields();" value="Add More" />          
+        </div>   
+        <br><br><br>   
+              
          <br><br><br><br><br>
          <input type="hidden" name="loopLength" id="length"/>
         <div style="display:block;">
@@ -31,48 +40,69 @@
         </div>
         
     {!! Form::close() !!}
-     
+    {{-- <div class="col form-group">
+        <a type="button" id="clickR[0]" class="btn-floating cyan"><i class="fa fa-check" aria-hidden="true"></i></a>
+        <a type="button" id="clickX[0]" class="btn-floating cyan"><i class="fa fa-close" aria-hidden="true"></i></a>
+    </div> --}}
     <script>
-        
-        $(document).ready(function(){
-            //Get ingridient name when use type the name in text box
-            $('.item_name').keyup(function(){
-                var query = $(this).val(); 
-                console.log(query);                           
-                if(query != ''){                    
-                    var _token = $('input[name="_token"]').val();
-                    $.ajax({
-                        url:"{{ route('FoodItemController.fetchNameWhenType')}}",    
-                        method:"POST",
-                        data:{query:query, _token:_token},
-                        success:function(data){                            
-                            $('#name_list').fadeIn();
-                            $('#name_list').html(data);
-                        }           
-                     })
-                }
-            });
-            //set item-id when user selcts the item name from the dropdown list
-            if($('.item_name').keyup()){ 
-                $(document).on('click', '#list2', function(){                
-                $('#item_name').val($(this).text());
-                $('#name_list').fadeOut();  
+       var room =0 ; 
 
-                });
+        $('#room_fileds').on('keyup','.item_name0',function(){      
+            var query = $(this).val(); 
+                                   
+            if(query != ''){                    
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url:"{{ route('FoodItemController.fetchNameWhenType')}}",    
+                    method:"POST",
+                    data:{query:query, _token:_token},
+                    success:function(data){                            
+                        $('#name_list0').fadeIn();
+                        $('#name_list0').html(data);
+                    }           
+                    })
             }
-
+        });           
+        //set item-id when user selcts the item name from the dropdown list
+        
+        $(document).on('click', '#list2', function(){                      
+            $('.item_name0').val($(this).text());
+            $('#name_list0').fadeOut();  
         });
-        var room = 0;      
-        function add_fields() {
-            room++;
-            var objTo = document.getElementById('room_fileds')
+      
+        function add_fields() {           
+            room++;            
+            var objTo = document.getElementById('thelist');
             var divtest = document.createElement("div");
-            divtest.innerHTML = '<div class="form-row"><div class="form-group col"><label>Ingrediants</label><input type ="text" placeholder="Item" name="ingri['+room+']" class="form-control item_name"><div id="name_list" style="z-index: 1;position:absolute;"></div>   </div><div class="form-group col"><label>Amounts</label><input type ="text" placeholder="Amounts" name="amount['+room+']" class="form-control"></div></div>';
+            divtest.innerHTML = '<form><div class="form-row">\
+            <div class="form-group col"><label>'+document.getElementById('ingri').value+'</label></div>\
+            <div class="form-group col"><label>'+document.getElementById('amount').value+'</label>\
+            <a href="#" onclick="storing(\''+document.getElementById('item_ID').value+'\',\''+document.getElementById('ingri').value+'\',\''+document.getElementById('amount').value+'\')" id="clickX['+room+']" class="btn-floating cyan"><i class="fa fa-close" aria-hidden="true"></i></a></div>\
+            </div></form>  {{ csrf_field() }}  ';
             objTo.appendChild(divtest);
             document.getElementById('length').value = room+1;
             var hello = document.getElementById("length").value
-            //console.log(hello);
-        } 
+            
+        }
+        function storing(dname, ingri, amount) {
+            $.ajax({
+                url: "{{route('RecipeController.store1')}}",
+                type: 'POST',
+                data: { 
+                    dname: dname,
+                    ingri: ingri,
+                    amount: amount                    
+                },
+                dataType: 'json',
+                success: function() { alert('hello!'); },
+                error: function() { alert('boo!'); },
+                headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        }
+        
+       
     </script>
     
 @endsection

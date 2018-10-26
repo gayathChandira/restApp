@@ -20,7 +20,7 @@
     <link href="{{asset('css/style.min.css')}}" rel="stylesheet">
     <script type="text/javascript" src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
     <style>
-        .card{
+        /* .card{
             padding-left: 73px;
             padding-right: 410px;
             padding-top: 31px;
@@ -33,7 +33,7 @@
         .btn{
             padding: 0;
             font-size: 15px;
-        }
+        } */
         
     </style>    
 </head>
@@ -209,8 +209,11 @@
     <main class="pt-5 mx-lg-5">
         <div class="container-fluid mt-5">
             <div class="card mb-4 wow fadeIn">
-                @include('inc.messages')
-                @yield('content')
+                <div class="card-body">
+                    @include('inc.messages')
+                    @yield('content')
+                </div>
+                
             </div>    
         </div>    
     </main>       
