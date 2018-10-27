@@ -61,16 +61,56 @@ class RecipeController extends Controller
     //     return redirect('./inventory/recipe')->with('success', 'New Recipe Created!');
     // }
 
-    public function store(Request $request){
-        $recipe = new Recipe;        
-        $length = $request->input('loopLength'); 
+    // public function store(Request $request){
+    //     $recipe = new Recipe;        
+    //     $length = $request->input('loopLength'); 
 
-    }
+    // }
 
-
+    //happens when user clicks the green button
     public function store1 (Request $request){
-        Log::info($request->dname);
+        $recipe = new Recipe;        
         
+        $dname = $request->get('dname');    
+        $ingri = $request->get('ingri');
+        $amount = $request->get('amount');
+        $length = $request->get('length');      
+        //Log::info("last one ". $last_id);
         
+        $result = Recipe::where('dish_id' , '=' , 1)->first();  //this is just to test the column empty or not
+        if(!$result){    
+            Log::info('it is empty');  // check whether dish_id column is empty. 
+            $recipe->dish_id = 1;
+        }else{
+            $last_id = DB::table('recipes')->orderBy('dish_id','desc')->value('dish_id');   
+            Log::info("Last id ".$last_id);     //if dish_id column isn't empty we add dish_id by one 
+            if($length>1){
+                $recipe->dish_id = $last_id; 
+            }else{
+                $recipe->dish_id = $last_id +1 ; 
+            }
+            
+        }
+                  
+            $recipe->dish_name = $dname;
+            $recipe->ingredients = $ingri;
+            $recipe->amount = $amount;
+            Log::info($dname); 
+            Log::info($ingri);    
+            Log::info($amount);    
+            Log::info($length);          
+            $recipe->save();
+            echo $length;
+    }
+        
+    public function delete(Request $request){
+        $recipe = new Recipe;        
+        
+        $dname = $request->get('dname');    
+        $ingri = $request->get('ingri');
+        $amount = $request->get('amount');
+        $length = $request->get('length');
+
+        DB::table('recipes')->where(['dish_name'=>$dname, 'ingredients'=>$ingri])->delete();
     }
 }

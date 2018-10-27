@@ -25,6 +25,8 @@ Route::get('/cashier', function () {
 Route::get('/accountant', function () {
     return view('accountant');
 });
+
+
 Route::get('/inventory','RecipeController@inven');
 Route::post('foodItems/fetch', 'FoodItemController@fetch')->name('FoodItemController.fetch');
 Route::post('foodItems/fetchItemName', 'FoodItemController@fetchItemName')->name('FoodItemController.fetchItemName');
@@ -51,7 +53,7 @@ Route::post('vendors/update','VendorController@updateVendor');
 Route::post('vendors/remove','VendorController@removeVendor');
 Route::post('/admin/vendor/editVendor','VendorController@editVendor')->name('VendorController.editVendor');
 
-Route::get('recipe','RecipeController@store1')->name('RecipeController.store1');
-  
+Route::post('recipe/storing','RecipeController@store1')->name('RecipeController.store1');
+Route::post('recipe/deleting','RecipeController@delete')->name('RecipeController.delete');  
 
 
