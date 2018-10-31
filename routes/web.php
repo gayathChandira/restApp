@@ -53,6 +53,16 @@ Route::post('vendors/update','VendorController@updateVendor');
 Route::post('vendors/remove','VendorController@removeVendor');
 Route::post('/admin/vendor/editVendor','VendorController@editVendor')->name('VendorController.editVendor');
 
+Route::get('/admin/employees','EmployeeController@index');
+Route::post('/admin/employees','EmployeeController@setEmployee')->name('EmployeeController.setEmployee');
+Route::post('employees/fetchID','EmployeeController@fetchID')->name('EmployeeController.fetchID');
+Route::post('employees/fetchEmployeeName','EmployeeController@fetchEmployeeName')->name('EmployeeController.fetchEmployeeName');
+Route::post('employees/fetchNameWhenType','EmployeeController@fetchNameWhenType')->name('EmployeeController.fetchNameWhenType');
+Route::post('employees/fetchEmployeeid','EmployeeController@fetchemployeeID')->name('EmployeeController.fetchemployeeID');
+Route::post('employees/update','EmployeeController@updateEmployee');
+Route::post('/admin/employee/editEmployee','EmployeeController@editEmployee')->name('EmployeeController.editEmployee');
+Route::post('employee/remove','EmployeeController@removeEmployee');
+
 Route::post('recipe/storing','RecipeController@store1')->name('RecipeController.store1');
 Route::post('recipe/deleting','RecipeController@delete')->name('RecipeController.delete');  
 

@@ -21,18 +21,114 @@
     <link href="{{asset('css/style.min.css')}}" rel="stylesheet">
     <script type="text/javascript" src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
     <style>
-        .side-nav {
-            transform: translateX(0%); width: 270px; padding: 0px 1.5rem 1.5rem; background-color:#fff; background-image:none;
+        /* .card{
+            padding-left: 73px;
+            padding-right: 410px;
+            padding-top: 31px;
+            padding-bottom: 502px;
         }
-        .list-group-item active{
-            
+        .container-fluid{
+            width: 102%;
+            margin-left: -23px;
         }
-        .side-nav a {
-            line-height: 32px;
-        }
+        .btn{
+            padding: 0;
+            font-size: 15px;
+        } */
+        
     </style>    
 </head>
+{{-- <body class="fixed-sn light-blue-skin">
 
+    <!--Double navigation-->
+    <header>
+        <!-- Sidebar navigation -->
+        <div id="slide-out" class="side-nav sn-bg-4 fixed">
+            <ul class="custom-scrollbar">
+                <!-- Logo -->
+                <li>
+                    <div class="logo-wrapper waves-light">
+                        <a href="#"><img src="https://mdbootstrap.com/img/logo/mdb-transparent.png" class="img-fluid flex-center"></a>
+                    </div>
+                </li>
+                <!--/. Logo -->              
+               
+                <!-- Side navigation links -->
+                <li>
+                    <ul class="collapsible collapsible-accordion">
+                        <li><a href="{{url('inventory/update')}}" class="collapsible-header waves-effect arrow-r"><i class="fa fa-chevron-right"></i> Update Stock</a>                            
+                        </li>
+                        <li><a href="{{url('inventory/addnew')}}" class="collapsible-header waves-effect arrow-r"><i class="fa fa-chevron-right"></i> Add New Item</a>                            
+                        </li>
+                        <li><a href="{{url('inventory/recipe')}}" class="collapsible-header waves-effect arrow-r"><i class="fa fa-chevron-right"></i> New Recipe</a>                            
+                        </li>
+                                            
+                    </ul>
+                </li>
+                <!--/. Side navigation links -->
+            </ul>
+            <div class="sidenav-bg mask-strong"></div>
+        </div>
+        <!--/. Sidebar navigation -->
+        <!-- Navbar -->
+        <nav class="navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav">
+            <!-- SideNav slide-out button -->
+            <div class="float-left">
+                <a href="#" data-activates="slide-out" class="button-collapse"><i class="fa fa-bars"></i></a>
+            </div>
+            <!-- Breadcrumb-->
+            <div class="breadcrumb-dn mr-auto">
+                <p>Inventory Manager</p>
+            </div>
+            <ul class="nav navbar-nav nav-flex-icons ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link"><i class="fa fa-envelope"></i> <span class="clearfix d-none d-sm-inline-block">Notifications</span></a>
+                </li>
+              
+              
+                        @guest
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <i class="fa fa-user"></i>
+                                    {{ Auth::user()->fname }} <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+            </ul>
+        </nav>
+        <!-- /.Navbar -->
+    </header>
+    <!--/.Double navigation-->
+
+    <!--Main Layout-->
+    <main>
+        <div class="container-fluid mt-5">
+            @yield('content');
+        </div>
+    </main>
+    <!--Main Layout-->
+
+
+     --}}
         
 <body class="grey lighten-3">
 
@@ -84,14 +180,10 @@
         </nav>
         <!-- Navbar -->
         <!-- Sidebar -->
-        <div class="side-nav sn-bg-4 fixed" id="slide-out"  >
+        <div class="side-nav sn-bg-4 fixed" id="slide-out" >
                 <img src="{{asset('img/main_logo2.png')}}" class="img-fluid" alt="" style="max-width:64%;margin-left:33px;">
                 <div class="list-group list-group-flush">
-                    <a href="{{url('/inventory')}}" class="list-group-item active waves-effect" style="webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
-                    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
-                    -webkit-border-radius: 5px;
-                    border-radius: 5px;height: 50px;
-                    line-height: 25px;">
+                    <a href="{{url('/inventory')}}" class="list-group-item active waves-effect">
                         <i class="fa fa-pie-chart mr-3"></i>Dashboard
                     </a>
                     <a href="{{url('inventory/update')}}" class="list-group-item list-group-item-action waves-effect">

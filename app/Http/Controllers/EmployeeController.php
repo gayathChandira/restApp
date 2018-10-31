@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Vendor;
+use App\Employee;
 use App\FoodItem;
 use DB;
 use Log;
 
-class VendorController extends Controller
+class EmployeeController extends Controller
 {
      /**
      * Show the form for creating a new resource.
@@ -27,36 +27,20 @@ class VendorController extends Controller
     }  
     public function index(){
         
-        return view('admin.vendors');
+        return view('admin.employees');
     }
-    //add new vendor to the db ----------------
-    public function setVendor(Request $request){
-        $vendor = new Vendor;
-        $fooditem = new FoodItem;
-        $vendor->fname = $request->input('fname');
-        $vendor->lname = $request->input('lname');
-        $vendor->contact = $request->input('contact');
-        $vendor->email = $request->input('email');
-       
-        $length = $request->input('length');  //length of the array (to the for loop)
-        $foodids = $request->input('food_ids');  
-        $arrayy = explode(',', $foodids);   //array of food-ids 
-        
-        $vendor->save();        
+    //add new employee to the db ----------------
+    public function setEmployee(Request $request){
+        $employee = new Employee;
 
-        //update fooditems table's vendor_id  
-        for($i=0;$i<$length;$i++){
-            $oldvendors = FoodItem::where('id', 'like', '%'.$arrayy[$i].'%')->value('vendor_id');
-            $oldvendors .= " $vendor->id";
-            //echo $oldvendors;
-
-            // $array2 = explode(',',$oldvendors);
-            // echo count($array2);
-            // $array2($vendor->id);
-            // echo $array2;
-            FoodItem::where('id', 'like', '%'.$arrayy[$i].'%')->update(['vendor_id'=>$oldvendors]);
-        }
-        
+        $employee->fname = $request->input('fname');
+        $employee->lname = $request->input('lname');
+        $employee->age = $request->input('age');
+        $employee->contact = $request->input('contact');
+        $employee->email = $request->input('email');
+            
+        $employee->save();        
+        return redirect()->back()->with('success', 'Added the New Employee!');            
        
     }
        // edit vendor----------------------
@@ -64,7 +48,7 @@ class VendorController extends Controller
      public function fetchID(Request $request){
         if($request->get('query')){            
             $query = $request->get('query');                   
-            $data = DB::table('vendors')->where('id', 'like', '%'.$query.'%')->get();            
+            $data = DB::table('employees')->where('id', 'like', '%'.$query.'%')->get();            
             $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
             foreach($data as $row){                
                 $output .= '<li id="list1"><a class="black-text dropdown-item" href="#">'.$row->id.'</a></li>';
@@ -73,20 +57,20 @@ class VendorController extends Controller
             echo $output;
         }
     }
-     //fetching vendor name from the db when id select
-     public function fetchVendorName(Request $request){       
+     //fetching employee name from the db when id select
+     public function fetchEmployeeName(Request $request){       
         if($request->get('query')){            
             $query = $request->get('query');                   
-            $data = DB::table('vendors')->where('id', 'like', '%'.$query.'%')->value('fname');    
+            $data = DB::table('employees')->where('id', 'like', '%'.$query.'%')->value('fname');    
             $output = $data;           
             echo $output;
         }
     }
-    //fetching vendor-name when typing vendor name
+    //fetching employee-name when typing employee name
     public function fetchNameWhenType(Request $request){
         if($request->get('query')){            
             $query = $request->get('query');                   
-            $data = DB::table('vendors')->where('fname', 'like', '%'.$query.'%')->get();            
+            $data = DB::table('employees')->where('fname', 'like', '%'.$query.'%')->get();            
             $output = '<ul class="dropdown-menu"  style="display:block; position:relative">';
             foreach($data as $row){                
                 $output .= '<li id="list2"><a class="black-text dropdown-item" href="#">'.$row->fname.'</a></li>';
@@ -94,22 +78,22 @@ class VendorController extends Controller
             $output .= '</ul>';
             echo $output;
         }
-    }//fetching vendor-id from the db when vendor-name select
-    public function fetchvendorID(Request $request){       
+    }//fetching employee-id from the db when employee-name select
+    public function fetchemployeeID(Request $request){       
         if($request->get('query')){            
             $query = $request->get('query');                   
-            $data = DB::table('vendors')->where('fname', 'like', '%'.$query.'%')->value('id');    
+            $data = DB::table('employees')->where('fname', 'like', '%'.$query.'%')->value('id');    
             $output = $data;           
             echo $output;
         }
     }
-    public function editVendor(Request $request){
+    public function editEmployee(Request $request){
         if($request->get('query')){                                 
             $query = $request->get('query'); 
-                   
-            $data = DB::table('vendors')->where('id','=', $query)->get();  
+                  
+            $data = DB::table('employees')->where('id','=', $query)->get();  
             foreach($data as $row){   
-                              
+                            
                 $output = '<div class="editform">
                 <div class="form-group">
                     <label>First Name</label>
@@ -120,6 +104,10 @@ class VendorController extends Controller
                         <input type="text" name="lname" value="'.$row->lname.'" class="form-control" placeholder="Last Name">
                 </div>
                 <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" name="age" value="'.$row->age.'" class="form-control" placeholder="Age">
+                </div>
+                <div class="form-group">
                         <label>Contact</label>
                         <input type="text" name="contact" value="'.$row->contact.'" class="form-control" placeholder="Contact Number">
                 </div>
@@ -127,34 +115,29 @@ class VendorController extends Controller
                         <label>Email</label>
                         <input type="email" name="email" value="'.$row->email.'" class="form-control" placeholder="Email Address">
                 </div>
-                <input type="hidden" value="'.$row->id.'" name="vendor_id">
+                <input type="hidden" value="'.$row->id.'" name="emp_id">
                 <input type="submit" value="Submit" class="btn btn-primary">
             </div>   ';     
-                 
+              
             echo $output;    
             }
         }   
     }
-    //update vendor details query 
-    public function updateVendor(Request $request){
-       
-        DB::table('vendors')->where('id','=',$request->vendor_id)
+    //update employee details query 
+    public function updateEmployee(Request $request){        
+        DB::table('employees')->where('id','=',$request->emp_id)
         
         ->update(['fname'=>$request->fname,
         'lname'=>$request->lname,
+        'age'=>$request->age,
         'email'=>$request->email,
         'contact'=>$request->contact]);
-        return redirect('./admin/vendors')->with('success', 'Vendor Details Updated!');
+        return redirect()->back()->with('success', 'Employee Details Updated!');
     }
     //Delete vendor from the db
-    public function removeVendor(Request $request){
-
-        
-        DB::table('vendors')->where('id', '=', $request->vendorid)->delete();
-        return redirect('./admin/vendors')->with('error', 'Vendor Details Deleted!');
+    public function removeEmployee(Request $request){       
+        DB::table('employees')->where('id', '=', $request->empid)->delete();
+        return redirect()->back()->with('error', 'Vendor Details Deleted!');
     }
 
 }
-
-
-// 
