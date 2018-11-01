@@ -20,10 +20,10 @@ Route::get('/admin', function () {
     return view('admin');
 });
 Route::get('/cashier', function () {
-    return view('cashier');
+    return view('cashier.bill');
 });
 Route::get('/accountant', function () {
-    return view('accountant');
+    return view('account.setprice');
 });
 
 
@@ -66,4 +66,8 @@ Route::post('employee/remove','EmployeeController@removeEmployee');
 Route::post('recipe/storing','RecipeController@store1')->name('RecipeController.store1');
 Route::post('recipe/deleting','RecipeController@delete')->name('RecipeController.delete');  
 
+Route::post('cashier/dish', 'BillController@fetchName')->name('BillController.fetchName');
+Route::post('cashier/bill', 'BillController@store')->name('BillController.store');
+Route::post('cashier/bill-table', 'BillController@makeTable')->name('BillController.makeTable');
 
+Route::post('account/setprice','PriceController@store')->name('PriceController.store'); 
