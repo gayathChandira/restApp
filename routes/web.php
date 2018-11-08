@@ -69,5 +69,8 @@ Route::post('recipe/deleting','RecipeController@delete')->name('RecipeController
 Route::post('cashier/dish', 'BillController@fetchName')->name('BillController.fetchName');
 Route::post('cashier/bill', 'BillController@store')->name('BillController.store');
 Route::post('cashier/bill-table', 'BillController@makeTable')->name('BillController.makeTable');
+Route::post('cashier/billRemove', 'BillController@billRemove')->name('BillController.billRemove');
+Route::post('cashier/billPaid', 'BillController@storePaid')->name('BillController.storePaid');
+Route::post('cashier/dishdiv', 'BillController@dishDiv')->name('BillController.dishDiv');
 
 Route::post('account/setprice','PriceController@store')->name('PriceController.store'); 

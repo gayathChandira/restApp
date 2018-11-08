@@ -26,43 +26,37 @@
                         
         </div>    
     </div>
-    <div class="col-md-4">
-        <!-- Card -->
-<div class="card card-cascade wider">
-
-        <!-- Card image -->
-        <div class="view view-cascade gradient-card-header peach-gradient">
-      
-          <!-- Title -->
-          <h2 class="card-header-title mb-3">The Bill</h2>          
-      
-        </div>
-      
-        <!-- Card content -->
-        <div class="card-body card-body-cascade text-center" id="billtable">
-      
-          
-      
-        </div>
-        <!-- Card content -->
-      
-      </div>
-      <!-- Card -->
-      
-
-        {{-- <div class="card card-cascade wider">
-            <div class="view view-cascade gradient-card-header peach-gradient">
-                <h2 class="card-header-title mb-3">The Bill</h2>
-            </div>  
-            <div class="card-body" id="billtable">
-                {{-- bill appear here 
-            </div>
-                         
-        </div>  --}}
+    <div class="col-md-4 ">        
+        <div class="card card-cascade wider">        
+            <div class="view view-cascade gradient-card-header peach-gradient">           
+                <h2 class="card-header-title mb-3">The Bill</h2>      
+            </div>       
+            <div class="card-body card-body-cascade text-center" id="billtable">         
+                {{-- bill will appear here --}}
+            </div>     
+      </div>  
     </div>
 </div>
-
+<div class="card mb-4 mt-5 ">
+    <div class="card-body" id="dishcard">
+            {{ csrf_field() }} 
+            {{-- dishcards will apear here --}}
+    </div>
+</div>        
 <script>
+
+    $(document).ready(function(){
+        console.log('iside');
+        var _token = $('input[name="_token"]').val();
+        $.ajax({
+            url:"{{ route('BillController.dishDiv')}}",    
+            method:"POST",
+            data:{ _token:_token},
+            success:function(data){        
+                $('#dishcard').html(data);
+            }           
+        })
+    });
     //get dish name when typing  
     $('#dish_name').keyup(function(){
         var query = $(this).val();                                      
@@ -83,38 +77,106 @@
             $('#dish_name').val($(this).text());
             $('#name_list').fadeOut();               
     });
-    //store in bill table 
-    function store(dish_name,quantity){
+
+    //store in bill table in db 
+    var num =0;
+    function store(dish_name,quantity){  
+        document.getElementById('dish_name').value = '';
+        document.getElementById('quantity').value = ''; 
         var _token = $('input[name="_token"]').val();
         $.ajax({
             url: "{{ route('BillController.store') }}",
             type: "POST",
             //dataType: 'json',
             data: { 
-                dish_name:dish_name, quantity:quantity,                
+                dish_name:dish_name, quantity:quantity, num: num,               
                 _token:_token                                     
             },                
-            success: function(data) {
-                $('#name_list0').fadeIn();
-                $('#name_list0').html(data); 
-                },
+            success: function() {             
+                num ++;
+                //bill appear             
+                var _token = $('input[name="_token"]').val();   
+                $.ajax({
+                    url:"{{ route('BillController.makeTable')}}",    
+                    method:"POST",
+                    data:{ dish_name:dish_name, _token:_token},
+                    success:function(data){        
+                        $('#billtable').html(data);
+                    }           
+                });
+            },
             error: function(jqXHR, textStatus, errorThrown,data) { // What to do if we fail
                 console.log(data); 
                 console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
             }               
         });
-        
-            
+    }
+    //remove items from the bill
+    function remove(bill_id){        
+        var _token = $('input[name="_token"]').val();   
+            $.ajax({
+                url:"{{ route('BillController.billRemove')}}",    
+                method:"POST",
+                data:{ bill_id:bill_id, _token:_token},
+                success:function(){    
+                      
+                   //bill appear             
+                    var _token = $('input[name="_token"]').val();   
+                    $.ajax({
+                        url:"{{ route('BillController.makeTable')}}",    
+                        method:"POST",
+                        data:{  _token:_token},
+                        success:function(data){        
+                            $('#billtable').html(data);
+                        }           
+                    });
+                }           
+            });
+    }
+    //when click proceed button 
+    function paid(){
+        var _token = $('input[name="_token"]').val();   
         $.ajax({
-            url:"{{ route('BillController.makeTable')}}",    
+            url:"{{ route('BillController.storePaid')}}",    
             method:"POST",
-            data:{ dish_name:dish_name, _token:_token},
+            data:{ _token:_token},
             success:function(data){                            
-                
-                $('#billtable').html(data);
+                $('#name_list').fadeIn();
+                $('#name_list').html(data);
             }           
         })
-
-    }    
+    }
+    //when click dishdiv buttons
+    function order(dish_name){        
+        console.log(dish_name);
+        var quantity =1; 
+        var _token = $('input[name="_token"]').val();   
+        $.ajax({
+            url: "{{ route('BillController.store') }}",
+            type: "POST",
+            //dataType: 'json',
+            data: { 
+                dish_name:dish_name, quantity:quantity, num: num,               
+                _token:_token                                     
+            },                
+            success: function() {             
+                num ++;
+                //bill appear             
+                var _token = $('input[name="_token"]').val();   
+                $.ajax({
+                    url:"{{ route('BillController.makeTable')}}",    
+                    method:"POST",
+                    data:{ dish_name:dish_name, _token:_token},
+                    success:function(data){        
+                        $('#billtable').html(data);
+                    }           
+                });
+            },
+            error: function(jqXHR, textStatus, errorThrown,data) { // What to do if we fail
+                console.log(data); 
+                console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+            }               
+        });
+    }
 </script>
 @endsection

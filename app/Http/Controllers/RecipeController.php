@@ -90,8 +90,7 @@ class RecipeController extends Controller
                 $recipe->dish_id = $last_id +1 ; 
             }
             
-        }
-                  
+        }                  
             $recipe->dish_name = $dname;
             $recipe->ingredients = $ingri;
             $recipe->amount = $amount;
