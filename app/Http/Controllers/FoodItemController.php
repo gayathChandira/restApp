@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\FoodItem;
 use App\FoodItemUpdate;
+use App\FoodItemQuantity;
 use DB;
 use Log;
 
@@ -27,6 +28,9 @@ class FoodItemController extends Controller
     public function indexAddNew(){
         return view('inventory.addnew');
     }    
+    public function indexIssue(){
+        return view('inventory.issue');
+    }  
     /**
      * Show the form for creating a new resource.
      *
@@ -86,11 +90,12 @@ class FoodItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storenew(Request $request)
+    public function storenew(Request $request)  
     {   //add new food items into database
         $foodItem = new  FoodItem;
         $foodItem->itemName = $request->input('foodItem');
-        $foodItem->unit = $request->input('unit');       
+        $foodItem->unit = $request->input('unit');     
+        $foodItem->limit = $request->input('limit');  
         $foodItem->save();
         return redirect('./inventory/addnew')->with('success', 'New Item Created');
     }
@@ -102,7 +107,11 @@ class FoodItemController extends Controller
         $items = FoodItem::where('id', 'like', '%'.$request->input('foodItem_id').'%')->value('quantity');       
 
         //current quantitiy + updated quantity
-        $sum = $items + $request->input('quantity');    
+        $sum = $items + $request->input('quantity');
+        $fdQuantity = new FoodItemQuantity;
+        $fdQuantity->itemName = $request->foodItem;
+        $fdQuantity->quantity = $sum;
+        $fdQuantity->save();    
 
         //update new quantity on Food_items table
         FoodItem::where('id', 'like', '%'.$request->input('foodItem_id').'%')->update(['quantity'=>$sum]);         
@@ -113,48 +122,5 @@ class FoodItemController extends Controller
         $foodItemUP->save();
         return redirect('./inventory/update')->with('success', 'Stock Updated!');
     }
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        
-    }
+  
 }

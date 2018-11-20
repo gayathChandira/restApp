@@ -4,7 +4,7 @@
     <h1>Update Stock</h1>
     
     {!! Form::open(['action'=> 'FoodItemController@store', 'method' =>'POST', 'autocomplete' =>'off'])!!}
-        <div class="form-group">
+        <div class="form-group mt-5">
             {{Form::label('foodItem_id', 'Item code')}}
             {{Form::text('foodItem_id', '', ['class' =>'form-control', 'placeholder'=>'Food Item ID', 'id'=>'item_ID'])}}
             {{-- <input type="text" class="form-control" id="item_ID"> --}}

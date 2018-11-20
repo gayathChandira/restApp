@@ -35,6 +35,7 @@ Route::post('foodItems/fetchID', 'FoodItemController@fetchID')->name('FoodItemCo
 Route::get('/inventory/update', 'FoodItemController@indexUpdate');
 Route::get('/inventory/addnew', 'FoodItemController@indexAddNew');
 Route::get('/inventory/recipe', 'RecipeController@indexRecipe');
+Route::get('/inventory/issue', 'FoodItemController@indexIssue');
 Route::post('recipes/store', 'RecipeController@store');
 Auth::routes();
 
@@ -74,3 +75,8 @@ Route::post('cashier/billPaid', 'BillController@storePaid')->name('BillControlle
 Route::post('cashier/dishdiv', 'BillController@dishDiv')->name('BillController.dishDiv');
 
 Route::post('account/setprice','PriceController@store')->name('PriceController.store'); 
+
+Route::post('inventory/issue', 'IssueFoodItemsController@store')->name('IssueFoodItemsController.store');
+Route::post('inventory/issue-table', 'IssueFoodItemsController@makeTable')->name('IssueFoodItemsController.makeTable');
+Route::post('inventory/issueRemove', 'IssueFoodItemsController@issueRemove')->name('IssueFoodItemsController.issueRemove');
+Route::post('inventory/submit', 'IssueFoodItemsController@submit')->name('IssueFoodItemsController.submit');

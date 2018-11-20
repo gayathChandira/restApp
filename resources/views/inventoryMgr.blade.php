@@ -98,6 +98,8 @@
                         <i class="fa fa-user mr-3"></i>Update Stock</a>
                     <a href="{{url('inventory/addnew')}}" class="list-group-item list-group-item-action waves-effect">
                         <i class="fa fa-table mr-3"></i>Add New Food-Items</a>
+                    <a href="{{url('inventory/issue')}}" class="list-group-item list-group-item-action waves-effect">
+                        <i class="fa fa-check-square-o mr-3"></i>Issue Food-Items</a>       
                     <a href="{{url('inventory/recipe')}}" class="list-group-item list-group-item-action waves-effect">
                         <i class="fa fa-map mr-3"></i>Create Recipes</a>                
                 </div>

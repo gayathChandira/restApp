@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Recipe;
+use App\FoodItem;
 use App\Bill;
 use App\Dish;
 use App\BillPaid;
@@ -80,8 +81,7 @@ class BillController extends Controller
             </tr>';
         }
         $output .='</table><a href="#" onclick="paid()" class="btn btn-primary btn-sm">Proceed!</a></a>';
-        echo $output;
-        
+        echo $output;        
         
     }
     //happen when user clicks red x button in bill
@@ -90,20 +90,30 @@ class BillController extends Controller
         Bill::where('id',$bill_id)->delete();
     }
 
+    //when user click proceed button
     public function storePaid(){
-        $bill = new Bill;
-        
+        $bill = new Bill;        
         $bill_data = Bill::all();
-        Log::info('dfdf');
-        Log::info($bill_data);
+       // Log::info('dfdf');
+        //Log::info($bill_data);
         foreach ($bill_data as $row){
             $billPaid = new BillPaid;
-            Log::info( $row->dish_name);
+            Log::info( $row->dish_id);
+            $dish_id = $row->dish_id;
             $billPaid->dish_id = $row->dish_id;
             $billPaid->dish_name = $row->dish_name;
             $billPaid->quantity = $row->quantity;
             $billPaid->price = $row->price;
             $billPaid->save();
+            $food_items = Recipe::where('dish_id','=',$dish_id )->select('ingredients','amount')->get();
+            // Log::info($food_items);
+            // foreach ($food_items as $row2){
+            //     Log::info($row2->ingredients);
+            //     $old_quantitiy = FoodItem::where('itemName','=',$row2->ingredients)->value('quantity');
+            //     Log::info($old_quantitiy);
+            //     $new_quantity = $old_quantitiy - ($row2->amount);
+            //     FoodItem::where('itemName','=',$row2->ingredients)->update(['quantity'=>$new_quantity]);
+            // }
         }
 
     }
@@ -111,7 +121,7 @@ class BillController extends Controller
         $dish_data = Dish::all();
         $output ='';   
         foreach($dish_data as $row){
-            Log::info($row->dish_name);
+            //Log::info($row->dish_name);
            $output .='<div>
            <a href="#" onclick="order(\''.$row->dish_name.'\')" class="btn btn-li btn-lg">'.$row->dish_name.'</a>          
            </div>';
