@@ -122,5 +122,22 @@ class FoodItemController extends Controller
         $foodItemUP->save();
         return redirect('./inventory/update')->with('success', 'Stock Updated!');
     }
-  
+    
+
+    public function editItem(Request $request){
+        $foodItem = $request->get('query');
+        $output =FoodItem::where('itemName','=',$foodItem)->select('unit','limit')->get();
+        foreach ($output as $row){
+            $unit =$row->unit;
+            $limit = $row->limit;      
+            $out = array($unit, $limit);
+        }
+        return response()->json([
+            'unit' => $unit,
+            'limit' => $limit
+        ]);
+        //$myjson =json_encode($out);
+       // Log::info($myjson);
+       // echo $out;
+    }
 }

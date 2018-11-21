@@ -7,6 +7,7 @@ use App\Issue_fd_temp;
 use App\IssueFoodItem;
 use App\FoodItem;
 use App\FoodItemQuantity;
+use App\Notification;
 use Log;
 
 class IssueFoodItemsController extends Controller
@@ -56,15 +57,28 @@ class IssueFoodItemsController extends Controller
             $issued->quantity = $row->quantity;
             $issued->save();          
            
+            //update quantity in food-item table
             $old_quantitiy = FoodItem::where('itemName','=',$row->food_item)->value('quantity');          
             $reduce = $row->quantity;
             $new_quantity = $old_quantitiy - $reduce;          
             FoodItem::where('itemName','=',$row->food_item)->update(['quantity'=>$new_quantity]);  
             
+            //add new quantity to fd quantity table
             $fdQunatity = new FoodItemQuantity;
             $fdQunatity->itemName = $row->food_item;
             $fdQunatity->quantity = $new_quantity;
             $fdQunatity->save();
+
+            //send notification if it's behind the limit
+            $limit = FoodItem::where('itemName','=',$row->food_item)->value('limit');
+            if($limit>=$new_quantity){
+                $noti = new Notification;
+                $noti->from = 'Inventory Manager';
+                $noti->to = 'Accountant';
+                $noti->read = 0;
+                $noti->content = ''.$row->food_item.' has fall behind it\'s limit';
+                $noti->save();
+            }
         }
     }
 

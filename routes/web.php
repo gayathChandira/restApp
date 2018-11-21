@@ -37,6 +37,7 @@ Route::get('/inventory/addnew', 'FoodItemController@indexAddNew');
 Route::get('/inventory/recipe', 'RecipeController@indexRecipe');
 Route::get('/inventory/issue', 'FoodItemController@indexIssue');
 Route::post('recipes/store', 'RecipeController@store');
+Route::post('inventory/editItem', 'FoodItemController@editItem')->name('FoodItemController.editItem');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

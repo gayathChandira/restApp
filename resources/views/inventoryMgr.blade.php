@@ -110,7 +110,7 @@
 
     <main class="pt-5 mx-lg-5">
         <div class="container-fluid mt-5">
-            <div class="card mb-4 wow fadeIn">
+            <div class="card mb-5 wow fadeIn">
                 <div class="card-body">
                     @include('inc.messages')
                     @yield('content')
