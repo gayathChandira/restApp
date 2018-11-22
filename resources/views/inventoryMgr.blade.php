@@ -52,6 +52,12 @@
             <ul class="nav navbar-nav nav-flex-icons ml-auto">
                 <li class="nav-item">
                     <a class="nav-link"><i class="fa fa-envelope"></i> <span class="clearfix d-none d-sm-inline-block">Notifications</span></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <notification></notification>
+                        </li>
+
+                    </ul>
                 </li>                      
                     @guest
                         <li class="nav-item">
