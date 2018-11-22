@@ -123,21 +123,25 @@ class FoodItemController extends Controller
         return redirect('./inventory/update')->with('success', 'Stock Updated!');
     }
     
-
+    //load edit inputs automatically when user types fooditem
     public function editItem(Request $request){
         $foodItem = $request->get('query');
         $output =FoodItem::where('itemName','=',$foodItem)->select('unit','limit')->get();
         foreach ($output as $row){
             $unit =$row->unit;
-            $limit = $row->limit;      
-            $out = array($unit, $limit);
+            $limit = $row->limit;                 
         }
         return response()->json([
             'unit' => $unit,
             'limit' => $limit
-        ]);
-        //$myjson =json_encode($out);
-       // Log::info($myjson);
-       // echo $out;
+        ]);        
+    }
+    
+    //submit the edited details
+    public function editSubmit(Request $request){
+        $food_item = new FoodItem;
+        $fooditem = $request->foodItem;
+        FoodItem::where('itemName','=',$fooditem)->update(['unit'=>$request->unit,'limit'=>$request->limit]);
+        return redirect()->back()->with('success', 'Successfully Changed!');   
     }
 }

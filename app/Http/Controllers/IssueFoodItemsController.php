@@ -78,6 +78,8 @@ class IssueFoodItemsController extends Controller
                 $noti->read = 0;
                 $noti->content = ''.$row->food_item.' has fall behind it\'s limit';
                 $noti->save();
+                $notify = new NotificationController;
+                $notify->checknotify();
             }
         }
     }

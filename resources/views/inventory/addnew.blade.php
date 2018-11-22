@@ -29,7 +29,7 @@
     <div class="card col-md-5 form-group">
         <div class="card-body">
                 <h1>Edit Food Item Details</h1>
-                {!! Form::open(['action'=> 'FoodItemController@storenew', 'method' =>'POST'])!!}
+                {!! Form::open(['action'=> 'FoodItemController@editSubmit', 'method' =>'POST'])!!}
                     <div class="form-group mt-5">
                         {{Form::label('foodItem', 'Food Item Name')}}
                         {{Form::text('foodItem', '', ['class' =>'form-control','id'=>'item_name', 'placeholder'=>'Food Item Name'])}}
