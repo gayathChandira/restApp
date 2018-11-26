@@ -7,7 +7,7 @@ use App\Issue_fd_temp;
 use App\IssueFoodItem;
 use App\FoodItem;
 use App\FoodItemQuantity;
-use App\Notifications\NotifyUser;
+use App\Notification;
 use App\User;
 use Log;
 use Auth;
@@ -78,21 +78,21 @@ class IssueFoodItemsController extends Controller
             //send notification if it's behind the limit
             $limit = FoodItem::where('itemName','=',$row->food_item)->value('limit');
             if($limit>=$new_quantity){
-                $fdd = $row->food_item;
-                // $noti = new Notification;
-                // $noti->from = 'Inventory Manager';
-                // $noti->to = 'Accountant';
-                // $noti->read = 0;
-                // $noti->content = ''.$row->food_item.' has fall behind it\'s limit';
-                // $noti->save();
+               
+                $noti = new Notification;
+                $noti->from = 'Inventory Manager';
+                $noti->to = 'Accountant';
+                $noti->read = 0;
+                $noti->data = ''.$row->food_item.' has fall behind it\'s limit';
+                $noti->save();
                 // $notify = new NotificationController;
                 // $notify->checknotify();
-                $id = Auth::user();
-                Log::info($fdd);
-                $user = User::find(1);
-                $fd = FoodItem::where('itemName','=', $fdd)->first();
-                Log::info($fd);
-                $id->notify(new NotifyUser($fd));
+                // $id = Auth::user();
+                // Log::info($fdd);
+                // $user = User::find(1);
+                // $fd = FoodItem::where('itemName','=', $fdd)->first();
+                // Log::info($fd);
+                // $id->notify(new NotifyUser($fd));
             }
         }
     }

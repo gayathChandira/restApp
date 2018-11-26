@@ -47,11 +47,16 @@
                 </a>
             </div>
             <!-- Links -->
-            
+         
             <!-- Right -->
             <ul class="nav navbar-nav nav-flex-icons ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link"><i class="fa fa-envelope"></i> <span class="clearfix d-none d-sm-inline-block">Notifications</span></a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-envelope"></i> <span class="clearfix d-none d-sm-inline-block">Notifications</span></a>
+                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                        <div id="noti">
+                            {{-- notifications will display here --}}
+                        </div>
+                    </div>
                 </li>                      
                     @guest
                         <li class="nav-item">
@@ -129,12 +134,60 @@
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="{{asset('js/mdb.min.js')}}"></script>
     <script>
+        //notifications();
+        // function notifications(){
+        //     console.log('im accountant');
+        //     var _token = $('input[name="_token"]').val();
+        //     var user ="accountant";
+        //     $.ajax({
+        //         url:"{{ route('NotificationController.checkNotify')}}",   
+        //         method:"POST",
+        //         data:{user:user,_token:_token},                        
+        //         success:function(data){  
+        //             $('#noti').html(data);                                   
+        //         }        
+        //     })
+        // }
+        setInterval(function(){
+            console.log('im accountant');
+            var _token = $('input[name="_token"]').val();
+            var user ="accountant";
+            $.ajax({
+                url:"{{ route('NotificationController.checkNotify')}}",   
+                method:"POST",
+                data:{user:user,_token:_token},                        
+                success:function(data){  
+                    $('#noti').html(data);                                   
+                }        
+            })
+        },3000);
+        
+
         // SideNav Button Initialization
         $(".button-collapse").sideNav();
         // SideNav Scrollbar Initialization
         var sideNavScrollbar = document.querySelector('.custom-scrollbar');
         Ps.initialize(sideNavScrollbar);
-      
+        
+
+        // setInterval(function() {
+        //     console.log('im accountant');
+        //     var user ="accountant"
+        //     $.ajax({
+        //         url:"{{ route('NotificationController.checkNotify')}}",   
+        //         method:"POST",
+        //         data:{user:user},                        
+        //         success:function(data){  
+        //             // $('#unit2').val(data.unit);
+        //             // $('#limit2').val(data.limit);                   
+        //         }        
+        //     })
+        // },3000);
+        
+
+        
+
+        
     
     </script>
 

@@ -13908,23 +13908,25 @@ window.Vue = __webpack_require__(38);
 Vue.component('notification', __webpack_require__(41));
 
 var app = new Vue({
-    el: "#app",
-    data: {
-        notifications: ''
-    },
-    created: function created() {
-        var _this = this;
+  // el: "#app",
+  // data: {
+  //     notifications: ''
+  // },
+  // created() {
+  //     console.log('its created');
+  //     axios.post('http://localhost/restapp/public/notification/get').then(response =>{            
+  //         this.notifications = response.data;
 
-        console.log('its created');
-        axios.post('http://localhost/restapp/public/notification/get').then(function (response) {
-            _this.notifications = response.data;
-        });
-
-        var userId = $('meta[name="userId"]').attr('content');
-        Echo.private('App.user' + userId).notification(function (notification) {
-            console.log(notification);
-        });
-    }
+  //     });
+  //     console.log('hello');
+  //     var userId = $('meta[name="userId"]').attr('content');    
+  //     console.log(userId);
+  //     Echo.private('App.User.' + userId).notification((notification) => {
+  //         console.log('hii');
+  //         //this.notifications.push(notification);
+  //         console.log(notification);
+  //     });
+  // }
 });
 
 /***/ }),
@@ -13987,6 +13989,7 @@ window.Pusher = __webpack_require__(37);
 
 window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
   broadcaster: 'pusher',
+  authEndpoint: 'http://localhost/restapp/public/broadcasting/auth',
   key: 'b36d08fb4537f633318c',
   cluster: 'ap2',
   encrypted: true
@@ -57000,12 +57003,11 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var disposed = false
 var normalizeComponent = __webpack_require__(42)
 /* script */
-var __vue_script__ = __webpack_require__(43)
+var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(44)
+var __vue_template__ = null
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -57023,22 +57025,6 @@ var Component = normalizeComponent(
   __vue_module_identifier__
 )
 Component.options.__file = "resources/assets/js/components/Notification.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-66002d22", Component.options)
-  } else {
-    hotAPI.reload("data-v-66002d22", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
 
 module.exports = Component.exports
 
@@ -57153,132 +57139,8 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 43 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['notifications'],
-    methods: {
-        MarkAsRead: function MarkAsRead(notification) {
-            var data = {
-                id: notification.id
-            };
-            axios.post('http://localhost/restapp/public/notification/read', data).then(function (response) {
-                //can redirect the page into something you like 
-                //window.location.href = 'link'
-            });
-        }
-    }
-});
-
-/***/ }),
-/* 44 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("li", { staticClass: "nav-item dropdown" }, [
-    _c(
-      "a",
-      {
-        staticClass: "nav-link dropdown-toggle",
-        attrs: {
-          id: "navbarDropdownMenuLink",
-          "data-toggle": "dropdown",
-          "aria-haspopup": "true",
-          "aria-expanded": "false"
-        }
-      },
-      [
-        _c("i", { staticClass: "fa fa-envelope" }),
-        _c("span", { staticClass: "badge badge-primary" }, [
-          _vm._v(_vm._s(_vm.notifications.length))
-        ]),
-        _vm._v(" "),
-        _c("span", { staticClass: "clearfix d-none d-sm-inline-block" }, [
-          _vm._v("Notifications")
-        ])
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "dropdown-menu dropdown-primary",
-        attrs: { "aria-labelledby": "navbarDropdownMenuLink" }
-      },
-      [
-        _vm._l(_vm.notifications, function(notification) {
-          return _c("li", [
-            _c(
-              "a",
-              {
-                staticClass: "dropdown-item",
-                attrs: { href: "#" },
-                on: {
-                  click: function($event) {
-                    _vm.MarkAsRead(notification)
-                  }
-                }
-              },
-              [
-                _vm._v(
-                  "\n            " +
-                    _vm._s(notification.data.data.itemName) +
-                    " \n            has gone beyond "
-                ),
-                _c("br"),
-                _vm._v("it's limit.  \n            ")
-              ]
-            )
-          ])
-        }),
-        _vm._v(" "),
-        _vm.notifications.length == 0
-          ? _c("li", [
-              _vm._v("\n            There is no new Notifications\n        ")
-            ])
-          : _vm._e()
-      ],
-      2
-    )
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-66002d22", module.exports)
-  }
-}
-
-/***/ }),
+/* 43 */,
+/* 44 */,
 /* 45 */
 /***/ (function(module, exports) {
 

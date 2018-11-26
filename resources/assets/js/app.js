@@ -18,19 +18,23 @@ window.Vue = require('vue');
 Vue.component('notification', require('./components/Notification.vue'));
 
 const app = new Vue({
-    el: "#app",
-    data: {
-        notifications: ''
-    },
-    created() {
-        console.log('its created');
-        axios.post('http://localhost/restapp/public/notification/get').then(response =>{            
-            this.notifications = response.data
-        });
-
-        var userId = $('meta[name="userId"]').attr('content');
-        Echo.private('App.user'+ userId).notification((notification) =>{
-            console.log(notification);
-        });
-    },
+    // el: "#app",
+    // data: {
+    //     notifications: ''
+    // },
+    // created() {
+    //     console.log('its created');
+    //     axios.post('http://localhost/restapp/public/notification/get').then(response =>{            
+    //         this.notifications = response.data;
+           
+    //     });
+    //     console.log('hello');
+    //     var userId = $('meta[name="userId"]').attr('content');    
+    //     console.log(userId);
+    //     Echo.private('App.User.' + userId).notification((notification) => {
+    //         console.log('hii');
+    //         //this.notifications.push(notification);
+    //         console.log(notification);
+    //     });
+    // }
 });

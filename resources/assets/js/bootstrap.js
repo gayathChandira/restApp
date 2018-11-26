@@ -50,6 +50,7 @@ window.Pusher = require('pusher-js');
 
 window.Echo = new Echo({
     broadcaster: 'pusher',
+    authEndpoint: 'http://localhost/restapp/public/broadcasting/auth',
     key: 'b36d08fb4537f633318c',
     cluster: 'ap2',
     encrypted: true

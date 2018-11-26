@@ -53,9 +53,7 @@
            
             <!-- Right -->
             <ul class="nav navbar-nav nav-flex-icons ml-auto">
-            <div id="app">     
-                <notification v-bind:notifications="notifications"></notification>
-            </div>
+            
                     @guest
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -142,6 +140,18 @@
         var sideNavScrollbar = document.querySelector('.custom-scrollbar');
        // Ps.initialize(sideNavScrollbar);
       
+        function notifications(){
+            var user ="inventoryManager"
+            $.ajax({
+                url:"{{ route('NotificationController.checkNotify')}}",   
+                method:"POST",
+                data:{user:user},                        
+                success:function(data){  
+                    $('#unit2').val(data.unit);
+                    $('#limit2').val(data.limit);                   
+                }        
+            })
+        }
     
     </script>
 

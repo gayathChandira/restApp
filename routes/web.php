@@ -83,5 +83,7 @@ Route::post('inventory/issue-table', 'IssueFoodItemsController@makeTable')->name
 Route::post('inventory/issueRemove', 'IssueFoodItemsController@issueRemove')->name('IssueFoodItemsController.issueRemove');
 Route::post('inventory/submit', 'IssueFoodItemsController@submit')->name('IssueFoodItemsController.submit');
 
-Route::post('/notification/get','NotificationController@get');
-Route::post('/notification/read','NotificationController@read');
+// Route::post('/notification/get','NotificationController@get');
+// Route::post('/notification/read','NotificationController@read');
+
+Route::post('notification/check', 'NotificationController@checkNotify')->name('NotificationController.checkNotify');
