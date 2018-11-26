@@ -7,19 +7,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="userId" content="{{ Auth::check() ? Auth::user()->id : '' }}">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Inventory Manager</title>
     <link rel="icon" href="{{asset('img/rest_icon.png')}}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-
+    
     <!-- Bootstrap core CSS -->
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Material Design Bootstrap -->
     <link href="{{asset('css/mdb.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.min.css')}}" rel="stylesheet">
+    
     <script type="text/javascript" src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+   
     <style>
         .side-nav {
             transform: translateX(0%); width: 270px; padding: 0px 1.5rem 1.5rem; background-color:#fff; background-image:none;
@@ -47,18 +50,12 @@
                 </a>
             </div>
             <!-- Links -->
-            
+           
             <!-- Right -->
             <ul class="nav navbar-nav nav-flex-icons ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link"><i class="fa fa-envelope"></i> <span class="clearfix d-none d-sm-inline-block">Notifications</span></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <notification></notification>
-                        </li>
-
-                    </ul>
-                </li>                      
+            <div id="app">     
+                <notification v-bind:notifications="notifications"></notification>
+            </div>
                     @guest
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -127,21 +124,23 @@
     </main>       
     <!-- SCRIPTS -->
     <!-- JQuery -->
-    
+    <script src="{{ asset('js/app.js') }}"></script>
+   
     <!-- Tooltips -->
     <script type="text/javascript" src="{{asset('js/popper.min.js')}}"></script>
-
+   
     <!-- Bootstrap core JavaScript -->
     <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
-
+    
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="{{asset('js/mdb.min.js')}}"></script>
+   
     <script>
         // SideNav Button Initialization
         $(".button-collapse").sideNav();
         // SideNav Scrollbar Initialization
         var sideNavScrollbar = document.querySelector('.custom-scrollbar');
-        Ps.initialize(sideNavScrollbar);
+       // Ps.initialize(sideNavScrollbar);
       
     
     </script>

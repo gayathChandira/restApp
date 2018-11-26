@@ -1,6 +1,7 @@
 @extends('inventoryMgr')
 
 @section('content')
+
 <div class="form-row">
     <div class="card col-md-5  form-group">
         <div class="card-body">
@@ -46,6 +47,11 @@
                     </div> 
                     {{Form::submit('Submit', ['class' => 'btn btn-primary'])}} 
                 {!! Form::close() !!}
+               
+                {{-- <div id="app">                        
+                        <notification></notification>                    
+                 </div> --}}
+                 
         </div>
 
     </div>

@@ -15,6 +15,7 @@
                     @endif
 
                     You are logged in!
+                    <notification></notification>
                 </div>
             </div>
         </div>

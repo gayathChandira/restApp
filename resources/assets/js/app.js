@@ -18,5 +18,19 @@ window.Vue = require('vue');
 Vue.component('notification', require('./components/Notification.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: "#app",
+    data: {
+        notifications: ''
+    },
+    created() {
+        console.log('its created');
+        axios.post('http://localhost/restapp/public/notification/get').then(response =>{            
+            this.notifications = response.data
+        });
+
+        var userId = $('meta[name="userId"]').attr('content');
+        Echo.private('App.user'+ userId).notification((notification) =>{
+            console.log(notification);
+        });
+    },
 });

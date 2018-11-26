@@ -22,9 +22,16 @@ class NotifyUser extends Notification
     
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database','broadcast'];
     }
 
+    public function toBroadcast($notifiable)
+    {
+        return [
+            'id'=>1,
+            'data' => $this->fd
+        ];
+    }
     
     public function toDatabase($notifiable)
     {
