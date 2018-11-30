@@ -57,6 +57,7 @@ class VendorController extends Controller
             FoodItem::where('id', 'like', '%'.$arrayy[$i].'%')->update(['vendor_id'=>$oldvendors]);
         }
         
+        return redirect()->back()->with('success', 'Vendor Details Added!');
        
     }
        // edit vendor----------------------

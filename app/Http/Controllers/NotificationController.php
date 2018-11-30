@@ -9,33 +9,21 @@ use Auth;
 
 class NotificationController extends Controller
 {
-    // public function get(){
-    //     $notification = Auth::user()->unreadNotifications;
-        
-    //     return $notification;
-
-    // }
-     
-    // public function read(Request $request){
-    //     Log::info($request);
-    //     Auth::user()->unreadNotifications()->find($request->id)->markAsRead();
-    //     return 'success';
-    // }
+    
 
     public function checkNotify(Request $request){
-        Log::info('heel');
-        $unRead = Notification::where('read','=','0')->select('from','data')->get();
+        //Log::info('heel');
+        $unRead = Notification::where('read','=','0')->select('from','data','id')->get();
 
         $user = $request->user;
-        if ($user == 'accountant'){
-            Log::info($unRead);
+        if ($user == 'accountant'){           
             $output ='';
-            foreach ($unRead as $row){
-                //$output =array('from'=>$row->from, 'data'=>$row->data);
-                $output .= '<a class="dropdown-item" href="#">'.$row->data.'<br><small>'.$row->from.'</small></a>';
-            }
-            Log::info($output);
+            foreach ($unRead as $row){                         
+                $output .= '<a class="dropdown-item" href="#" onclick="showNoti(\''.$row->data. '\',\''.$row->id.'\')">'.$row->data.'<br><small>'.$row->from.'</small></a>';
+            }            
             echo $output;
         }
     }
+  
+    
 }

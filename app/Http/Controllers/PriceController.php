@@ -10,6 +10,20 @@ use Log;
 
 class PriceController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function accountant(){
+        return view('accountant');
+    }  
+
+    public function setPrice(){
+        return view('account.setprice');
+    }  
+
     public function store(Request $request){
         $dish = new Dish;
         $dish_name = $request->dish_name;

@@ -22,9 +22,17 @@ Route::get('/admin', function () {
 Route::get('/cashier', function () {
     return view('cashier.bill');
 });
-Route::get('/accountant', function () {
-    return view('account.setprice');
-});
+
+Route::get('/accountant/setprice','PriceController@setPrice');
+Route::get('/accountant','PriceController@accountant');
+Route::get('/accountant/order','OrderController@index')->name('OrderController.index');
+Route::get('/accountant/order/{id}','OrderController@index1')->name('OrderController.index1');
+Route::post('/accountant/fetchUnit','OrderController@fetchUnit')->name('OrderController.fetchUnit');
+Route::post('/accountant/vendorLoad','OrderController@vendorLoad')->name('OrderController.vendorLoad');
+Route::post('/accountant/fillForm','OrderController@fillForm')->name('OrderController.fillForm');
+Route::get('autofill/{foodname}', [
+    'uses' => 'OrderController@fillForm',
+    'as'   => 'autofill']);
 
 
 Route::get('/inventory','RecipeController@inven');

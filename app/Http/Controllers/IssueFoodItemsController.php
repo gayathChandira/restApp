@@ -83,16 +83,8 @@ class IssueFoodItemsController extends Controller
                 $noti->from = 'Inventory Manager';
                 $noti->to = 'Accountant';
                 $noti->read = 0;
-                $noti->data = ''.$row->food_item.' has fall behind it\'s limit';
-                $noti->save();
-                // $notify = new NotificationController;
-                // $notify->checknotify();
-                // $id = Auth::user();
-                // Log::info($fdd);
-                // $user = User::find(1);
-                // $fd = FoodItem::where('itemName','=', $fdd)->first();
-                // Log::info($fd);
-                // $id->notify(new NotifyUser($fd));
+                $noti->data = ''.$row->food_item." has fall behind its limit";
+                $noti->save();               
             }
         }
     }
