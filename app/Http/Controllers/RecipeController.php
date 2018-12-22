@@ -71,7 +71,8 @@ class RecipeController extends Controller
     public function store1 (Request $request){
         $recipe = new Recipe;        
         
-        $dname = $request->get('dname');    
+        $dname = $request->get('dname');   
+        $dtype = $request->get('dtype');   
         $ingri = $request->get('ingri');
         $amount = $request->get('amount');
         $length = $request->get('length');      
@@ -92,6 +93,7 @@ class RecipeController extends Controller
             
         }                  
             $recipe->dish_name = $dname;
+            $recipe->dish_type = $dtype;
             $recipe->ingredients = $ingri;
             $recipe->amount = $amount;
             Log::info($dname); 

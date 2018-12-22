@@ -41,22 +41,35 @@
     <div class="card-body" id="dishcard">
             {{ csrf_field() }} 
             {{-- dishcards will apear here --}}
+        <div class="row">
+            <div class="col-md-4" >ddd</div>
+            <div class="col-md-4" >vvv</div>
+            <div class="col-md-4 border border-primary rounded">
+                <h3>Rice</h3>
+                @foreach($rice as $ric)                    
+                    <div>
+                        <a href="#" onclick="order('{{$ric->dish_name}}')" class="btn btn-li btn-lg"> {{$ric->dish_name}}</a>          
+                    </div>
+                @endforeach
+                
+            </div>
+        </div>
     </div>
 </div>        
 <script>
 
-    $(document).ready(function(){
-        console.log('iside');
-        var _token = $('input[name="_token"]').val();
-        $.ajax({
-            url:"{{ route('BillController.dishDiv')}}",    
-            method:"POST",
-            data:{ _token:_token},
-            success:function(data){        
-                $('#dishcard').html(data);
-            }           
-        })
-    });
+    // $(document).ready(function(){
+    //     console.log('iside');
+    //     var _token = $('input[name="_token"]').val();
+    //     $.ajax({
+    //         url:"{{ route('BillController.dishDiv')}}",    
+    //         method:"POST",
+    //         data:{ _token:_token},
+    //         success:function(data){        
+    //             $('#dishcard').html(data);
+    //         }           
+    //     })
+    // });
     //get dish name when typing  
     $('#dish_name').keyup(function(){
         var query = $(this).val();                                      

@@ -16,12 +16,8 @@
 Route::get('/login', function () {
     return view('auth.login');
 });
-Route::get('/admin', function () {
-    return view('admin');
-});
-Route::get('/cashier', function () {
-    return view('cashier.bill');
-});
+Route::get('/admin', 'DashboardController@adminIndex');
+Route::get('/cashier','BillController@index');
 
 Route::get('/accountant/setprice','PriceController@setPrice');
 Route::get('/accountant','PriceController@accountant');

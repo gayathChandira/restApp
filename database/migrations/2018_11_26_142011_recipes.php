@@ -18,6 +18,7 @@ class Recipes extends Migration
             $table->increments('id');
             $table->integer('dish_id')->default(0);
             $table->string('dish_name');
+            $table->string('dish_type');
             $table->string('ingredients')->nullable();   
             $table->string('amount')->nullable();      
             $table->timestamps();

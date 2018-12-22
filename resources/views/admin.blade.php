@@ -14,11 +14,19 @@
 
     <!-- Bootstrap core CSS -->
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
+     
 
     <!-- Material Design Bootstrap -->
     <link href="{{asset('css/mdb.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.min.css')}}" rel="stylesheet">
-    <script type="text/javascript" src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+    <link href="{{asset('css/addons/datatables.min.css')}}" rel="stylesheet">
+    {{-- <script type="text/javascript" src="{{asset('js/jquery-3.3.1.min.js')}}"></script> --}}
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+
+    
+
+
     <style>
         .side-nav {
             transform: translateX(0%); width: 270px; padding: 0px 1.5rem 1.5rem; background-color:#fff; background-image:none;
@@ -29,7 +37,7 @@
         .side-nav a {
             line-height: 32px;
         }
-    </style>    
+    </style>        
 </head>
 
         
@@ -121,7 +129,7 @@
         </div>    
     </main>       
     <!-- SCRIPTS -->
-    <!-- JQuery -->
+   
     
     <!-- Tooltips -->
     <script type="text/javascript" src="{{asset('js/popper.min.js')}}"></script>
@@ -131,12 +139,13 @@
 
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="{{asset('js/mdb.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/addons/datatables.min.js')}}"></script>
     <script>
         // SideNav Button Initialization
         $(".button-collapse").sideNav();
         // SideNav Scrollbar Initialization
         var sideNavScrollbar = document.querySelector('.custom-scrollbar');
-        Ps.initialize(sideNavScrollbar);
+        //Ps.initialize(sideNavScrollbar);
       
     
     </script>

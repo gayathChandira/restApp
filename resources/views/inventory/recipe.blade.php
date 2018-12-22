@@ -2,16 +2,40 @@
 
 @section('content')
     <h1 class="card-title">Make a New Recipe</h1>
-    {!! Form::open(['action'=>'RecipeController@store', 'method' =>'POST','autocomplete' =>'off'])!!}
+    {!! Form::open(['autocomplete' =>'off'])!!}
         <div class="form-group">
             {{Form::label('recipeName', 'Meal Name')}}
             {{Form::text('recipeName', '', ['class' =>'form-control', 'placeholder'=>'Recipe', 'id'=>'item_ID'])}}
             <!-- {{-- <input type="text" class="form-control" id="item_ID"> --}} -->
             <div id="item_list" style="z-index: 1;position:absolute;"></div>            
         </div>
+
+        <label>Dish Type</label>
+    
+        <div class="form-check">
+            <input type="radio" class="form-check-input" id="materialGroupExample1" name="dishType" value="shorteats">
+            <label class="form-check-label" for="materialGroupExample1">Short Eats</label>
+        </div>     
+        <div class="form-check">
+            <input type="radio" class="form-check-input" id="materialGroupExample2" name="dishType" value="rice">
+            <label class="form-check-label" for="materialGroupExample2">Rice</label>
+        </div>      
+        <div class="form-check">
+            <input type="radio" class="form-check-input" id="materialGroupExample3" name="dishType" value="noodles">
+            <label class="form-check-label" for="materialGroupExample3">Noodles</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" id="materialGroupExample4" name="dishType" value="soups">
+            <label class="form-check-label" for="materialGroupExample4">Soups</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" id="materialGroupExample5" name="dishType" value="beverages">
+            <label class="form-check-label" for="materialGroupExample5">Beverages</label>
+        </div>
+
         {{ csrf_field() }}  
         <div id="room_fileds">
-            <div class="form-row">
+            <div class="form-row mt-4">
                 <div class="col-md-4 form-group"  >
                     {{Form::label('ingredients', 'Ingredients')}}
                     {{Form::text('ingri[0]', '', ['class' =>'form-control item_name0', 'placeholder'=>'Item', 'id'=>'ingri'])}}
@@ -20,7 +44,7 @@
                 </div> 
                 <div class="col-md-4 form-group ">
                     {{Form::label('amounts', 'Amounts')}}
-                    {{Form::text('amount[0]', '', ['class' =>'form-control', 'placeholder'=>'Amounts', 'id'=>'amount'])}}
+                    {{Form::text('amount[0]', '', ['class' =>'form-control', 'placeholder'=>'Amount (grams)', 'id'=>'amount'])}}
                 </div> 
                 <input type="button" class="btn btn-primary" id="more_fields" onclick="add_fields();" value="Add More" />
                 <div class="col-md-4 card mb-4" >
@@ -35,7 +59,7 @@
          <br><br><br><br><br>
         
         <div style="display:block;">
-            {{Form::submit('Submit', ['class' => 'btn btn-primary'])}} 
+            <button type="button" class="btn btn-primary">Submit</button>
         </div>
         
     {!! Form::close() !!}
@@ -73,7 +97,7 @@
             divtest.innerHTML = '<form><div class="form-row">\
             <div class="form-group col"><label>'+document.getElementById('ingri').value+'</label></div>\
             <div class="form-group col"><label>'+document.getElementById('amount').value+'</label></div>\
-            <div class="form-group col"><a href="#" onclick="storing(\''+document.getElementById('item_ID').value+'\',\''+document.getElementById('ingri').value+'\',\''+document.getElementById('amount').value+'\',\''+room+'\')" \
+            <div class="form-group col"><a href="#" onclick="storing(\''+document.getElementById('item_ID').value+'\',\''+document.querySelector('input[type = radio]:checked').value+'\',\''+document.getElementById('ingri').value+'\',\''+document.getElementById('amount').value+'\',\''+room+'\')" \
             id="clickX['+room+']" class="btn btn-success btn-sm"><i class="fa fa-check" aria-hidden="true"></i></a></div>\
             <div class="form-group col"><a href="#" onclick="deleting(\''+document.getElementById('item_ID').value+'\',\''+document.getElementById('ingri').value+'\',\''+document.getElementById('amount').value+'\',\''+room+'\')" \
             id="clickX['+room+']" class="btn btn-danger btn-sm"><i class="fa fa-close" aria-hidden="true"></i></a></div>\
@@ -85,7 +109,7 @@
 
 
         //when user clicks the green color button the data will be stord in db
-        function storing(dname,ingri,amount,length) {
+        function storing(dname,dtype,ingri,amount,length) {
             document.getElementById('ingri').value = '';
             document.getElementById('amount').value = '';
             var _token = $('input[name="_token"]').val();
@@ -94,7 +118,7 @@
                 type: "POST",
                 //dataType: 'json',
                 data: { 
-                    dname: dname,ingri:ingri,amount:amount,length:length,                  
+                    dname: dname,dtype:dtype,ingri:ingri,amount:amount,length:length,                  
                     _token:_token                                     
                 },                
                 success: function(data) {

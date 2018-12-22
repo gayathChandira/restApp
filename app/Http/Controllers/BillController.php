@@ -117,15 +117,32 @@ class BillController extends Controller
         }
 
     }
-    public function dishDiv(){
-        $dish_data = Dish::all();
-        $output ='';   
-        foreach($dish_data as $row){
-            //Log::info($row->dish_name);
-           $output .='<div>
-           <a href="#" onclick="order(\''.$row->dish_name.'\')" class="btn btn-li btn-lg">'.$row->dish_name.'</a>          
-           </div>';
-        }
-        echo $output;
+
+
+    public function index(){
+        $shorteats = Recipe::where('dish_type','=','shorteats')->select('dish_name')->groupBy('dish_name')->get();
+        $rice = Recipe::where('dish_type','=','rice')->select('dish_name')->groupBy('dish_name')->get();
+        $noodles = Recipe::where('dish_type','=','noodles')->select('dish_name')->groupBy('dish_name')->get();
+        $soup = Recipe::where('dish_type','=','soups')->select('dish_name')->groupBy('dish_name')->get();
+        $beverages = Recipe::where('dish_type','=','beverages')->select('dish_name')->groupBy('dish_name')->get();
+        $data = array(
+            'rice' => $rice,
+            'shorteats' => $shorteats,
+            'noodles' => $noodles,
+            'soup' => $soup,
+            'beverages' => $beverages
+        );
+        return view ('cashier.bill')->with($data);
     }
+    // public function dishDiv(){
+    //     $dish_data = Dish::all();
+    //     $output ='';   
+    //     foreach($dish_data as $row){
+    //         //Log::info($row->dish_name);
+    //        $output .='<div>
+    //        <a href="#" onclick="order(\''.$row->dish_name.'\')" class="btn btn-li btn-lg">'.$row->dish_name.'</a>          
+    //        </div>';
+    //     }
+    //     echo $output;
+    // }
 }

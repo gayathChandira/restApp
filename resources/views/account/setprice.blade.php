@@ -10,7 +10,7 @@
                 </div>
                 {{ csrf_field() }}  
                 <div class="col-md-5 form-group">
-                    <input type="text" id="price" class="form-control" placeholder="Unit Price">
+                    <input type="text" id="price" class="form-control" placeholder="Unit Price (Rs)">
                 </div> 
                 <div class="form-group col-md-2">
                     <a href="#" onclick="priceSet(document.getElementById('dish_name').value , document.getElementById('price').value)" class="btn btn-success btn-sm"><i class="fa fa-check" aria-hidden="true"></i></a>
