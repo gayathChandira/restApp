@@ -31,7 +31,7 @@
             <div class="view view-cascade gradient-card-header peach-gradient">           
                 <h2 class="card-header-title mb-3">The Bill</h2>      
             </div>       
-            <div class="card-body card-body-cascade text-center" id="billtable">         
+            <div class="card-body card-body-cascade " id="billtable" style="text-align: right;">         
                 {{-- bill will appear here --}}
             </div>     
       </div>  
@@ -41,17 +41,53 @@
     <div class="card-body" id="dishcard">
             {{ csrf_field() }} 
             {{-- dishcards will apear here --}}
-        <div class="row">
-            <div class="col-md-4" >ddd</div>
-            <div class="col-md-4" >vvv</div>
+        <div class="row">     
+
             <div class="col-md-4 border border-primary rounded">
-                <h3>Rice</h3>
+                <h4>Short Eats</h4>
+                @foreach($shorteats as $shrt)                    
+                    <div>
+                        <a href="#" onclick="order('{{$shrt->dish_name}}')" class="btn btn-li btn-lg"> {{$shrt->dish_name}}</a>          
+                    </div>
+                @endforeach                
+            </div>
+
+            <div class="col-md-4 border border-primary rounded">
+                <h4>Rice</h4>
                 @foreach($rice as $ric)                    
                     <div>
                         <a href="#" onclick="order('{{$ric->dish_name}}')" class="btn btn-li btn-lg"> {{$ric->dish_name}}</a>          
                     </div>
-                @endforeach
-                
+                @endforeach                
+            </div>
+            
+            <div class="col-md-4 border border-primary rounded">
+                <h4>Noodles</h4>
+                @foreach($noodles as $noo)                    
+                    <div>
+                        <a href="#" onclick="order('{{$noo->dish_name}}')" class="btn btn-li btn-lg"> {{$noo->dish_name}}</a>          
+                    </div>
+                @endforeach                
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 border border-primary rounded">
+                <h4>Soups</h4>
+                @foreach($soup as $sp)                    
+                    <div>
+                        <a href="#" onclick="order('{{$sp->dish_name}}')" class="btn btn-li btn-lg"> {{$sp->dish_name}}</a>          
+                    </div>
+                @endforeach                
+            </div>
+
+            <div class="col-md-6 border border-primary rounded">
+                <h4>Beverages</h4>
+                @foreach($beverages as $bev)                    
+                    <div>
+                        <a href="#" onclick="order('{{$bev->dish_name}}')" class="btn btn-li btn-lg"> {{$bev->dish_name}}</a>          
+                    </div>
+                @endforeach                
             </div>
         </div>
     </div>

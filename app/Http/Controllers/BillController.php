@@ -68,19 +68,30 @@ class BillController extends Controller
         $alldata = Bill::all();
         Log::info($alldata);
 
-        $output ='<table>';
+        $output ='<table style="width: -webkit-fill-available;">
+        <tr>
+            <td></td>
+            <td class="font-weight-bold">Food Item</td>
+            <td class="font-weight-bold">Quantity</td>
+            <td class="font-weight-bold">Price</td>
+        </tr>';
+        $netprice=0;
         foreach ($alldata as $row) {
            // Log::info($row);
             $output .='
             <tr>
                 <td>'.$row->id.'</td>
                 <td>'.$row->dish_name.'</td>
-                <td>'.$row->dish_quantity.'</td>
+                <td>'.$row->quantity.'</td>
                 <td>'.$row->price.'</td>  
                 <td><a href="#" onclick="remove('.$row->id.')" class="btn btn-danger btn-sm"><i class="fa fa-close" aria-hidden="true"></i></a></td>
             </tr>';
+            $netprice = $row->price + $netprice;
         }
-        $output .='</table><a href="#" onclick="paid()" class="btn btn-primary btn-sm">Proceed!</a></a>';
+        $output .=' <tr style="border-top-style: solid;">
+        <td colspan="3" style="text-align: left; font-weight: 500;">Net Price</td>      
+        <td>'.$netprice.'</td>        
+        </tr></table><a href="#" onclick="paid()" class="btn btn-primary btn-sm">Proceed!</a></a>';
         echo $output;        
         
     }
