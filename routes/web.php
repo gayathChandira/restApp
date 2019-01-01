@@ -17,6 +17,9 @@ Route::get('/login', function () {
     return view('auth.login');
 });
 Route::get('/admin', 'DashboardController@adminIndex');
+Route::post('/admin/daytable', 'DashboardController@daytable')->name('DashboardController.daytable');
+Route::post('/admin/weektable', 'DashboardController@weektable')->name('DashboardController.weektable');
+Route::post('/inventory/linegraph', 'DashboardController@linegraph')->name('DashboardController.linegraph');
 Route::get('/cashier','BillController@index');
 
 Route::get('/accountant/setprice','PriceController@setPrice');
@@ -31,7 +34,7 @@ Route::get('autofill/{foodname}', [
     'as'   => 'autofill']);
 
 
-Route::get('/inventory','RecipeController@inven');
+Route::get('/inventory','DashboardController@inventoryIndex');
 Route::post('foodItems/fetch', 'FoodItemController@fetch')->name('FoodItemController.fetch');
 Route::post('foodItems/fetchItemName', 'FoodItemController@fetchItemName')->name('FoodItemController.fetchItemName');
 Route::post('foodItems/fetchNameWhenType', 'FoodItemController@fetchNameWhenType')->name('FoodItemController.fetchNameWhenType');

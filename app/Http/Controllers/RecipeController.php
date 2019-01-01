@@ -15,9 +15,7 @@ class RecipeController extends Controller
         $this->middleware('auth');
     }
 
-    public function inven(){
-        return view('inventoryMgr');
-    }  
+  
 
     public function indexRecipe(){
         return view('inventory.recipe');
