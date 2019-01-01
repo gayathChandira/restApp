@@ -83,7 +83,7 @@ class IssueFoodItemsController extends Controller
                 $noti->from = 'Inventory Manager';
                 $noti->to = 'Accountant';
                 $noti->read = 0;
-                $noti->data = ''.$row->food_item." has fall behind its limit";
+                $noti->data = ''.$row->food_item." has fallen behind its limit";
                 $noti->save();               
             }
         }

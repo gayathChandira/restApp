@@ -88,6 +88,9 @@
 
 
         {{-- line chart --}}
+        <div class="card mb-5">        
+            <div class="card-body">
+                <h1 class="card-title mt-3">Food Item's Inventory Levels</h1>
         {{-- <div class="dropdown">        
                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1-1" data-toggle="dropdown">Select Ingredient</button>                   
                 <div class="dropdown-menu dropdown-primary" id="your-custom-id">
@@ -98,14 +101,16 @@
                 </div>
             </div>   --}}
             <div class="form-group">    
-            <label for="users">Select Ingredient </label>
-            <select name="id" id="users" class="form-control dropdown-menu dropdown-primary" onchange="selectedItem()">
-                @foreach($itemNames as $item)
-                <option class="dropdown-item mdb-dropdownLink-1" value="{{$item->itemName}}">{{$item->itemName}}</option>
-                @endforeach
-            </select>
+                <label for="users">Select Ingredient </label>
+                <select name="id" id="users" class="form-control dropdown-menu dropdown-primary" onchange="selectedItem()">
+                    @foreach($itemNames as $item)
+                    <option class="dropdown-item mdb-dropdownLink-1" value="{{$item->itemName}}">{{$item->itemName}}</option>
+                    @endforeach
+                </select>
             </div>{{ csrf_field() }}  
-        <canvas id="lineChart"></canvas>
+            <canvas id="lineChart"></canvas>
+        </div>
+    </div>
     <script>
 
     $(document).ready(function () {

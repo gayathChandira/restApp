@@ -18,10 +18,16 @@ class NotificationController extends Controller
         $user = $request->user;
         if ($user == 'accountant'){           
             $output ='';
-            foreach ($unRead as $row){                         
-                $output .= '<a class="dropdown-item" href="#" onclick="showNoti(\''.$row->data. '\',\''.$row->id.'\')">'.$row->data.'<br><small>'.$row->from.'</small></a>';
-            }            
-            echo $output;
+            if ($unRead->isEmpty()){
+                $output .= '<a class="dropdown-item" href="#">No New Notifications</a>';
+                echo $output;
+            }else{
+                foreach ($unRead as $row){                         
+                    $output .= '<a class="dropdown-item" href="#" onclick="showNoti(\''.$row->data. '\',\''.$row->id.'\')">'.$row->data.'<br><small>'.$row->from.'</small></a>';
+                }            
+                echo $output;
+            }
+            
         }
     }
   
