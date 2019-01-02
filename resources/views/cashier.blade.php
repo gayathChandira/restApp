@@ -51,7 +51,7 @@
             </div>
           
             <!-- Links -->
-            
+            <ul class="nav navbar-nav nav-flex-icons" style="margin-left:28px"><h4>Nishan Hotel Nivithigala </h4></ul>
             <!-- Right -->
             <ul class="nav navbar-nav nav-flex-icons ml-auto">
                 <li class="nav-item">
@@ -88,25 +88,24 @@
         </nav>
         <!-- Navbar -->
        <!-- Sidebar -->
-       <div class="side-nav sn-bg-4 " id="slide-out"  >
-        <img src="{{asset('img/main_logo2.png')}}" class="img-fluid" alt="" style="max-width:64%;margin-left:33px;">
-        <div class="list-group list-group-flush">
-            <a href="{{url('/inventory')}}" class="list-group-item active waves-effect" style="webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
-            box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
-            -webkit-border-radius: 5px;
-            border-radius: 5px;height: 50px;
-            line-height: 25px;">
-                <i class="fa fa-pie-chart mr-3"></i>Dashboard
-            </a>
-            <a href="{{url('inventory/update')}}" class="list-group-item list-group-item-action waves-effect">
-                <i class="fa fa-user mr-3"></i>Update Stock</a>
-            <a href="{{url('inventory/addnew')}}" class="list-group-item list-group-item-action waves-effect">
-                <i class="fa fa-table mr-3"></i>Add New Food-Items</a>
-            <a href="{{url('inventory/recipe')}}" class="list-group-item list-group-item-action waves-effect">
-                <i class="fa fa-map mr-3"></i>Create Recipes</a>                
-        </div>
-       
-    </div>
+       {{-- <div class="side-nav sn-bg-4 " id="slide-out"  >
+            <img src="{{asset('img/main_logo2.png')}}" class="img-fluid" alt="" style="max-width:64%;margin-left:33px;">
+            <div class="list-group list-group-flush">
+                <a href="{{url('/inventory')}}" class="list-group-item active waves-effect" style="webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+                box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+                -webkit-border-radius: 5px;
+                border-radius: 5px;height: 50px;
+                line-height: 25px;">
+                    <i class="fa fa-pie-chart mr-3"></i>Dashboard
+                </a>
+                <a href="{{url('inventory/update')}}" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-user mr-3"></i>Update Stock</a>
+                <a href="{{url('inventory/addnew')}}" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-table mr-3"></i>Add New Food-Items</a>
+                <a href="{{url('inventory/recipe')}}" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-map mr-3"></i>Create Recipes</a>                
+            </div>       
+        </div> --}}
     <!-- Sidebar --> 
     </header>
 

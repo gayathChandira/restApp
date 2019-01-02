@@ -54,7 +54,7 @@
                 </a>
             </div>
             <!-- Links -->
-            
+            <ul class="nav navbar-nav nav-flex-icons" style="margin-left:28px"><h4>Nishan Hotel Nivithigala </h4></ul>
             <!-- Right -->
             <ul class="nav navbar-nav nav-flex-icons ml-auto">
                 <li class="nav-item dropdown">
@@ -97,8 +97,9 @@
         <!-- Navbar -->
         <!-- Sidebar -->
         <div class="side-nav sn-bg-4 fixed" id="slide-out"  >
-                <img src="{{asset('img/main_logo2.png')}}" class="img-fluid" alt="" style="max-width:64%;margin-left:33px;">
+                <img src="{{asset('img/main_logo2.png')}}" class="img-fluid" alt="" style="max-width:64%;margin-left:33px;margin-top:18px;">
                 <div class="list-group list-group-flush">
+                    <h4 style="color: gray;text-align: center;margin-bottom: 5%;">Administrator</h4>
                     <a href="{{url('/inventory')}}" class="list-group-item active waves-effect" style="webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
                     box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
                     -webkit-border-radius: 5px;
