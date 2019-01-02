@@ -57,7 +57,14 @@
            
             <!-- Right -->
             <ul class="nav navbar-nav nav-flex-icons ml-auto">
-            
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-envelope"></i> <span class="clearfix d-none d-sm-inline-block">Notifications</span ><span class="badge badge-danger ml-2" id="num"></span></a>
+                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink" style="left:-128px">
+                        <div id="noti"  >
+                            {{-- notifications will display here --}}
+                        </div>
+                    </div>
+                </li> 
                     @guest
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -140,24 +147,60 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script> 
    
     <script>
+        //when user clicks the notifications
+        function showNoti(dataa,nid){    
+            var _token = $('input[name="_token"]').val(); 
+            var str = " to the Inventory";
+            var str1 ="Update ";
+            var dataa = dataa.replace(str,'');  
+            var food = dataa.replace(str1,'');  
+            console.log(food);                
+            console.log(nid);
+            $.ajax({
+                url:"{{ route('FoodItemController.fillform')}}",   
+                method:"POST",
+                data:{food:food,_token:_token,nid:nid},                      
+                success:function(data){  
+                    console.log(data)   ;
+                    window.location = "http://localhost/restapp/public/inventory/update/"+data;               
+                }        
+            })
+        }
+
+        setInterval(function(){
+            console.log('im inventory manager');
+            var _token = $('input[name="_token"]').val();
+            var user ="inventory manager";
+            $.ajax({
+                url:"{{ route('NotificationController.checkNotify')}}",   
+                method:"POST",
+                data:{user:user,_token:_token},                        
+                success:function(data){                      
+                    $('#noti').html(data);     
+                    $('#num').html($('#count').val());                              
+                }        
+            })
+           
+           
+        },3000);
         // SideNav Button Initialization
         $(".button-collapse").sideNav();
         // SideNav Scrollbar Initialization
         var sideNavScrollbar = document.querySelector('.custom-scrollbar');
        // Ps.initialize(sideNavScrollbar);
       
-        function notifications(){
-            var user ="inventoryManager"
-            $.ajax({
-                url:"{{ route('NotificationController.checkNotify')}}",   
-                method:"POST",
-                data:{user:user},                        
-                success:function(data){  
-                    $('#unit2').val(data.unit);
-                    $('#limit2').val(data.limit);                   
-                }        
-            })
-        }
+        // function notifications(){
+        //     var user ="inventoryManager"
+        //     $.ajax({
+        //         url:"{{ route('NotificationController.checkNotify')}}",   
+        //         method:"POST",
+        //         data:{user:user},                        
+        //         success:function(data){  
+        //             $('#unit2').val(data.unit);
+        //             $('#limit2').val(data.limit);                   
+        //         }        
+        //     })
+        // }
     
     </script>
 

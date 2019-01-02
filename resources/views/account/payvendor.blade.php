@@ -36,8 +36,9 @@
 <script>
     $(document).ready(function(){
         $('#items').select2({
-            placeholder : 'Please select user',
-            tags: true
+            placeholder : 'Please Select Item ',
+            tags: true,
+            width: '18%'
         });
     });
     var bigarray =[];
@@ -160,12 +161,13 @@
             $.ajax({
                 url:"{{ route('PayVendorController.store')}}",   
                 method:"POST",
-                data:{values:values,ven_id:ven_id,ven_name:ven_name,data:data,_token:_token},                        
-                success:function(data){   
-                    $('#vendor_id').val(data);
+                data:{values:values,ven_id:ven_id,ven_name:ven_name,data:data,_token:_token}                     
+                // success:function(data){   
+                   
                                    
-                }        
+                // }        
             })
+            
         
     }
 

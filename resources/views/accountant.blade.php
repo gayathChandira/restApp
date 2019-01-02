@@ -56,8 +56,8 @@
             <!-- Right -->
             <ul class="nav navbar-nav nav-flex-icons ml-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-envelope"></i> <span class="clearfix d-none d-sm-inline-block">Notifications</span></a>
-                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-envelope"></i> <span class="clearfix d-none d-sm-inline-block">Notifications</span><span class="badge badge-danger ml-2" id="num"></span></a>
+                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink" style="left:-128px;width:274px">
                         <div id="noti">
                             {{-- notifications will display here --}}
                         </div>
@@ -108,8 +108,8 @@
                         <i class="fa fa-user mr-3"></i>Set Prices</a>
                     <a href="{{url('accountant/order')}}" class="list-group-item list-group-item-action waves-effect">
                         <i class="fa fa-table mr-3"></i>Order Food-Items</a>
-                    <a href="{{url('inventory/recipe')}}" class="list-group-item list-group-item-action waves-effect">
-                        <i class="fa fa-map mr-3"></i>Create Recipes</a>                
+                    <a href="{{url('/accountant/payvendor')}}" class="list-group-item list-group-item-action waves-effect">
+                        <i class="fa fa-map mr-3"></i>Pay Vendor</a>                
                 </div>
     
             </div>
@@ -169,7 +169,8 @@
                 method:"POST",
                 data:{user:user,_token:_token},                        
                 success:function(data){  
-                    $('#noti').html(data);                                   
+                    $('#noti').html(data);  
+                    $('#num').html($('#count').val());                                  
                 }        
             })
         },3000);

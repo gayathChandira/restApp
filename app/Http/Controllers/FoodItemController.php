@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\FoodItem;
 use App\FoodItemUpdate;
 use App\FoodItemQuantity;
+use App\Notification;
 use DB;
 use Log;
 
@@ -21,6 +22,15 @@ class FoodItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function indexUpdate1($id){
+        $foodname = FoodItem::where('id','=',$id)->value('itemName');
+        $data = array(
+            'foodname' => $foodname,
+            'id' => $id
+        );
+        return view ('inventory.update')->with($data);
+    }
+
     public function indexUpdate(){
         $foodItemsfromDB = FoodItem::all();
         return view('inventory.update')->with('fooditems', $foodItemsfromDB);
@@ -143,5 +153,14 @@ class FoodItemController extends Controller
         $fooditem = $request->foodItem;
         FoodItem::where('itemName','=',$fooditem)->update(['unit'=>$request->unit,'limit'=>$request->limit]);
         return redirect()->back()->with('success', 'Successfully Changed!');   
+    }
+
+    public function fillform(Request $request){
+        Log::info($request->food);
+        $foodName = $request->food;
+        $id = FoodItem::where('itemName','=',$foodName)->value('id');
+        $nid = $request->nid;
+        Notification::where('id','=',$nid)->update(['read'=>1]);
+        echo $id;
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\FoodItem;
 use App\PayVendor;
+use App\Notification;
 use Log;
 
 class PayVendorController extends Controller
@@ -68,9 +69,25 @@ class PayVendorController extends Controller
             $payVendor->foodItem = $value;
             $payVendor->data = json_encode($data[$index]);
             $payVendor->save();
+
+            //To send a notification to inventory manager
+            $noti = new Notification;
+            $noti->from = 'Accountant';
+            $noti->to = 'Inventory Manager';
+            $noti->read = 0;
+            $noti->data = 'Update '.$value." to the Inventory";
+            $noti->save();   
+
+             //To send a notification to admin
+             $noti1 = new Notification;
+             $noti1->from = 'Accountant';
+             $noti1->to = 'Admin';
+             $noti1->read = 0;
+             $noti1->data = 'Update '.$value." to the Inventory";
+             $noti1->save();   
         }
         
         
-
+        // return redirect()->back()->with('success', 'Success!');  
     }
 }

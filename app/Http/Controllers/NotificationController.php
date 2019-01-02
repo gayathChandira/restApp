@@ -12,23 +12,108 @@ class NotificationController extends Controller
     
 
     public function checkNotify(Request $request){
-        //Log::info('heel');
-        $unRead = Notification::where('read','=','0')->select('from','data','id')->get();
-
+        // Log::info('heel');
+        // $unRead = Notification::where('read','=','0')->select('to','from','data','id')->get();
+        // if ($unRead->isEmpty()){
+        //     $output .= '<a class="dropdown-item" href="#">No New Notifications</a>';
+        //     echo $output;
+        // }
+        // else{
+        //     $user = $request->user;
+        //     foreach ($unRead as $row){  
+        //         if ($user == 'accountant' && $row->to == 'Accountant'){           
+        //             $output ='';                                                  
+        //             $output .= '<a class="dropdown-item" href="#" onclick="showNoti(\''.$row->data. '\',\''.$row->id.'\')">'.$row->data.'<br><small>'.$row->from.'</small></a>';
+        //             echo $output;         
+        //         }
+        //         if ($user == 'inventory manager' && $row->to == 'Inventory Manager'){           
+        //             $output ='';                                                    
+        //             $output .= '<a class="dropdown-item" href="#" onclick="showNoti(\''.$row->data. '\',\''.$row->id.'\')">'.$row->data.'<br><small>'.$row->from.'</small></a>';
+        //             echo $output;          
+        //         }
+        //     }
+        // }   
+        
+        
         $user = $request->user;
-        if ($user == 'accountant'){           
-            $output ='';
-            if ($unRead->isEmpty()){
-                $output .= '<a class="dropdown-item" href="#">No New Notifications</a>';
-                echo $output;
-            }else{
-                foreach ($unRead as $row){                         
-                    $output .= '<a class="dropdown-item" href="#" onclick="showNoti(\''.$row->data. '\',\''.$row->id.'\')">'.$row->data.'<br><small>'.$row->from.'</small></a>';
-                }            
+        if ($user == 'accountant'){ 
+            $accountant = Notification::where('read','=','0')->where('to','=','Accountant')->select('to','from','data','id')->get();
+            $accountcount = Notification::where('read','=','0')->where('to','=','Accountant')->select('to','from','data','id')->count();
+           
+            if ($accountant->isEmpty()){
+                $output =''; 
+                $output .= '<a class="dropdown-item" style="text-align:center" href="#">No New Notifications</a>';
                 echo $output;
             }
-            
+            else{                        
+                      
+                    foreach ($accountant as $row){   
+                        $output ='';                                      
+                        $output .= '<a class="dropdown-item" href="#" onclick="showNoti(\''.$row->data. '\',\''.$row->id.'\')">'.$row->data.'<br><small>'.$row->from.'</small></a>
+                        <input type="hidden" id="count" value="'.$accountcount.'">';
+                        echo $output;                            
+                    }
+            }
         }
+        
+
+
+
+
+
+        if ($user == 'inventory manager'){ 
+            $inventoryManager = Notification::where('read','=','0')->where('to','=','Inventory Manager')->select('to','from','data','id')->get();
+            $inventorycount = Notification::where('read','=','0')->where('to','=','Inventory Manager')->select('to','from','data','id')->count();
+           
+            if ($inventoryManager->isEmpty()){
+                $output =''; 
+                $output .= '<a class="dropdown-item" style="text-align:center" href="#">No New Notifications</a>';
+                echo $output;
+            }
+            else{                       
+                     
+                    foreach ($inventoryManager as $row){ 
+                        
+                        
+                        $output ='';                                           
+                        $output .= '<a class="dropdown-item" href="#" onclick="showNoti(\''.$row->data. '\',\''.$row->id.'\')">'.$row->data.'<br><small>'.$row->from.'</small></a>
+                        <input type="hidden" id="count" value="'.$inventorycount.'">';
+                        
+                        echo $output;
+                    }         
+                
+            }
+        }
+
+        if ($user == 'admin'){ 
+            $admin = Notification::where('read','=','0')->where('to','=','Admin')->select('to','from','data','id')->get();
+            $admincount = Notification::where('read','=','0')->where('to','=','Admin')->select('to','from','data','id')->count();
+           
+            if ($admin->isEmpty()){
+                $output =''; 
+                $output .= '<a class="dropdown-item" style="text-align:center" href="#">No New Notifications</a>';
+                echo $output;
+            }
+            else{                       
+                     
+                    foreach ($admin as $row){ 
+                        
+                        
+                        $output ='';                                           
+                        $output .= '<a class="dropdown-item" href="#" onclick="showNoti(\''.$row->data. '\',\''.$row->id.'\')">'.$row->data.'<br><small>'.$row->from.'</small></a>
+                        <input type="hidden" id="count" value="'.$admincount.'">';
+                        
+                        echo $output;
+                    }         
+                
+            }
+        }
+
+    }
+
+    public function adminRead(Request $request){
+        $nid = $request->nid;
+        Notification::where('id','=',$nid)->update(['read'=>1]);
     }
   
     

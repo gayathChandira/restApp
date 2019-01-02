@@ -312,7 +312,7 @@
 
 
         //Day table
-        $('#dateSearch').mdbDropSearch();
+    
         $('#daytable').dataTable({
             "aLengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
             "iDisplayLength": 5

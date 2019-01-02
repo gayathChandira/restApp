@@ -6,14 +6,14 @@
     {!! Form::open(['action'=> 'FoodItemController@store', 'method' =>'POST', 'autocomplete' =>'off'])!!}
         <div class="form-group mt-5">
             {{Form::label('foodItem_id', 'Item code')}}
-            {{Form::text('foodItem_id', '', ['class' =>'form-control', 'placeholder'=>'Food Item ID', 'id'=>'item_ID'])}}
+            {{Form::text('foodItem_id',!empty($id) ? $id : '', ['class' =>'form-control', 'placeholder'=>'Food Item ID', 'id'=>'item_ID'])}}
             {{-- <input type="text" class="form-control" id="item_ID"> --}}
             <div id="item_list" style="z-index: 1;position:absolute;"></div>            
         </div> 
               
         <div class="form-group">
             {{Form::label('foodItem', 'Food Item')}}
-            {{Form::text('foodItem', '', ['class' =>'form-control', 'id'=>'item_name','placeholder'=>'Food Item Name'])}}
+            {{Form::text('foodItem', !empty($foodname) ? $foodname : '', ['class' =>'form-control', 'id'=>'item_name','placeholder'=>'Food Item Name'])}}
             <div id="name_list" style="z-index: 1;position:absolute;"></div>   
         </div> 
                   

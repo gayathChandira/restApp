@@ -37,13 +37,14 @@ Route::get('autofill/{foodname}', [
     'uses' => 'OrderController@fillForm',
     'as'   => 'autofill']);
 
-
+Route::post('/inventory/fillform', 'FoodItemController@fillform')->name('FoodItemController.fillform');
 Route::get('/inventory','DashboardController@inventoryIndex');
 Route::post('foodItems/fetch', 'FoodItemController@fetch')->name('FoodItemController.fetch');
 Route::post('foodItems/fetchItemName', 'FoodItemController@fetchItemName')->name('FoodItemController.fetchItemName');
 Route::post('foodItems/fetchNameWhenType', 'FoodItemController@fetchNameWhenType')->name('FoodItemController.fetchNameWhenType');
 Route::post('foodItems/fetchID', 'FoodItemController@fetchID')->name('FoodItemController.fetchID');
 Route::get('/inventory/update', 'FoodItemController@indexUpdate');
+Route::get('/inventory/update/{id}', 'FoodItemController@indexUpdate1')->name('FoodItemController.indexUpdate1');
 Route::get('/inventory/addnew', 'FoodItemController@indexAddNew');
 Route::get('/inventory/recipe', 'RecipeController@indexRecipe');
 Route::get('/inventory/issue', 'FoodItemController@indexIssue');
@@ -98,3 +99,4 @@ Route::post('inventory/submit', 'IssueFoodItemsController@submit')->name('IssueF
 // Route::post('/notification/read','NotificationController@read');
 
 Route::post('notification/check', 'NotificationController@checkNotify')->name('NotificationController.checkNotify');
+Route::post('notification/admin', 'NotificationController@adminRead')->name('NotificationController.adminRead');

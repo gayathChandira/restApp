@@ -79,12 +79,21 @@ class IssueFoodItemsController extends Controller
             $limit = FoodItem::where('itemName','=',$row->food_item)->value('limit');
             if($limit>=$new_quantity){
                
+                //send notification to accountant
                 $noti = new Notification;
                 $noti->from = 'Inventory Manager';
                 $noti->to = 'Accountant';
                 $noti->read = 0;
                 $noti->data = ''.$row->food_item." has fallen behind its limit";
-                $noti->save();               
+                $noti->save();  
+                
+                //send notification to admin
+                $noti = new Notification;
+                $noti->from = 'Inventory Manager';
+                $noti->to = 'Admin';
+                $noti->read = 0;
+                $noti->data = ''.$row->food_item." has fallen behind its limit";
+                $noti->save();  
             }
         }
     }

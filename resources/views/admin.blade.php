@@ -57,8 +57,13 @@
             
             <!-- Right -->
             <ul class="nav navbar-nav nav-flex-icons ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link"><i class="fa fa-envelope"></i> <span class="clearfix d-none d-sm-inline-block">Notifications</span></a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-envelope"></i> <span class="clearfix d-none d-sm-inline-block">Notifications</span><span class="badge badge-danger ml-2" id="num"></span></a>
+                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink" style="left:-128px;width:274px">
+                        <div id="noti">
+                            {{-- notifications will display here --}}
+                        </div>
+                    </div>
                 </li>                      
                     @guest
                         <li class="nav-item">
@@ -141,6 +146,43 @@
     <script type="text/javascript" src="{{asset('js/mdb.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/addons/datatables.min.js')}}"></script>
     <script>
+        //when user clicks the notifications
+        function showNoti(dataa,nid){    
+            var _token = $('input[name="_token"]').val();        
+            var str = "has fall behind its limit";
+            var food = dataa.replace(str,'');
+            console.log(food);
+            console.log(nid);
+            $.ajax({
+                url:"{{ route('NotificationController.adminRead')}}",   
+                method:"POST",
+                data:{food:food,_token:_token,nid:nid},                      
+                success:function(data){  
+                    console.log(data);
+                    window.location = "http://localhost/restapp/public/admin"
+                                  
+                }        
+            })
+        }
+
+        setInterval(function(){
+            console.log('im admin');
+            var _token = $('input[name="_token"]').val();
+            var user ="admin";
+            $.ajax({
+                url:"{{ route('NotificationController.checkNotify')}}",   
+                method:"POST",
+                data:{user:user,_token:_token},                        
+                success:function(data){  
+                    $('#noti').html(data);  
+                    $('#num').html($('#count').val());                                  
+                }        
+            })
+        },3000);
+
+
+
+
         // SideNav Button Initialization
         $(".button-collapse").sideNav();
         // SideNav Scrollbar Initialization
