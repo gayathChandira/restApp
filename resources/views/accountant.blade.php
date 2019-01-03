@@ -22,7 +22,8 @@
     <link href="{{asset('css/addons/datatables.min.css')}}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     
-    <script type="text/javascript" src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+    {{-- <script type="text/javascript" src="{{asset('js/jquery-3.3.1.min.js')}}"></script> --}}
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 
     <style>
@@ -106,7 +107,7 @@
                         <i class="fa fa-pie-chart mr-3"></i>Dashboard
                     </a>
                     <a href="{{url('accountant/setprice')}}" class="list-group-item list-group-item-action waves-effect">
-                        <i class="fa fa-user mr-3"></i>Set Prices</a>
+                        <i class="fa fa-user mr-3"></i>Set / Edit Prices</a>
                     <a href="{{url('accountant/order')}}" class="list-group-item list-group-item-action waves-effect">
                         <i class="fa fa-table mr-3"></i>Order Food-Items</a>
                     <a href="{{url('/accountant/payvendor')}}" class="list-group-item list-group-item-action waves-effect">
@@ -119,13 +120,10 @@
 
     <main class="pt-5 mx-lg-5">
         <div class="container-fluid mt-5">
-            <div class="card mb-4 wow fadeIn">
-                <div class="card-body">
+            
                     @include('inc.messages')
                     @yield('content')
-                </div>
                 
-            </div>    
         </div>    
     </main>       
     <!-- SCRIPTS -->
@@ -142,6 +140,7 @@
      <script type="text/javascript" src="{{asset('js/mdb.min.js')}}"></script>
      <script type="text/javascript" src="{{asset('js/addons/datatables.min.js')}}"></script>
      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script> 
+    
     <script>
         //when user clicks the notifications
         function showNoti(dataa,nid){    

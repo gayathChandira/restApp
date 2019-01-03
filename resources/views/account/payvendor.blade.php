@@ -1,5 +1,7 @@
 @extends('accountant')
 @section('content')
+<div class="card mb-4 wow fadeIn ">        
+        
 <div class="card-body">
     <h2>Pay For Vendor</h2>  
     {!! Form::open(['action'=> 'FoodItemController@storenew', 'method' =>'POST','autocomplete' =>'off'])!!}
@@ -32,6 +34,7 @@
 
         <div id="table"></div>
         <button type="button" onclick="store()" class="btn btn-primary btn-sm">Proceed!</button>
+</div>
 </div>
 <script>
     $(document).ready(function(){

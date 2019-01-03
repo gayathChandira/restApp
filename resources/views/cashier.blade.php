@@ -33,6 +33,10 @@
         .navbar , main, .page-footer{
             padding-left: 15px;
         }
+        .menu-container {
+        display: flex;
+        flex-wrap: wrap;
+        }
     </style>    
 </head>
 

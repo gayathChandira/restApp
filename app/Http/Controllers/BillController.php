@@ -144,20 +144,5 @@ class BillController extends Controller
         );
         return view ('cashier.bill')->with($data);
     }
-    // public function dishDiv(){
-    //     $dish_data = Dish::all();
-    //     $output ='';   
-    //     foreach($dish_data as $row){
-    //         //Log::info($row->dish_name);
-    //        $output .='<div>
-    //        <a href="#" onclick="order(\''.$row->dish_name.'\')" class="btn btn-li btn-lg">'.$row->dish_name.'</a>          
-    //        </div>';
-    //     }
-    //     echo $output;
-    // }
-
-    // public function invoice($id){
-    //     $pdf = PDF::loadView('invoice')->with('billdata',$id);
-    //     return $pdf->download('invoice.pdf');
-    // }
+    
 }

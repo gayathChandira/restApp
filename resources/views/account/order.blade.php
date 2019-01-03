@@ -1,5 +1,6 @@
 @extends('accountant')
 @section('content')
+<div class="card mb-4 wow fadeIn ">    
 <div class="card-body">
     <h2>Order Food Items</h2>    
     
@@ -29,6 +30,7 @@
             </div> 
             {{Form::submit('Submit', ['class' => 'btn btn-primary'])}} 
         {!! Form::close() !!}
+</div>
 </div>
 <script>
     //Get item name when use type the item-name in text box

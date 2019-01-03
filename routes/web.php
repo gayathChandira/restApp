@@ -90,6 +90,7 @@ Route::post('cashier/billPaid', 'BillController@storePaid')->name('BillControlle
 Route::post('cashier/dishdiv', 'BillController@dishDiv')->name('BillController.dishDiv');
 
 Route::post('account/setprice','PriceController@store')->name('PriceController.store'); 
+Route::post('account/editprice','PriceController@edit')->name('PriceController.edit'); 
 
 Route::post('inventory/issue', 'IssueFoodItemsController@store')->name('IssueFoodItemsController.store');
 Route::post('inventory/issue-table', 'IssueFoodItemsController@makeTable')->name('IssueFoodItemsController.makeTable');

@@ -17,7 +17,7 @@ class PriceController extends Controller
     }
 
     public function accountant(){
-        return view('accountant');
+        return view('account.accountDash');
     }  
 
     public function setPrice(){
@@ -33,5 +33,13 @@ class PriceController extends Controller
         $dish->dish_name = $dish_name;
         $dish->unit_price = $price;
         $dish->save();
+    }
+
+    public function edit(Request $request){
+        $dish_name = $request->get('dish_name');
+        $price = $request->get('price');
+        Log::info($dish_name);
+        Log::info($price);
+        Dish::where('dish_name','=',$dish_name)->update(['unit_price'=>$price]);
     }
 }
