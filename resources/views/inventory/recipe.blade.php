@@ -1,6 +1,7 @@
 @extends('inventoryMgr')
 
 @section('content')
+    <div id="message"></div>
     <h1 class="card-title">Make a New Recipe</h1>
     {!! Form::open(['autocomplete' =>'off'])!!}
         <div class="form-group">
@@ -47,8 +48,8 @@
                     {{Form::text('amount[0]', '', ['class' =>'form-control', 'placeholder'=>'Amount (grams)', 'id'=>'amount'])}}
                 </div> 
                 <input type="button" class="btn btn-primary" id="more_fields" onclick="add_fields();" value="Add More" />
-                <div class="col-md-4 card mb-4" >
-                    <div class="card-body" id="thelist">
+                <div class="col-md-4 card mb-4" style="display: none" id="card">
+                    <div class="card-body"  id="thelist">
                         {{-- popup parts --}}                       
                     </div>                    
                 </div>
@@ -59,7 +60,10 @@
          <br><br><br><br><br>
         
         <div style="display:block;">
-            <button type="button" class="btn btn-primary">Submit</button>
+                {{ csrf_field() }}
+                <a   onclick="submit()" class="btn btn-primary" >Submit</a>
+            
+            
         </div>
         
     {!! Form::close() !!}
@@ -91,7 +95,8 @@
         });
       
         function add_fields() {         //when clicking the ad more button  
-            room++;            
+            room++;    
+            document.getElementById('card').style.display = "block";      
             var objTo = document.getElementById('thelist');
             var divtest = document.createElement("div");
             divtest.innerHTML = '<form><div class="form-row">\
@@ -154,6 +159,21 @@
                     console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
                 }               
             });
+        }
+        
+        //when click submit button
+        function submit(){
+            console.log('submit');
+            var success = '<div class="alert alert-success">\
+            Successfully Added!       \
+            </div> ';
+            $('#message').html(success);
+            
+            setTimeout(function() {
+                location.reload();
+            }, 1000);
+            
+            
         }
        
     </script>

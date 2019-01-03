@@ -18,7 +18,7 @@
                     </div>    
                     <div class="form-group">
                             {{Form::label('limit', 'Food-Item Limit')}}
-                            {{Form::text('limit', '', ['class' =>'form-control', 'placeholder'=>'Food Item Limit'])}}
+                            {{Form::text('limit', '', ['class' =>'form-control', 'placeholder'=>'Food Item Limit (Units)'])}}
                     </div> 
                     {{Form::submit('Submit', ['class' => 'btn btn-primary'])}} 
                 {!! Form::close() !!}
@@ -30,7 +30,7 @@
     <div class="card col-md-5 form-group">
         <div class="card-body">
                 <h1>Edit Food Item Details</h1>
-                {!! Form::open(['action'=> 'FoodItemController@editSubmit', 'method' =>'POST'])!!}
+                {!! Form::open(['action'=> 'FoodItemController@editSubmit', 'autocomplete' =>'off','method' =>'POST'])!!}
                     <div class="form-group mt-5">
                         {{Form::label('foodItem', 'Food Item Name')}}
                         {{Form::text('foodItem', '', ['class' =>'form-control','id'=>'item_name', 'placeholder'=>'Food Item Name'])}}

@@ -1,6 +1,7 @@
 @extends('accountant')
 @section('content')
     <div class="card-body">
+        <div id="message"></div>
         <h2>Set price</h2>
         <form>
             <div class="form-row">
@@ -43,6 +44,7 @@
                 $('#name_list').fadeOut();               
         });
         
+        //when click the green check button
         function priceSet(dish_name,price){
             console.log(dish_name);
             console.log(price);
@@ -55,15 +57,20 @@
                     dish_name:dish_name, price:price,                
                     _token:_token                                     
                 },                
-                success: function(data) {
-                    $('#name_list0').fadeIn();
-                    $('#name_list0').html(data); 
+                success: function(data) {                    
                     },
-                error: function(jqXHR, textStatus, errorThrown,data) { // What to do if we fail
-                    console.log(data); 
+                error: function(jqXHR, textStatus, errorThrown,data) { // What to do if we fail                    
                     console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
                 }               
             });
+            var success = '<div class="alert alert-success">\
+            Successfully Set the Price!       \
+            </div> ';
+            $('#message').html(success);
+            
+            setTimeout(function() {
+                location.reload();
+            }, 1000);
         }    
     </script>
 @endsection
