@@ -10,6 +10,7 @@ use App\Dish;
 use App\BillPaid;
 use DB;
 use Log;
+use PDF;
 
 class BillController extends Controller
 {   
@@ -116,17 +117,15 @@ class BillController extends Controller
             $billPaid->quantity = $row->quantity;
             $billPaid->price = $row->price;
             $billPaid->save();
-            $food_items = Recipe::where('dish_id','=',$dish_id )->select('ingredients','amount')->get();
-            // Log::info($food_items);
-            // foreach ($food_items as $row2){
-            //     Log::info($row2->ingredients);
-            //     $old_quantitiy = FoodItem::where('itemName','=',$row2->ingredients)->value('quantity');
-            //     Log::info($old_quantitiy);
-            //     $new_quantity = $old_quantitiy - ($row2->amount);
-            //     FoodItem::where('itemName','=',$row2->ingredients)->update(['quantity'=>$new_quantity]);
-            // }
-        }
 
+
+
+            $food_items = Recipe::where('dish_id','=',$dish_id )->select('ingredients','amount')->get();
+       
+        }
+        
+        $pdf = PDF::loadView('invoice',compact('bill_data'));   
+        return $pdf->download('invoice.pdf');
     }
 
 
@@ -155,5 +154,10 @@ class BillController extends Controller
     //        </div>';
     //     }
     //     echo $output;
+    // }
+
+    // public function invoice($id){
+    //     $pdf = PDF::loadView('invoice')->with('billdata',$id);
+    //     return $pdf->download('invoice.pdf');
     // }
 }

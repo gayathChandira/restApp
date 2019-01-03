@@ -100,3 +100,10 @@ Route::post('inventory/submit', 'IssueFoodItemsController@submit')->name('IssueF
 
 Route::post('notification/check', 'NotificationController@checkNotify')->name('NotificationController.checkNotify');
 Route::post('notification/admin', 'NotificationController@adminRead')->name('NotificationController.adminRead');
+
+Route::get('/invoice',function(){
+    return view('invoice');
+
+    // $pdf = PDF::loadView('invoice');
+    // return $pdf->download('invoice.pdf');
+});
