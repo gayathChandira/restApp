@@ -35,7 +35,8 @@ class IssueFoodItemsController extends Controller
        // $temp = new Issue_fd_temp;
         $alldata =Issue_fd_temp::all();        
         Log::info($alldata);
-        $output ='<table>';
+        $output ='<table class="table">
+                    <tr style=""><th scope="col">Item</th><th scope="col">Amount</th></tr>';//Added table headers for issued items
         foreach ($alldata as $row) {
            // Log::info($row);
             $output .='
@@ -45,7 +46,7 @@ class IssueFoodItemsController extends Controller
                 <td><a href="#" onclick="remove(\''.$row->food_item.'\')" class="btn btn-danger btn-sm"><i class="fa fa-close" aria-hidden="true"></i></a></td>
             </tr>';
         }
-        $output .='</table><a href="#" onclick="submit()" class="btn btn-primary btn-sm">Proceed!</a></a>';
+        $output .='</table><a href="#" onclick="submit()" style="float:left;" class="btn btn-primary btn-lg">Proceed!</a></a>'; // changed button size
         echo $output;        
         
     }

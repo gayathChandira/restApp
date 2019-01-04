@@ -2,40 +2,40 @@
 
 @section('content')
     <div id="message"></div>
-    <h1 class="card-title">Make a New Recipe</h1>
+    <h1 class="card-title" style="padding-left: 10px;">Make a New Recipe</h1>
     {!! Form::open(['autocomplete' =>'off'])!!}
-        <div class="form-group">
+        <div class="form-group" style="padding-left: 10px;">
             {{Form::label('recipeName', 'Meal Name')}}
             {{Form::text('recipeName', '', ['class' =>'form-control', 'placeholder'=>'Recipe', 'id'=>'item_ID'])}}
             <!-- {{-- <input type="text" class="form-control" id="item_ID"> --}} -->
             <div id="item_list" style="z-index: 1;position:absolute;"></div>            
         </div>
 
-        <label>Dish Type</label>
+        <label style="padding-left: 10px;">Dish Type</label>
     
-        <div class="form-check">
+        <div class="form-check" style="padding-left: 10px;">
             <input type="radio" class="form-check-input" id="materialGroupExample1" name="dishType" value="shorteats">
             <label class="form-check-label" for="materialGroupExample1">Short Eats</label>
         </div>     
-        <div class="form-check">
+        <div class="form-check" style="padding-left: 10px;">
             <input type="radio" class="form-check-input" id="materialGroupExample2" name="dishType" value="rice">
             <label class="form-check-label" for="materialGroupExample2">Rice</label>
         </div>      
-        <div class="form-check">
+        <div class="form-check" style="padding-left: 10px;">
             <input type="radio" class="form-check-input" id="materialGroupExample3" name="dishType" value="noodles">
             <label class="form-check-label" for="materialGroupExample3">Noodles</label>
         </div>
-        <div class="form-check">
+        <div class="form-check" style="padding-left: 10px;">
             <input type="radio" class="form-check-input" id="materialGroupExample4" name="dishType" value="soups">
             <label class="form-check-label" for="materialGroupExample4">Soups</label>
         </div>
-        <div class="form-check">
+        <div class="form-check" style="padding-left: 10px;">
             <input type="radio" class="form-check-input" id="materialGroupExample5" name="dishType" value="beverages">
             <label class="form-check-label" for="materialGroupExample5">Beverages</label>
         </div>
 
         {{ csrf_field() }}  
-        <div id="room_fileds">
+        <div id="room_fileds" style="padding-left: 10px;">
             <div class="form-row mt-4">
                 <div class="col-md-4 form-group"  >
                     {{Form::label('ingredients', 'Ingredients')}}
@@ -47,7 +47,7 @@
                     {{Form::label('amounts', 'Amounts')}}
                     {{Form::text('amount[0]', '', ['class' =>'form-control', 'placeholder'=>'Amount (grams)', 'id'=>'amount'])}}
                 </div> 
-                <input type="button" class="btn btn-primary" id="more_fields" onclick="add_fields();" value="Add More" />
+                <input type="button" class="btn btn-primary btn-lg" id="more_fields" onclick="add_fields();" value="Add More"/>
                 <div class="col-md-4 card mb-4" style="display: none" id="card">
                     <div class="card-body"  id="thelist">
                         {{-- popup parts --}}                       
@@ -59,9 +59,9 @@
               
          <br><br><br><br><br>
         
-        <div style="display:block;">
+        <div style="display:block; padding-left: 10px;">
                 {{ csrf_field() }}
-                <a   onclick="submit()" class="btn btn-primary" >Submit</a>
+                <a   onclick="submit()" class="btn btn-primary btn-lg">Submit</a>
             
             
         </div>
