@@ -11,7 +11,7 @@
 |
 */
 
-
+Route::get('/emppdf', 'PdfController@employeePdf');
 
 Route::get('/login', function () {
     return view('auth.login');
@@ -20,10 +20,11 @@ Route::get('/admin', 'DashboardController@adminIndex');
 Route::post('/admin/daytable', 'DashboardController@daytable')->name('DashboardController.daytable');
 Route::post('/admin/weektable', 'DashboardController@weektable')->name('DashboardController.weektable');
 Route::post('/inventory/linegraph', 'DashboardController@linegraph')->name('DashboardController.linegraph');
+Route::post('/inventory/pricetable', 'DashboardController@pricetable')->name('DashboardController.pricetable');
 Route::get('/cashier','BillController@index');
 
 Route::get('/accountant/setprice','PriceController@setPrice');
-Route::get('/accountant','PriceController@accountant');
+Route::get('/accountant','DashboardController@accountIndex');
 Route::get('/accountant/order','OrderController@index')->name('OrderController.index');
 Route::get('/accountant/payvendor','PayVendorController@index')->name('PayVendorController.index');
 Route::post('/accountant/payvendor/data','PayVendorController@getitems')->name('PayVendorController.getitems');
