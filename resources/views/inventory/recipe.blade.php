@@ -39,13 +39,13 @@
             <div class="form-row mt-4">
                 <div class="col-md-4 form-group"  >
                     {{Form::label('ingredients', 'Ingredients')}}
-                    {{Form::text('ingri[0]', '', ['class' =>'form-control item_name0', 'placeholder'=>'Item', 'id'=>'ingri'])}}
+                    {{Form::text('ingri[0]', '', ['class' =>'form-control item_name0', 'placeholder'=>'Item', 'id'=>'ingri', 'required'])}}
                     <div id="name_list0" style="z-index: 1;position:absolute;"></div>     
                                         
                 </div> 
                 <div class="col-md-4 form-group ">
                     {{Form::label('amounts', 'Amounts')}}
-                    {{Form::text('amount[0]', '', ['class' =>'form-control', 'placeholder'=>'Amount (grams)', 'id'=>'amount'])}}
+                    {{Form::text('amount[0]', '', ['class' =>'form-control', 'placeholder'=>'Amount (grams)', 'id'=>'amount', 'required'])}}
                 </div> 
                 <input type="button" class="btn btn-primary btn-lg" id="more_fields" onclick="add_fields();" value="Add More"/>
                 <div class="col-md-4 card mb-4" style="display: none" id="card">
@@ -59,12 +59,10 @@
               
          <br><br><br><br><br>
         
-        <div style="display:block; padding-left: 10px;">
+        <div style="display:block; padding-left: 10px; padding-top: 5px;">
                 {{ csrf_field() }}
-                <a   onclick="submit()" class="btn btn-primary btn-lg">Submit</a>
-            
-            
-        </div>
+                <a onclick="submit()" class="btn btn-primary btn-lg">Submit</a>
+        </div><!-- Edited button size and padding -->
         
     {!! Form::close() !!}
  
@@ -162,18 +160,22 @@
         }
         
         //when click submit button
+        var recipe_name = document.getElementById("item_ID").value;
         function submit(){
-            console.log('submit');
-            var success = '<div class="alert alert-success">\
-            Successfully Added!       \
-            </div> ';
-            $('#message').html(success);
+            if(recipe_name==""){
+                window.alert("Name of recipe cannot be empty!");
+            }
+            else{
+                console.log('submit');
+                var success = '<div class="alert alert-success">\
+                Successfully Added!       \
+                </div> ';
+                $('#message').html(success);
             
-            setTimeout(function() {
-                location.reload();
-            }, 1000);
-            
-            
+                setTimeout(function() {
+                    location.reload();
+                }, 1000);
+            }
         }
        
     </script>

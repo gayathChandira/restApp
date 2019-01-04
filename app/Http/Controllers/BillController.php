@@ -92,7 +92,7 @@ class BillController extends Controller
         $output .=' <tr style="border-top-style: solid;">
         <td colspan="3" style="text-align: left; font-weight: 500;">Net Price</td>      
         <td>'.$netprice.'</td>        
-        </tr></table><a href="#" onclick="paid()" class="btn btn-primary btn-sm">Proceed!</a></a>';
+        </tr></table><a href="#" onclick="paid()" class="btn btn-primary btn-md">Proceed!</a></a>';
         echo $output;        
         
     }
