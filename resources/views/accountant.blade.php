@@ -21,11 +21,11 @@
     <link href="{{asset('css/style.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/addons/datatables.min.css')}}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-    
+   
     {{-- <script type="text/javascript" src="{{asset('js/jquery-3.3.1.min.js')}}"></script> --}}
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-
+    
     <style>
         .side-nav {
             transform: translateX(0%); width: 270px; padding: 0px 1.5rem 1.5rem; background-color:#fff; background-image:none;

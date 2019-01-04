@@ -16,6 +16,8 @@ class BillController extends Controller
 {   
     //Get dish name when user types dish name
     public function fetchName(Request $request){       
+
+        
         if($request->get('query')){            
             $query = $request->get('query');  
             

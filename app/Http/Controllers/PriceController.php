@@ -16,9 +16,7 @@ class PriceController extends Controller
         $this->middleware('auth');
     }
 
-    public function accountant(){
-        return view('account.accountDash');
-    }  
+   
 
     public function setPrice(){
         return view('account.setprice');

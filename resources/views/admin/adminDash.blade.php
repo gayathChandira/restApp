@@ -2,6 +2,32 @@
 
 @section('content')
 
+{{-- <div class="row">
+    <div class="col-md-4" style="background-color: green;margin:3%">
+fdf
+    </div>
+    <div class="col-md-4" style="background-color: darkslateblue">
+fdf
+    </div>
+    <div class="col-md-4" style="background-color:darkviolet">
+dfd
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-6" style="background-color: firebrick">
+fd
+    </div>
+    <div class="col-md-6" style="background-color:goldenrod">
+fdf
+    </div>
+</div>
+
+
+ --}}
+
+
+
     {{-- employee table --}}
     <div class="card mb-5">        
         <div class="card-body">
@@ -167,16 +193,32 @@
     <div class="card mb-5">        
         <div class="card-body">
             <h1 class="card-title mt-3">Weekly /  Monthly Summery <span id="weekstartselect"></span> to <span id="weekendselect"></span></h1>
-
-            <div class="dropdown">        
-                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1-1" data-toggle="dropdown">Select Week</button>                   
-                <div class="dropdown-menu dropdown-primary" id="your-custom-id">
-                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-                    @foreach($weeks as $week)
-                        <a class="dropdown-item mdb-dropdownLink-1" id="selected" href="#" onclick="weeklytablemake('{{$week['start']}}','{{$week['end']}}')">{{$week['start']}} to {{$week['end']}} </a>
-                    @endforeach                       
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="dropdown">        
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1-1" data-toggle="dropdown">Select Week</button>                   
+                        <div class="dropdown-menu dropdown-primary" id="your-custom-id">
+                            <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                            @foreach($weeks as $week)
+                                <a class="dropdown-item mdb-dropdownLink-1" id="selected" href="#" onclick="weeklytablemake('{{$week['start']}}','{{$week['end']}}')">{{$week['start']}} to {{$week['end']}} </a>
+                            @endforeach                       
+                        </div>
+                    </div>  
                 </div>
-            </div>  
+                <div class="col-sm-3">
+                    <div class="dropdown">        
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1-1" data-toggle="dropdown">Select Month</button>                   
+                        <div class="dropdown-menu dropdown-primary" id="your-custom-id">
+                            <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                            @foreach($months as $index => $month)
+                        <a class="dropdown-item mdb-dropdownLink-1" id="selected" href="#" onclick="weeklytablemake('{{$month['start']}}','{{$month['end']}}')">{{json_encode($monthsyears[$index])}} </a>
+                            @endforeach                       
+                        </div>
+                    </div>  
+                </div>
+            </div>
+            
+            
             <div id="weektabledata"></div> 
             <div class="tohide1">    
                 <table id="weeklytable" class="table table-striped table-responsive-sm" cellspacing="0" width="100%">
@@ -188,7 +230,7 @@
                         </th>                           
                         <th class="th-lg">Quantity
                         </th>
-                        <th class="th-lg">Net Price
+                        <th class="th-lg">Net Income
                         </th>                                         
                         </tr>
                     </thead>
@@ -210,7 +252,7 @@
                         </th>                           
                         <th>Quantity
                         </th>
-                        <th>Net Price
+                        <th>Net Income
                         </th>                                            
                         </tr>
                     </tfoot>
@@ -396,17 +438,20 @@
 
     // weeklytable ajax
     function weeklytablemake(start, end){                                     
-     
+        console.log(start);
+        console.log(end);
         var _token = $('input[name="_token"]').val();
         $.ajax({
             url:"{{ route('DashboardController.weektable')}}",    
             method:"POST",
-            data:{ start:start,end:end, _token:_token},
-            success:function(data){  
+            data:{ start:start,end:end, _token:_token},           
+            success:function(data){                  
+
                 $('.tohide1').fadeOut();           
-                $('#weektabledata').html(data);         
+                $('#weektabledata').html(data.output);                   
                 $('#weekstartselect').html(document.getElementById('startdate').value );
                 $('#weekendselect').html(document.getElementById('enddate').value);
+
                //weekly table
                 $('#weeklytable').dataTable({
                     "aLengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
