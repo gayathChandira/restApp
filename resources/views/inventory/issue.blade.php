@@ -3,27 +3,27 @@
 <h1 class="card-title">Issue Food-Items to Kitchen</h1>
 <form>
     <div class="form-row mt-5">
-        <div class="col-md-5 form-group">
+        <div class="col-md-5 form-group" style="padding-top:7px;">
             <input type="text" id="item_name" class="form-control" placeholder="Food Item Name">
             <div id="name_list" style="z-index: 1;position:absolute;"></div>    
         </div>
         {{ csrf_field() }}  
-        <div class="col-md-5 form-group">
+        <div class="col-md-5 form-group" style="padding-top:7px;">
             <input type="text" id="quantity" class="form-control" placeholder="Quantity">
         </div>            
         <div class="form-group col-md-2">
-            <a href="#" onclick="store(document.getElementById('item_name').value, document.getElementById('quantity').value)" class="btn btn-success btn-sm"><i class="fa fa-check" aria-hidden="true"></i></a>
-        </div> 
+            <a href="#" onclick="store(document.getElementById('item_name').value, document.getElementById('quantity').value)" class="btn btn-success btn-md"><i class="fa fa-check" aria-hidden="true"></i></a>
+        </div> <!-- Changed button size and allign text boxes -->
                         
     </div>
 </form>
-<div class="col-md-4  ">        
-        <div class="card card-cascade wider mt-5">                
-            <div class="card-body card-body-cascade text-center" id="issued">         
-                {{-- issued items will appear here --}}
-            </div>     
-      </div>  
-    </div>
+<div class="col-md-4">        
+    <!-- <div class="card card-cascade wider mt-5">                 -->
+        <div class="card-body card-body-cascade text-center" id="issued">         
+            {{-- issued items will appear here --}}
+        </div>     
+    <!-- </div>   -->
+</div>
 <script>
 
     //Get item name when use type the item-name in text box
