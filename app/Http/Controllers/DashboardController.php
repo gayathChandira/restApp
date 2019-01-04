@@ -50,7 +50,7 @@ class DashboardController extends Controller
         $vendor = Vendor::all();
 
         $weeks = BillPaid::select(DB::raw('WEEK(created_at) as week'))->groupBy('week')->orderBy('week', 'desc')->get();  //this will get us the week numbers from start to end of data
-        $months = BillPaid::select(DB::raw('MONTH(created_at) as month'))->groupBy('month')->orderBy('month', 'desc')->get();   //this will get us the month numbers from start to end of data
+        //$months = BillPaid::select(DB::raw('MONTH(created_at) as month'))->groupBy('month')->orderBy('month', 'desc')->get();   //this will get us the month numbers from start to end of data
         //Log::info($months);     
         $results = BillPaid::select('created_at')
         ->orderBy('created_at','desc')
@@ -58,15 +58,15 @@ class DashboardController extends Controller
         ->groupBy(function (BillPaid $item) {
             return $item->created_at->format('Y-m');
         });
-        Log::info($results->keys());    //this will get the year and month 2019-01
-       
+        //Log::info($results->keys());    //this will get the year and month 2019-01
+        $months = $results->keys();
         $date = Carbon::now(); 
         $weekarray = array();     //this array includes start date and end date of each weeks. 
-        foreach($weeks as $week){
-            
+        
+        foreach($weeks as $week){            
             //Log::info($week->week);
             $weekNumber = $week->week;
-            $date->setISODate(2018,($weekNumber)); //when given a week number it returns start date of that week
+            $date->setISODate(2018,($weekNumber+1)); //when given a week number it returns start date of that week
             $start = $date->startOfWeek()->toDateTimeString();    //get the start date of the week
             $end =  $date->endOfWeek()->toDateTimeString();      // get the end date of the week
             $weekly = array(
@@ -76,23 +76,23 @@ class DashboardController extends Controller
             array_push($weekarray,$weekly);
         }
         $montharray = array();     //this array includes start date and end date of each month. 
-        foreach($months as $month){
-            
-            //Log::info($week->week);
-            $monthNumber = $month->month;// Log::info($monthNumber);
-            
-            $firstday = date('01-' . $monthNumber . '-Y'); 
-            //  Log::info($firstday);
-            $lastday = date(date('t', strtotime($firstday)) .'-' . $monthNumber . '-Y'); 
-            //  Log::info($lastday);         
-         
+        
+        $monthswithyears = array();
+        foreach($months as $month){             
+            array_push($monthswithyears,$month);
+            $firstday = $month.'-01';          //first date of the month
+            $lastday = date("Y-m-t", strtotime($firstday));            //last date of the month
+               
             $monthly = array(
                 "start" => $firstday,
                 "end" => $lastday
             );           
             array_push($montharray,$monthly);
         }
-        //Log::info($montharray);
+       // $monthswithyears = str_replace('"', '', json_encode($monthswithyears));
+        Log::info($monthswithyears);
+        
+
         $today = Carbon::now();
         $one_week_ago = Carbon::now()->subWeeks(1);
         $weeklytable = BillPaid::selectRaw( 'dish_id , dish_name ,sum(price) as totalPrice , sum(quantity) as totalQuantity')
@@ -110,7 +110,9 @@ class DashboardController extends Controller
             'daytable' => $daytable,
             'billdates' => $billdates,
             'weeklytable' => $weeklytable,
-            'weeks' => $weekarray
+            'weeks' => $weekarray,
+            'months' => $montharray,
+            'monthsyears' => $monthswithyears
         );
         return View ('admin.adminDash')->with($data);
     }
@@ -167,10 +169,10 @@ class DashboardController extends Controller
     //for weekly table admin dash
     public function weektable(Request $request){
         $startday = $request->get('start');
-        $endday = $request->get('end');
+        $endday = $request->get('end');      
         $weeklytable = BillPaid::selectRaw( 'dish_id , dish_name ,sum(price) as totalPrice , sum(quantity) as totalQuantity')
             ->whereBetween('created_at', [$startday, $endday])
-            ->groupBy('dish_id')->get();  
+            ->groupBy('dish_id')->get();           
         $output = '<table id="weeklytable" class="table table-striped table-responsive-sm" cellspacing="0" width="100%">
         <thead>
             <tr>
@@ -208,8 +210,7 @@ class DashboardController extends Controller
             </th>                                            
             </tr>
         </tfoot>
-        </tabel>';      
-        
+        </tabel>';              
         return response()->json([
             'output'=> $output,
             'weeklytable' => $weeklytable

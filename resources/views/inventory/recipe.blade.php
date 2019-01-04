@@ -6,7 +6,7 @@
     {!! Form::open(['autocomplete' =>'off'])!!}
         <div class="form-group" style="padding-left: 10px;">
             {{Form::label('recipeName', 'Meal Name')}}
-            {{Form::text('recipeName', '', ['class' =>'form-control', 'placeholder'=>'Recipe', 'id'=>'item_ID'])}}
+            {{Form::text('recipeName', '', ['class' =>'form-control', 'placeholder'=>'Recipe', 'id'=>'item_ID' ,'required' => 'required'])}}
             <!-- {{-- <input type="text" class="form-control" id="item_ID"> --}} -->
             <div id="item_list" style="z-index: 1;position:absolute;"></div>            
         </div>
@@ -161,21 +161,38 @@
             });
         }
         
-        //when click submit button
+        // //when click submit button
+        // function submit(){
+        //     console.log('submit');
+        //     var success = '<div class="alert alert-success">\
+        //     Successfully Added!       \
+        //     </div> ';
+        //     $('#message').html(success);
+            
+        //     setTimeout(function() {
+        //         location.reload();
+        //     }, 1000);
+            
+            
+        // }
+       //when click submit button
+        var recipe_name = document.getElementById("item_ID").value;
         function submit(){
-            console.log('submit');
-            var success = '<div class="alert alert-success">\
-            Successfully Added!       \
-            </div> ';
-            $('#message').html(success);
+            if(recipe_name=="" || recipe_name.length==0 || recipe_name== null){
+                window.alert("Name of recipe cannot be empty!");
+            }
+            else{
+                console.log('submit');
+                var success = '<div class="alert alert-success">\
+                Successfully Added!       \
+                </div> ';
+                $('#message').html(success);
             
-            setTimeout(function() {
-                location.reload();
-            }, 1000);
-            
-            
+                setTimeout(function() {
+                    location.reload();
+                }, 1000);
+            }
         }
-       
     </script>
     
 @endsection

@@ -210,8 +210,8 @@ fdf
                         <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1-1" data-toggle="dropdown">Select Month</button>                   
                         <div class="dropdown-menu dropdown-primary" id="your-custom-id">
                             <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-                            @foreach($weeks as $week)
-                                <a class="dropdown-item mdb-dropdownLink-1" id="selected" href="#" onclick="weeklytablemake('{{$week['start']}}','{{$week['end']}}')">{{$week['start']}} to {{$week['end']}} </a>
+                            @foreach($months as $index => $month)
+                        <a class="dropdown-item mdb-dropdownLink-1" id="selected" href="#" onclick="weeklytablemake('{{$month['start']}}','{{$month['end']}}')">{{json_encode($monthsyears[$index])}} </a>
                             @endforeach                       
                         </div>
                     </div>  
@@ -438,19 +438,17 @@ fdf
 
     // weeklytable ajax
     function weeklytablemake(start, end){                                     
-        console.log('fdfd');
+        console.log(start);
+        console.log(end);
         var _token = $('input[name="_token"]').val();
         $.ajax({
             url:"{{ route('DashboardController.weektable')}}",    
             method:"POST",
-            data:{ start:start,end:end, _token:_token},
-            dataType: "json",
-            success:function(data){  
-                // console.log(data.output);
-                // console.log(data.weeklytable);
+            data:{ start:start,end:end, _token:_token},           
+            success:function(data){                  
 
                 $('.tohide1').fadeOut();           
-                $('#weektabledata').html(data.output);         
+                $('#weektabledata').html(data.output);                   
                 $('#weekstartselect').html(document.getElementById('startdate').value );
                 $('#weekendselect').html(document.getElementById('enddate').value);
 
