@@ -114,19 +114,19 @@ class VendorController extends Controller
                 $output = '<div class="editform">
                 <div class="form-group">
                     <label>First Name</label>
-                    <input type="text" name="fname" value="'.$row->fname.'" class="form-control" placeholder="First Name">
+                    <input type="text" name="fname" value="'.$row->fname.'" class="form-control" placeholder="First Name" required>
                 </div>
                 <div class="form-group">
                         <label>Last Name</label>
-                        <input type="text" name="lname" value="'.$row->lname.'" class="form-control" placeholder="Last Name">
+                        <input type="text" name="lname" value="'.$row->lname.'" class="form-control" placeholder="Last Name" required>
                 </div>
                 <div class="form-group">
                         <label>Contact</label>
-                        <input type="text" name="contact" value="'.$row->contact.'" class="form-control" placeholder="Contact Number">
+                        <input type="text" name="contact" value="'.$row->contact.'" class="form-control" placeholder="Contact Number" required>
                 </div>
                 <div class="form-group">
                         <label>Email</label>
-                        <input type="email" name="email" value="'.$row->email.'" class="form-control" placeholder="Email Address">
+                        <input type="email" name="email" value="'.$row->email.'" class="form-control" placeholder="Email Address" required>
                 </div>
                 <input type="hidden" value="'.$row->id.'" name="vendor_id">
                 <input type="submit" value="Submit" class="btn btn-primary">

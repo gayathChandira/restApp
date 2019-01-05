@@ -6,26 +6,26 @@
     
         {!! Form::open(['action'=> 'FoodItemController@storenew', 'method' =>'POST','autocomplete' =>'off'])!!}
         
-            <div class="form-group mt-5">
+            <div class="form-group mt-5" style="padding-left:10px; width:70%;">
                 
                 {{Form::label('foodItem', 'Food Item Name')}}
-                {{Form::text('foodItem', !empty($foodname) ? $foodname : '', ['class' =>'form-control','id'=>'item_name', 'placeholder'=>'Food Item Name'])}}
+                {{Form::text('foodItem', !empty($foodname) ? $foodname : '', ['class' =>'form-control','id'=>'item_name', 'placeholder'=>'Food Item Name', 'required'])}}
                 <div id="name_list" style="z-index: 1;position:absolute;"></div>  
             </div>   
             
-            <div class="form-group">
+            <div class="form-group" style="padding-left:10px; width:70%;">
                     {{Form::label('unit', 'Unit')}}
-                    {{Form::text('unit', '', ['class' =>'form-control','id'=>'unit', 'placeholder'=>'Unit Name'])}}
+                    {{Form::text('unit', '', ['class' =>'form-control','id'=>'unit', 'placeholder'=>'Unit Name', 'required'])}}
             </div>    
             {{ csrf_field() }} 
-            <div class="form-group">
+            <div class="form-group" style="padding-left:10px; width:70%;">
                     {{Form::label('quantity', 'Quantity')}}
-                    {{Form::text('quantity', '', ['class' =>'form-control', 'placeholder'=>'Requesting Quantity'])}}
+                    {{Form::text('quantity', '', ['class' =>'form-control', 'placeholder'=>'Requesting Quantity', 'required'])}}
             </div> 
         
-            <div class="form-group">
+            <div class="form-group" style="padding-left:10px; width:70%;">
                 {{Form::label('vendor', 'Vendor')}}
-                {{Form::text('vendor', '', ['class' =>'form-control','id'=>'vendorName', 'placeholder'=>'Vendor'])}}
+                {{Form::text('vendor', '', ['class' =>'form-control','id'=>'vendorName', 'placeholder'=>'Vendor', 'required'])}}
                 <div id="item_list" style="z-index: 1;position:absolute;"></div> 
             </div> 
             {{Form::submit('Submit', ['class' => 'btn btn-primary'])}} 

@@ -9,16 +9,16 @@
                 {!! Form::open(['action'=> 'FoodItemController@storenew', 'method' =>'POST'])!!}
                     <div class="form-group mt-5">
                         {{Form::label('foodItem', 'Food Item Name')}}
-                        {{Form::text('foodItem', '', ['class' =>'form-control', 'placeholder'=>'Food Item Name'])}}
+                        {{Form::text('foodItem', '', ['class' =>'form-control', 'placeholder'=>'Food Item Name', 'required'])}}
                     </div>   
                     
                     <div class="form-group">
                             {{Form::label('unit', 'Unit')}}
-                            {{Form::text('unit', '', ['class' =>'form-control', 'placeholder'=>'Unit Name'])}}
+                            {{Form::text('unit', '', ['class' =>'form-control', 'placeholder'=>'Unit Name', 'required'])}}
                     </div>    
                     <div class="form-group">
                             {{Form::label('limit', 'Food-Item Limit')}}
-                            {{Form::text('limit', '', ['class' =>'form-control', 'placeholder'=>'Food Item Limit (Units)'])}}
+                            {{Form::text('limit', '', ['class' =>'form-control', 'placeholder'=>'Food Item Limit (Units)', 'required'])}}
                     </div> 
                     {{Form::submit('Submit', ['class' => 'btn btn-primary'])}} 
                 {!! Form::close() !!}
@@ -33,17 +33,17 @@
                 {!! Form::open(['action'=> 'FoodItemController@editSubmit', 'autocomplete' =>'off','method' =>'POST'])!!}
                     <div class="form-group mt-5">
                         {{Form::label('foodItem', 'Food Item Name')}}
-                        {{Form::text('foodItem', '', ['class' =>'form-control','id'=>'item_name', 'placeholder'=>'Food Item Name'])}}
+                        {{Form::text('foodItem', '', ['class' =>'form-control','id'=>'item_name', 'placeholder'=>'Food Item Name', 'required'])}}
                         <div id="item_list" style="z-index: 1;position:absolute;"></div> 
                     </div>   
                     
                     <div class="form-group">
                             {{Form::label('unit', 'Unit')}}
-                            {{Form::text('unit', '', ['class' =>'form-control','id'=>'unit2' ,'placeholder'=>'Unit Name'])}}
+                            {{Form::text('unit', '', ['class' =>'form-control','id'=>'unit2' ,'placeholder'=>'Unit Name', 'required'])}}
                     </div>    
                     <div class="form-group">
                             {{Form::label('limit', 'Food-Item Limit')}}
-                            {{Form::text('limit', '', ['class' =>'form-control','id'=>'limit2', 'placeholder'=>'Food Item Limit'])}}
+                            {{Form::text('limit', '', ['class' =>'form-control','id'=>'limit2', 'placeholder'=>'Food Item Limit', 'required'])}}
                     </div> 
                     {{Form::submit('Submit', ['class' => 'btn btn-primary'])}} 
                 {!! Form::close() !!}

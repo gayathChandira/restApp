@@ -97,23 +97,23 @@ class EmployeeController extends Controller
                 $output = '<div class="editform">
                 <div class="form-group">
                     <label>First Name</label>
-                    <input type="text" name="fname" value="'.$row->fname.'" class="form-control" placeholder="First Name">
+                    <input type="text" name="fname" id="fname" value="'.$row->fname.'" class="form-control" placeholder="First Name" required>
                 </div>
                 <div class="form-group">
                         <label>Last Name</label>
-                        <input type="text" name="lname" value="'.$row->lname.'" class="form-control" placeholder="Last Name">
+                        <input type="text" name="lname" id="lname" value="'.$row->lname.'" class="form-control" placeholder="Last Name" required>
                 </div>
                 <div class="form-group">
-                        <label>Last Name</label>
-                        <input type="text" name="age" value="'.$row->age.'" class="form-control" placeholder="Age">
+                        <label>Age</label>
+                        <input type="text" name="age" id="age" value="'.$row->age.'" class="form-control" placeholder="Age" required>
                 </div>
                 <div class="form-group">
                         <label>Contact</label>
-                        <input type="text" name="contact" value="'.$row->contact.'" class="form-control" placeholder="Contact Number">
+                        <input type="text" name="contact" id="text" value="'.$row->contact.'" class="form-control" placeholder="Contact Number" required>
                 </div>
                 <div class="form-group">
                         <label>Email</label>
-                        <input type="email" name="email" value="'.$row->email.'" class="form-control" placeholder="Email Address">
+                        <input type="email" name="email" id="email" value="'.$row->email.'" class="form-control" placeholder="Email Address" required>
                 </div>
                 <input type="hidden" value="'.$row->id.'" name="emp_id">
                 <input type="submit" value="Submit" class="btn btn-primary">
@@ -123,21 +123,22 @@ class EmployeeController extends Controller
             }
         }   
     }
-    //update employee details query 
-    public function updateEmployee(Request $request){        
-        DB::table('employees')->where('id','=',$request->emp_id)
+    //update employee details query
+    public function updateEmployee(Request $request){
         
+        DB::table('employees')->where('id','=',$request->emp_id)        
         ->update(['fname'=>$request->fname,
         'lname'=>$request->lname,
         'age'=>$request->age,
         'email'=>$request->email,
         'contact'=>$request->contact]);
         return redirect()->back()->with('success', 'Employee Details Updated!');
+        
     }
     //Delete vendor from the db
     public function removeEmployee(Request $request){       
         DB::table('employees')->where('id', '=', $request->empid)->delete();
-        return redirect()->back()->with('error', 'Vendor Details Deleted!');
+        return redirect()->back()->with('error', 'Employee Details Deleted!');
     }
 
 }

@@ -8,16 +8,16 @@
                 <h2>Order Bill</h2>
                 <form>
                     <div class="form-row">
-                        <div class="col-md-5 form-group">
+                        <div class="col-md-5 form-group" style="padding: 7px;">
                             <input type="text" id="dish_name" class="form-control" placeholder="Dish Name">
                             <div id="name_list" style="z-index: 1;position:absolute;"></div>    
                         </div>
                         {{ csrf_field() }}  
-                        <div class="col-md-5 form-group">
+                        <div class="col-md-5 form-group" style="padding: 7px;">
                             <input type="text" id="quantity" class="form-control" placeholder="Quantity">
                         </div> 
                         <div class="form-group col-md-2">
-                            <a href="#" onclick="store(document.getElementById('dish_name').value, document.getElementById('quantity').value)" class="btn btn-success btn-sm"><i class="fa fa-check" aria-hidden="true"></i></a>
+                            <a href="#" onclick="store(document.getElementById('dish_name').value, document.getElementById('quantity').value)" class="btn btn-success btn-md"><i class="fa fa-check" aria-hidden="true"></i></a>
                         </div>                   
                     </div>
                     

@@ -39,13 +39,13 @@
             <div class="form-row mt-4">
                 <div class="col-md-4 form-group"  >
                     {{Form::label('ingredients', 'Ingredients')}}
-                    {{Form::text('ingri[0]', '', ['class' =>'form-control item_name0', 'placeholder'=>'Item', 'id'=>'ingri'])}}
+                    {{Form::text('ingri[0]', '', ['class' =>'form-control item_name0', 'placeholder'=>'Item', 'id'=>'ingri', 'required'])}}
                     <div id="name_list0" style="z-index: 1;position:absolute;"></div>     
                                         
                 </div> 
                 <div class="col-md-4 form-group ">
                     {{Form::label('amounts', 'Amounts')}}
-                    {{Form::text('amount[0]', '', ['class' =>'form-control', 'placeholder'=>'Amount (grams)', 'id'=>'amount'])}}
+                    {{Form::text('amount[0]', '', ['class' =>'form-control', 'placeholder'=>'Amount (grams)', 'id'=>'amount', 'required'])}}
                 </div> 
                 <input type="button" class="btn btn-primary btn-lg" id="more_fields" onclick="add_fields();" value="Add More"/>
                 <div class="col-md-4 card mb-4" style="display: none" id="card">
@@ -59,12 +59,10 @@
               
          <br><br><br><br><br>
         
-        <div style="display:block; padding-left: 10px;">
+        <div style="display:block; padding-left: 10px; padding-top: 5px;">
                 {{ csrf_field() }}
-                <a   onclick="submit()" class="btn btn-primary btn-lg">Submit</a>
-            
-            
-        </div>
+                <a onclick="submit()" class="btn btn-primary btn-lg">Submit</a>
+        </div><!-- Edited button size and padding -->
         
     {!! Form::close() !!}
  
@@ -93,23 +91,30 @@
             $('.item_name0').val($(this).text());
             $('#name_list0').fadeOut();  
         });
-      
-        function add_fields() {         //when clicking the ad more button  
-            room++;    
-            document.getElementById('card').style.display = "block";      
-            var objTo = document.getElementById('thelist');
-            var divtest = document.createElement("div");
-            divtest.innerHTML = '<form><div class="form-row">\
-            <div class="form-group col"><label>'+document.getElementById('ingri').value+'</label></div>\
-            <div class="form-group col"><label>'+document.getElementById('amount').value+'</label></div>\
-            <div class="form-group col"><a href="#" onclick="storing(\''+document.getElementById('item_ID').value+'\',\''+document.querySelector('input[type = radio]:checked').value+'\',\''+document.getElementById('ingri').value+'\',\''+document.getElementById('amount').value+'\',\''+room+'\')" \
-            id="clickX['+room+']" class="btn btn-success btn-sm"><i class="fa fa-check" aria-hidden="true"></i></a></div>\
-            <div class="form-group col"><a href="#" onclick="deleting(\''+document.getElementById('item_ID').value+'\',\''+document.getElementById('ingri').value+'\',\''+document.getElementById('amount').value+'\',\''+room+'\')" \
-            id="clickX['+room+']" class="btn btn-danger btn-sm"><i class="fa fa-close" aria-hidden="true"></i></a></div>\
-            </div>  {{ csrf_field() }}  <input type="hidden" name="loopLength" id="length"/> </form>    ';           
-            objTo.appendChild(divtest);
-            //document.getElementById('length').value = room+1;
-            //var hello = document.getElementById("length").value            
+
+
+        //when clicking the ad more button
+        function add_fields() {
+            if(document.getElementById('ingri').value==""||document.getElementById('amount')==""){
+                window.alert("No ingredients or amount added!");
+            }         
+            else{
+                room++;    
+                document.getElementById('card').style.display = "block";      
+                var objTo = document.getElementById('thelist');
+                var divtest = document.createElement("div");
+                divtest.innerHTML = '<form><div class="form-row">\
+                <div class="form-group col"><label>'+document.getElementById('ingri').value+'</label></div>\
+                <div class="form-group col"><label>'+document.getElementById('amount').value+'</label></div>\
+                <div class="form-group col"><a href="#" onclick="storing(\''+document.getElementById('item_ID').value+'\',\''+document.querySelector('input[type = radio]:checked').value+'\',\''+document.getElementById('ingri').value+'\',\''+document.getElementById('amount').value+'\',\''+room+'\')" \
+                id="clickX['+room+']" class="btn btn-success btn-sm"><i class="fa fa-check" aria-hidden="true"></i></a></div>\
+                <div class="form-group col"><a href="#" onclick="deleting(\''+document.getElementById('item_ID').value+'\',\''+document.getElementById('ingri').value+'\',\''+document.getElementById('amount').value+'\',\''+room+'\')" \
+                id="clickX['+room+']" class="btn btn-danger btn-sm"><i class="fa fa-close" aria-hidden="true"></i></a></div>\
+                </div>  {{ csrf_field() }}  <input type="hidden" name="loopLength" id="length"/> </form>    ';           
+                objTo.appendChild(divtest);
+                //document.getElementById('length').value = room+1;
+                //var hello = document.getElementById("length").value 
+            }           
         }
 
 
@@ -161,24 +166,11 @@
             });
         }
         
-        // //when click submit button
-        // function submit(){
-        //     console.log('submit');
-        //     var success = '<div class="alert alert-success">\
-        //     Successfully Added!       \
-        //     </div> ';
-        //     $('#message').html(success);
-            
-        //     setTimeout(function() {
-        //         location.reload();
-        //     }, 1000);
-            
-            
-        // }
-       //when click submit button
+
+        //when click submit button
         var recipe_name = document.getElementById("item_ID").value;
         function submit(){
-            if(recipe_name=="" || recipe_name.length==0 || recipe_name== null){
+            if(recipe_name==""){
                 window.alert("Name of recipe cannot be empty!");
             }
             else{
@@ -187,7 +179,6 @@
                 Successfully Added!       \
                 </div> ';
                 $('#message').html(success);
-            
                 setTimeout(function() {
                     location.reload();
                 }, 1000);
