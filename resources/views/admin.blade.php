@@ -20,6 +20,7 @@
     <link href="{{asset('css/mdb.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/addons/datatables.min.css')}}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     {{-- <script type="text/javascript" src="{{asset('js/jquery-3.3.1.min.js')}}"></script> --}}
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
@@ -114,15 +115,13 @@
                         <i class="fa fa-pie-chart mr-3"></i>Dashboard
                     </a>
                     <a href="{{url('/register')}}" class="list-group-item list-group-item-action waves-effect">
-                        <i class="fa fa-user mr-3"></i>User Registration</a>
-                    <a href="#" class="list-group-item list-group-item-action waves-effect">
-                        <i class="fa fa-table mr-3"></i>View Accounts</a>
-                    <a href="#" class="list-group-item list-group-item-action waves-effect">
-                        <i class="fa fa-map mr-3"></i>View Reports</a>
+                        <i class="fa fa-user mr-3"></i>User Registration</a>                    
                     <a href="{{url('/admin/vendors')}}" class="list-group-item list-group-item-action waves-effect">
-                        <i class="fa fa-money mr-3"></i>Manage Venders</a> 
+                        <i class="fa fa-table mr-3"></i> Manage Venders</a> 
                     <a href="{{url('/admin/employees')}}" class="list-group-item list-group-item-action waves-effect">
-                        <i class="fa fa-money mr-3"></i>Manage Employees</a>                   
+                        <i class="fa fa-map mr-3"></i>Manage Employees</a>    
+                    <a href="{{url('/checkfood')}}" class="list-group-item list-group-item-action waves-effect">
+                        <i class="fa fa-check-square-o mr-3"></i>Check Food Items</a>               
                 </div>
     
             </div>
@@ -152,6 +151,7 @@
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="{{asset('js/mdb.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/addons/datatables.min.js')}}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script>
         //when user clicks the notifications
         function showNoti(dataa,nid){    
