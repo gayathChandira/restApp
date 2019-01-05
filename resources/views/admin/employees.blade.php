@@ -19,26 +19,26 @@
     <div class="tab-pane fade in show active" id="panel1" role="tabpanel">
         <br>
         {!! Form::open(['action'=> 'EmployeeController@setEmployee', 'method' =>'POST', 'autocomplete' =>'off'])!!}
-        <div class="form-group">
+        <div class="form-group" style="width:70%">
             {{Form::label('fname', 'First Name')}}
-            {{Form::text('fname', '', ['class' =>'form-control', 'placeholder'=>'First Name'])}}
+            {{Form::text('fname', '', ['class' =>'form-control', 'placeholder'=>'First Name', 'required'])}}
         </div>   
         
-        <div class="form-group">
+        <div class="form-group" style="width:70%">
                 {{Form::label('lname', 'Last Name')}}
-                {{Form::text('lname', '', ['class' =>'form-control', 'placeholder'=>'Last Name'])}}
+                {{Form::text('lname', '', ['class' =>'form-control', 'placeholder'=>'Last Name', 'required'])}}
         </div>
-        <div class="form-group">
+        <div class="form-group" style="width:70%">
             {{Form::label('age', 'Age')}}
-            {{Form::text('age', '', ['class' =>'form-control', 'placeholder'=>'Age'])}}
+            {{Form::text('age', '', ['class' =>'form-control', 'placeholder'=>'Age', 'required'])}}
         </div>  
-        <div class="form-group">
+        <div class="form-group" style="width:70%">
                 {{Form::label('contact', 'Contact')}}
-                {{Form::text('contact', '', ['class' =>'form-control', 'placeholder'=>'Contact Number'])}}
+                {{Form::text('contact', '', ['class' =>'form-control', 'placeholder'=>'Contact Number', 'required'])}}
         </div> 
-        <div class="form-group">
+        <div class="form-group" style="width:70%">
                 {{Form::label('email', 'Email')}}
-                {{Form::text('email', '', ['class' =>'form-control', 'placeholder'=>'Email Address'])}}
+                {{Form::email('email', '', ['class' =>'form-control', 'placeholder'=>'Email Address', 'required'])}}
         </div> 
         {{ csrf_field() }}
         
@@ -84,14 +84,14 @@
             <div class="form-row">
                 <div class="form-group col">
                     {{Form::label('empid', 'ID')}}
-                    {{Form::text('empid', '', ['class' =>'form-control','id'=>'emp_id1' ,'placeholder'=>'Employee ID'])}}                    
+                    {{Form::text('empid', '', ['class' =>'form-control','id'=>'emp_id1' ,'placeholder'=>'Employee ID', 'required'])}}                    
                     <div id="id_list1" style="z-index: 1;position:absolute;"></div>  
                 </div>   
                 <div class="form-group col" style="text-align:center;margin-top:27px;"><h1>OR</h1> </div>  
               
                 <div class="form-group col">
                     {{Form::label('name', 'Name')}}
-                    {{Form::text('name', '', ['class' =>'form-control','id'=>'emp_name1' ,'placeholder'=>'Employee Name'])}}                    
+                    {{Form::text('name', '', ['class' =>'form-control','id'=>'emp_name1' ,'placeholder'=>'Employee Name', 'required'])}}                    
                     <div id="ven_list1" style="z-index: 1;position:absolute;"></div> 
                 </div> 
             </div>            
