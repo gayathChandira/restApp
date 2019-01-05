@@ -91,23 +91,30 @@
             $('.item_name0').val($(this).text());
             $('#name_list0').fadeOut();  
         });
-      
-        function add_fields() {         //when clicking the ad more button  
-            room++;    
-            document.getElementById('card').style.display = "block";      
-            var objTo = document.getElementById('thelist');
-            var divtest = document.createElement("div");
-            divtest.innerHTML = '<form><div class="form-row">\
-            <div class="form-group col"><label>'+document.getElementById('ingri').value+'</label></div>\
-            <div class="form-group col"><label>'+document.getElementById('amount').value+'</label></div>\
-            <div class="form-group col"><a href="#" onclick="storing(\''+document.getElementById('item_ID').value+'\',\''+document.querySelector('input[type = radio]:checked').value+'\',\''+document.getElementById('ingri').value+'\',\''+document.getElementById('amount').value+'\',\''+room+'\')" \
-            id="clickX['+room+']" class="btn btn-success btn-sm"><i class="fa fa-check" aria-hidden="true"></i></a></div>\
-            <div class="form-group col"><a href="#" onclick="deleting(\''+document.getElementById('item_ID').value+'\',\''+document.getElementById('ingri').value+'\',\''+document.getElementById('amount').value+'\',\''+room+'\')" \
-            id="clickX['+room+']" class="btn btn-danger btn-sm"><i class="fa fa-close" aria-hidden="true"></i></a></div>\
-            </div>  {{ csrf_field() }}  <input type="hidden" name="loopLength" id="length"/> </form>    ';           
-            objTo.appendChild(divtest);
-            //document.getElementById('length').value = room+1;
-            //var hello = document.getElementById("length").value            
+
+
+        //when clicking the ad more button
+        function add_fields() {
+            if(document.getElementById('ingri').value==""||document.getElementById('amount')==""){
+                window.alert("No ingredients or amount added!");
+            }         
+            else{
+                room++;    
+                document.getElementById('card').style.display = "block";      
+                var objTo = document.getElementById('thelist');
+                var divtest = document.createElement("div");
+                divtest.innerHTML = '<form><div class="form-row">\
+                <div class="form-group col"><label>'+document.getElementById('ingri').value+'</label></div>\
+                <div class="form-group col"><label>'+document.getElementById('amount').value+'</label></div>\
+                <div class="form-group col"><a href="#" onclick="storing(\''+document.getElementById('item_ID').value+'\',\''+document.querySelector('input[type = radio]:checked').value+'\',\''+document.getElementById('ingri').value+'\',\''+document.getElementById('amount').value+'\',\''+room+'\')" \
+                id="clickX['+room+']" class="btn btn-success btn-sm"><i class="fa fa-check" aria-hidden="true"></i></a></div>\
+                <div class="form-group col"><a href="#" onclick="deleting(\''+document.getElementById('item_ID').value+'\',\''+document.getElementById('ingri').value+'\',\''+document.getElementById('amount').value+'\',\''+room+'\')" \
+                id="clickX['+room+']" class="btn btn-danger btn-sm"><i class="fa fa-close" aria-hidden="true"></i></a></div>\
+                </div>  {{ csrf_field() }}  <input type="hidden" name="loopLength" id="length"/> </form>    ';           
+                objTo.appendChild(divtest);
+                //document.getElementById('length').value = room+1;
+                //var hello = document.getElementById("length").value 
+            }           
         }
 
 

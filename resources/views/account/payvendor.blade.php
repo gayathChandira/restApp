@@ -9,20 +9,20 @@
             <div class="form-group mt-5">
                 
                 {{Form::label('vendorid', 'Vendor Id')}}
-                {{Form::text('vendorid', '', ['class' =>'form-control','id'=>'vendor_id', 'placeholder'=>'Enter Vendor ID'])}}
+                {{Form::text('vendorid', '', ['class' =>'form-control','id'=>'vendor_id', 'placeholder'=>'Enter Vendor ID', 'required'])}}
                 <div id="id_list" style="z-index: 1;position:absolute;"></div>
             </div>   
             
             <div class="form-group">
                     {{Form::label('vname', 'Vendor Name')}}
-                    {{Form::text('vname', '', ['class' =>'form-control','id'=>'vendor_name', 'placeholder'=>'Enter Vendor Name'])}}
+                    {{Form::text('vname', '', ['class' =>'form-control','id'=>'vendor_name', 'placeholder'=>'Enter Vendor Name', 'required'])}}
                     <div id="ven_list" style="z-index: 1;position:absolute;"></div>
             </div>    
             {{ csrf_field() }} 
            
         {!! Form::close() !!}
         <div class="form-group">
-            <label for="users">Select Food Items</label>
+            <label for="users" style="padding-right:10px;">Select Food Items: </label>
             <select name="user_id" id="items" class="form-control" multiple="multiple">
                 @foreach($fooditem as $key)
                 <option value="{{ $key->itemName }}">{{ $key->itemName }}</option>
@@ -30,10 +30,10 @@
             </select>
         </div>
 
-        <button type="button" onclick="makeTable()" class="btn btn-primary btn-sm">Next</button>
+        <button type="button" onclick="makeTable()" class="btn btn-primary btn-lg" style="width:147px;">Next</button>
 
         <div id="table"></div>
-        <button type="button" onclick="store()" class="btn btn-primary btn-sm">Proceed!</button>
+        <button type="button" onclick="store()" class="btn btn-primary btn-lg">Proceed!</button>
 </div>
 </div>
 <script>
@@ -156,22 +156,23 @@
     });
 
     function store(){
-        var values = $('#items').val();
-        var ven_id = $('#vendor_id').val();
-        var ven_name = $('#vendor_name').val();        
-        var data = multiDimensionalUnique(bigarray);
-        var _token = $('input[name="_token"]').val();
+        if(document.getElementById('vendor_id').value==""||document.getElementById('vendor_name').value==""){
+            window.alert("Vendor name or Id cannot be empty!");
+        }
+        else{
+            var values = $('#items').val();
+            var ven_id = $('#vendor_id').val();
+            var ven_name = $('#vendor_name').val();        
+            var data = multiDimensionalUnique(bigarray);
+            var _token = $('input[name="_token"]').val();
             $.ajax({
                 url:"{{ route('PayVendorController.store')}}",   
                 method:"POST",
                 data:{values:values,ven_id:ven_id,ven_name:ven_name,data:data,_token:_token}                     
-                // success:function(data){   
-                   
-                                   
+                // success:function(data){        
                 // }        
             })
-            
-        
+        }
     }
 
     function multiDimensionalUnique(arr) {   //to remove duplicates in bigarray

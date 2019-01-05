@@ -9,12 +9,12 @@
             <form>
                 <div class="form-row">
                     <div class="col-md-5 form-group">
-                        <input type="text" id="dish_name" class="form-control" placeholder="Dish Name" autocomplete ='off'>
+                        <input type="text" id="dish_name" class="form-control" placeholder="Dish Name" autocomplete ='off' required>
                         <div id="name_list" style="z-index: 1;position:absolute;"></div>    
                     </div>
                     {{ csrf_field() }}  
                     <div class="col-md-5 form-group">
-                        <input type="text" id="price" class="form-control" placeholder="Unit Price (Rs)">
+                        <input type="text" id="price" class="form-control" placeholder="Unit Price (Rs)" required>
                     </div> 
                     <div class="form-group col-md-2">
                         <a href="#" onclick="priceSet(document.getElementById('dish_name').value , document.getElementById('price').value)" class="btn btn-success btn-sm"><i class="fa fa-check" aria-hidden="true"></i></a>
@@ -32,12 +32,12 @@
                 <form>
                     <div class="form-row">
                         <div class="col-md-5 form-group">
-                            <input type="text" id="dish_name1" class="form-control" placeholder="Dish Name" autocomplete ='off'>
+                            <input type="text" id="dish_name1" class="form-control" placeholder="Dish Name" autocomplete ='off' required>
                             <div id="name_list1" style="z-index: 1;position:absolute;"></div>    
                         </div>
                         {{ csrf_field() }}  
                         <div class="col-md-5 form-group">
-                            <input type="text" id="price1" class="form-control" placeholder="Unit Price (Rs)">
+                            <input type="text" id="price1" class="form-control" placeholder="Unit Price (Rs)" required> 
                         </div> 
                         <div class="form-group col-md-2">
                             <a href="#" onclick="priceEdit(document.getElementById('dish_name1').value , document.getElementById('price1').value)" class="btn btn-success btn-sm"><i class="fa fa-check" aria-hidden="true"></i></a>
