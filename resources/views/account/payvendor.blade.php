@@ -200,18 +200,6 @@
     }
 
 
-//  function getdata(vendor_id){
-//         console.log('hdfdfdf');
-//         var _token = $('input[name="_token"]').val();
-//             $.ajax({
-//                 url:"{{ route('PayVendorController.getitems')}}",   
-//                 method:"POST",
-//                 data:{vendor_id:vendor_id,_token:_token},                        
-//                 success:function(data){   
-//                     $('#vendor_id').val(data);
-//                     getdata(document.getElementById('vendor_id').value) ;                     
-//                 }        
-//             })
-//     }
+
 </script>
 @endsection

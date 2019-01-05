@@ -45,11 +45,12 @@ class PayVendorController extends Controller
        
         foreach ($items as $item){            
             $itemId = FoodItem::where('itemName','like','%'.$item.'%')->value('id');          
+            $unit = FoodItem::where('itemName','like','%'.$item.'%')->value('unit');    
             $output .= '<tr>
             <th scope="row">'.$itemId.'</th>
             <td>'.$item.'</td>
             <td><input type="text" class="auto-calc unit-price form-control" placeholder="From Rupees"></td>
-            <td><input type="text" class="auto-calc amount form-control" ></td>
+            <td><input type="text" class="auto-calc amount form-control" placeholder="'.$unit.'" ></td>
             <td><input type="text" class="total-cost form-control" placeholder="From Rupees"></td>
           </tr>';
         
