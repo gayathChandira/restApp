@@ -36,7 +36,13 @@
         }
         .side-nav a {
             line-height: 32px;
-        }
+        }.classic-admin-card{
+            height:216px;
+        }.white-text{margin: 0 auto;
+    text-align: center;
+    vertical-align: middle;
+    font-size: x-large;
+    margin-top: 30px;}
     </style>        
 </head>
 

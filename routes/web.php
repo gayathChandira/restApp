@@ -12,6 +12,9 @@
 */
 
 Route::get('/emppdf', 'PdfController@employeePdf');
+Route::get('/venpdf', 'PdfController@vendorPdf');
+Route::post('/daypdf', 'PdfController@dayPdf')->name('PdfController.dayPdf');
+Route::post('/weekpdf', 'PdfController@weekPdf')->name('PdfController.weekPdf');
 
 Route::get('/login', function () {
     return view('auth.login');
