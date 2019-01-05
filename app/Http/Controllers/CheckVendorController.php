@@ -9,6 +9,11 @@ use Log;
 
 class CheckVendorController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    } 
     public function checkfoodIndex(){
         $fooditems = FoodItem::all();
         return view('admin.checkfood')->with('fooditem',$fooditems);

@@ -9,31 +9,13 @@ use Auth;
 
 class NotificationController extends Controller
 {
-    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    } 
 
     public function checkNotify(Request $request){
-        // Log::info('heel');
-        // $unRead = Notification::where('read','=','0')->select('to','from','data','id')->get();
-        // if ($unRead->isEmpty()){
-        //     $output .= '<a class="dropdown-item" href="#">No New Notifications</a>';
-        //     echo $output;
-        // }
-        // else{
-        //     $user = $request->user;
-        //     foreach ($unRead as $row){  
-        //         if ($user == 'accountant' && $row->to == 'Accountant'){           
-        //             $output ='';                                                  
-        //             $output .= '<a class="dropdown-item" href="#" onclick="showNoti(\''.$row->data. '\',\''.$row->id.'\')">'.$row->data.'<br><small>'.$row->from.'</small></a>';
-        //             echo $output;         
-        //         }
-        //         if ($user == 'inventory manager' && $row->to == 'Inventory Manager'){           
-        //             $output ='';                                                    
-        //             $output .= '<a class="dropdown-item" href="#" onclick="showNoti(\''.$row->data. '\',\''.$row->id.'\')">'.$row->data.'<br><small>'.$row->from.'</small></a>';
-        //             echo $output;          
-        //         }
-        //     }
-        // }   
-        
+ 
         
         $user = $request->user;
         if ($user == 'accountant'){ 

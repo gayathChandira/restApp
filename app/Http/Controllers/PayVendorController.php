@@ -10,6 +10,11 @@ use Log;
 
 class PayVendorController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    } 
     public function index(){
         $fooditems = FoodItem::all();
         return view('account.payvendor')->with('fooditem',$fooditems);
