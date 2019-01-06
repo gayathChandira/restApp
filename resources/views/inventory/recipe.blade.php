@@ -47,7 +47,7 @@
                     {{Form::label('amounts', 'Amounts')}}
                     {{Form::text('amount[0]', '', ['class' =>'form-control', 'placeholder'=>'Amount (grams)', 'id'=>'amount', 'required'])}}
                 </div> 
-                <input type="button" class="btn btn-primary btn-lg" id="more_fields" onclick="add_fields();" value="Add More"/>
+                <a class="btn btn-primary btn-lg" style="height: fit-content;top: 9px;" id="more_fields" onclick="add_fields();">Add More</a> 
                 <div class="col-md-4 card mb-4" style="display: none" id="card">
                     <div class="card-body"  id="thelist">
                         {{-- popup parts --}}                       
@@ -146,6 +146,8 @@
         function deleting(dname,ingri,amount,length) {
             document.getElementById('ingri').value = '';
             document.getElementById('amount').value = '';
+            console.log(dname);
+            console.log(ingri);
             var _token = $('input[name="_token"]').val();
             $.ajax({
                 url: "{{ route('RecipeController.delete') }}",

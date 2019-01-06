@@ -9,6 +9,7 @@ use App\FoodItemQuantity;
 use App\Notification;
 use DB;
 use Log;
+use Mail;
 
 class FoodItemController extends Controller
 {
@@ -108,6 +109,8 @@ class FoodItemController extends Controller
         $foodItem->limit = $request->input('limit');  
         $foodItem->save();
         return redirect('./inventory/addnew')->with('success', 'New Item Created');
+        
+
     }
     public function store(Request $request)
     {   //food items updating to the database food_item_update table        
