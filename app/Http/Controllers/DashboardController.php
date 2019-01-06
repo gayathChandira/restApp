@@ -13,7 +13,11 @@ use DateTime;
 use App\IssueFoodItem;
 use App\FoodItemQuantity;
 use App\Dish;
+
+use App\PayVendor;
+
 Use App\PayVendor;
+
 
 
 class DashboardController extends Controller
@@ -361,5 +365,53 @@ class DashboardController extends Controller
         </tabel>';
         echo $output;
 
+    }
+
+    //for expence table account dash
+    public function expensetable(Request $request){
+        $startday = $request -> get('start');
+        $endday = $request -> get('end');
+        $weeklytable = PayVendor::selectRaw('foodItem, vendor_id , vendor_name, data[2]')
+        ->whereBetween('created_at', [$startday, $endday])
+        ->groupBy('foodItem')->get();
+        $output = '<table id="weeklytable" class="table table-striped table-responsive-sm" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+            <th class="th-lg">Item Name
+            </th>
+            <th class="th-lg">Food Item Name
+            </th>                           
+            <th class="th-lg">Quantity
+            </th>
+            <th class="th-lg">Net Price
+            </th>                                         
+            </tr>
+        </thead>
+        <tbody> ';  
+        foreach($weeklytable as $week){
+            $output .= '<tr>
+            <td>'. $week->dish_id.' </td>
+            <td>'. $week->dish_name.' </td>                                
+            <td>'. $week->totalQuantity.' </td>
+            <td>'. $week->totalPrice.' </td>                              
+        </tr>
+        <input type="hidden" id="startdate" value="'.$startday.'">
+        <input type="hidden" id="enddate" value="'.$endday.'">';
+        }     
+        $output .= '</tbody>
+        <tfoot>
+            <tr>
+            <th>Dish ID
+            </th>
+            <th>Food Item Name
+            </th>                           
+            <th>Quantity
+            </th>
+            <th>Net Price
+            </th>                                            
+            </tr>
+        </tfoot>
+        </tabel>';
+        echo $output;
     }
 }

@@ -37,7 +37,6 @@
 <div class="card mb-5">        
     <div class="card-body">
         <h1 class="card-title mt-3">Income Table <span id="weekstartselect"></span> to <span id="weekendselect"></span></h1>
-
         <div class="dropdown">        
             <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1-1" data-toggle="dropdown">Select Week</button>                   
             <div class="dropdown-menu dropdown-primary" id="your-custom-id">
@@ -56,7 +55,6 @@
                     </th>
                     <th class="th-lg">Food Item Name
                     </th>                           
-                  
                     <th class="th-lg">Net Price
                     </th>                                         
                     </tr>
@@ -65,27 +63,73 @@
                     @foreach($weeklytable as $weekly)
                     <tr>
                         <td> {{$weekly->dish_id}} </td>
-                        <td> {{$weekly->dish_name}} </td>
-                     
+                        <td> {{$weekly->dish_name}} </td>   
                         <td> {{$weekly->totalPrice}} </td>                                          
                     </tr>
                     @endforeach
                 </tbody>
                 <tfoot>
                     <tr>
-                    <th>Dish ID
-                    </th>
-                    <th>Food Item Name
-                    </th>                           
-                   
-                    <th>Net Price
-                    </th>                                            
+                        <th>Dish ID</th>
+                        <th>Food Item Name</th>                             
+                        <th>Net Price</th>                                            
                     </tr>
                 </tfoot>
             </table>
         </div>            
-
     </div>
+</div>
+
+{{-- expenses table --}}    
+<div class="card mb-5">        
+    <div class="card-body">
+        <h1 class="card-title mt-3">Expenses Table <span id="weekstartselect"></span> to <span id="weekendselect"></span></h1>
+        <div class="dropdown">        
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1-1" data-toggle="dropdown">Select Week</button>                   
+            <div class="dropdown-menu dropdown-primary" id="your-custom-id">
+                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                @foreach($weeks as $week)
+                    <a class="dropdown-item mdb-dropdownLink-1" id="selected" href="#" onclick="weeklytablemake('{{$week['start']}}','{{$week['end']}}')">{{$week['start']}} to {{$week['end']}} </a>
+                @endforeach                       
+            </div>
+        </div>  
+        <div id="weektabledata"></div> 
+        <div class="tohide1">    
+            <table id="weeklytable" class="table table-striped table-responsive-sm" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                    <th class="th-lg">Item ID
+                    </th>
+                    <th class="th-lg">Item Name
+                    </th>                           
+                    <th class="th-lg">Price
+                    </th>                                         
+                    </tr>
+                </thead>
+                <tbody>{{ csrf_field() }}  
+                    @foreach($weeklytable as $weekly)
+                    <tr>
+                        <td> {{$weekly->dish_id}} </td>
+                        <td> {{$weekly->dish_name}} </td>   
+                        <td> {{$weekly->totalPrice}} </td>                                          
+                    </tr>
+                    @endforeach
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Item ID</th>
+                        <th>Item Name</th>                             
+                        <th>Price</th>                                            
+                    </tr>
+                </tfoot>
+            </table>
+        </div>            
+    </div>
+
+</div>
+
+<script>
+
 </div>     
 
 {{-- expense table --}}    
@@ -152,6 +196,7 @@
     </div>
 </div>     
  <script>
+
    $(document).ready(function () {
         // pricetable
         $('#pricetable').dataTable({
