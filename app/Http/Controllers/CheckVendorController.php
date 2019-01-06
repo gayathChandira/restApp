@@ -8,7 +8,7 @@ use App\Vendor;
 use Log;
 
 class CheckVendorController extends Controller
-{
+{    //this is for checking who is the vendor for food items
 
     public function __construct()
     {

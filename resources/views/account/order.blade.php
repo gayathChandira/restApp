@@ -4,7 +4,7 @@
 <div class="card-body">
     <h2>Order Food Items</h2>    
     
-        {!! Form::open(['action'=> 'FoodItemController@storenew', 'method' =>'POST','autocomplete' =>'off'])!!}
+        {!! Form::open(['action'=> 'OrderController@orderfoods', 'method' =>'POST','autocomplete' =>'off'])!!}
         
             <div class="form-group mt-5" style="padding-left:10px; width:70%;">
                 

@@ -13,6 +13,7 @@ use DateTime;
 use App\IssueFoodItem;
 use App\FoodItemQuantity;
 use App\Dish;
+Use App\PayVendor;
 
 
 class DashboardController extends Controller
@@ -257,7 +258,7 @@ class DashboardController extends Controller
     public function accountIndex(){
         $dish = Dish::all();        
         $weeks = BillPaid::select(DB::raw('WEEK(created_at) as week'))->groupBy('week')->orderBy('week', 'desc')->get();
-        Log::info($weeks);     
+       // Log::info($weeks);     
         
         $date = Carbon::now(); 
         $weekarray = array();
@@ -275,19 +276,40 @@ class DashboardController extends Controller
             array_push($weekarray,$weekly);
         }
        
-        Log::info($weekarray);
+        //Log::info($weekarray);
         $today = Carbon::now();
         $one_week_ago = Carbon::now()->subWeeks(1);
         $weeklytable = BillPaid::selectRaw( 'dish_id , dish_name ,sum(price) as totalPrice , sum(quantity) as totalQuantity')
             ->whereBetween('created_at', [$one_week_ago, $today])
             ->groupBy('dish_id')->get();       
 
-                 
+        $expensetbl = PayVendor::whereBetween('created_at', [$one_week_ago, $today])->get();         
+        
+        $unitData =array();
+        foreach($expensetbl as $ex){
+            $hello= $ex->data;
+            
+            $hello = explode(',',$hello);
+            //Log::info($hello);
+            $res = preg_replace("/[^0-9.]/",'' , $hello);
+            
+            //Log::info($res);
 
+            array_push($unitData,$res);
+            // foreach($hello as $hell){
+            //     Log::info($hell);
+            // }
+        }
+        Log::info($unitData);
+        
+        
+       
         $data = array(
             'weeks' => $weekarray,
             'dishes'=>$dish,
-            'weeklytable' => $weeklytable
+            'weeklytable' => $weeklytable,
+            'expensetable' => $expensetbl,
+            'unitdata' => $unitData
         );    
         return view('account.accountDash')->with($data);
     }

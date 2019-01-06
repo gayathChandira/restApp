@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/sendmail', 'MailController@send');
 Route::get('/emppdf', 'PdfController@employeePdf');
 Route::get('/venpdf', 'PdfController@vendorPdf');
 Route::post('/daypdf', 'PdfController@dayPdf')->name('PdfController.dayPdf');
@@ -39,6 +39,7 @@ Route::get('/accountant/order/{id}','OrderController@index1')->name('OrderContro
 Route::post('/accountant/fetchUnit','OrderController@fetchUnit')->name('OrderController.fetchUnit');
 Route::post('/accountant/vendorLoad','OrderController@vendorLoad')->name('OrderController.vendorLoad');
 Route::post('/accountant/fillForm','OrderController@fillForm')->name('OrderController.fillForm');
+Route::post('/accountant/orderfoods','OrderController@orderfoods')->name('OrderController.orderfoods');
 Route::get('autofill/{foodname}', [
     'uses' => 'OrderController@fillForm',
     'as'   => 'autofill']);
