@@ -14,6 +14,11 @@ use PDF;
 
 class BillController extends Controller
 {   
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    } 
     //Get dish name when user types dish name
     public function fetchName(Request $request){       
 

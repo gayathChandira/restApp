@@ -163,7 +163,8 @@ class DashboardController extends Controller
             </th>                      
             </tr>
         </tfoot>
-        </table>';
+        </table>
+        <a class="btn btn-sm btn-primary" onclick="print(\'daytable\')">Get Report</a>';
         echo $output; 
             
     }
@@ -211,7 +212,8 @@ class DashboardController extends Controller
             </th>                                            
             </tr>
         </tfoot>
-        </tabel>';              
+        </tabel>
+        <a class="btn btn-sm btn-primary" onclick="print(\'weektable\')">Get Report</a>';              
         return response()->json([
             'output'=> $output,
             'weeklytable' => $weeklytable

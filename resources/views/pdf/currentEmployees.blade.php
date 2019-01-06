@@ -1,20 +1,8 @@
-<html>
-    <head>
-        <title>Pdf</title>
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-        <!-- Bootstrap core CSS -->
-    <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
+@extends('pdf.letterhead')
 
-    <!-- Material Design Bootstrap -->
-    <link href="{{asset('css/mdb.min.css')}}" rel="stylesheet">
-    <link href="{{asset('css/style.min.css')}}" rel="stylesheet">
-    <link href="{{asset('css/addons/datatables.min.css')}}" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-    
-    <script type="text/javascript" src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-    </head>
-    <body>{{ csrf_field() }}
+@section('content')
+        
+{{-- {{ csrf_field() }}   --}}
         {{-- employee table --}}
 
         <h1 class="card-title mt-3">Current Employees</h1>
@@ -31,7 +19,7 @@
                 </th>
                 <th class="th-lg">Email
                 </th>                      
-                </tr>{{ csrf_field() }}  
+                </tr>
             </thead>
             <tbody>
                 @foreach($employee as $emp)
@@ -61,21 +49,7 @@
         </table>
    
 
-    </body>
-</html>
 
-<script src="{{ asset('js/app.js') }}"></script>
-   
-<!-- Tooltips -->
-<script type="text/javascript" src="{{asset('js/popper.min.js')}}"></script>
-
-<!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
-
-<!-- MDB core JavaScript -->
-<script type="text/javascript" src="{{asset('js/mdb.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/addons/datatables.min.js')}}"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script> 
 
 
 <script>
@@ -101,3 +75,5 @@
 //         $('#emptable_wrapper .dataTables_filter').find('label').remove();
 // });
 </script>
+
+@endsection

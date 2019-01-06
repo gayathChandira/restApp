@@ -12,7 +12,12 @@
 */
 
 Route::get('/emppdf', 'PdfController@employeePdf');
+Route::get('/venpdf', 'PdfController@vendorPdf');
+Route::post('/daypdf', 'PdfController@dayPdf')->name('PdfController.dayPdf');
+Route::post('/weekpdf', 'PdfController@weekPdf')->name('PdfController.weekPdf');
 
+Route::post('/checkvendor', 'CheckVendorController@check')->name('CheckVendorController.check');
+Route::get('/checkfood', 'CheckVendorController@checkfoodIndex');
 Route::get('/login', function () {
     return view('auth.login');
 });
