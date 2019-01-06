@@ -2,34 +2,57 @@
 
 @section('content')
 
-{{-- <div class="row">
-    <div class="col-md-4" style="background-color: green;margin:3%">
-fdf
-    </div>
-    <div class="col-md-4" style="background-color: darkslateblue">
-fdf
-    </div>
-    <div class="col-md-4" style="background-color:darkviolet">
-dfd
-    </div>
+<section>
 
-</div>
-<div class="row">
-    <div class="col-md-6" style="background-color: firebrick">
-fd
-    </div>
-    <div class="col-md-6" style="background-color:goldenrod">
-fdf
-    </div>
-</div>
+    <!--Grid row-->
+    <div class="row">
 
+      
+        <div class="col-xl-3 col-md-6 mb-4">
+            <a href="#" onclick="loadcontent('daytble')" >
+            <div class="card classic-admin-card primary-color">
+                <div class="card-body">            
+                    <p class="white-text">PERCHASES ON TODAY</p>               
+                </div>
+            </div>  
+            </a> 
+        </div>    
+        <div class="col-xl-3 col-md-6 mb-4">
+            <a href="#" onclick="loadcontent('weekmonthsummery')" >
+            <div class="card classic-admin-card warning-color">
+                <div class="card-body">                
+                    <p class="white-text">WEEKLY / MONTHLY SUMMERY</p>                   
+                </div>
+            </div>  
+            </a> 
+        </div>    
+        <div class="col-xl-3 col-md-6 mb-4">
+            <a href="#" onclick="loadcontent('currentEmp')" >
+            <div class="card classic-admin-card light-blue lighten-1">
+                <div class="card-body">                
+                    <p class="white-text">CURRENT EMPLOTYEES</p>                   
+                </div>
+            </div>  
+            </a> 
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <a href="#" onclick="loadcontent('vendors')" >
+            <div class="card classic-admin-card red accent-2">
+                <div class="card-body">                
+                    <p class="white-text">CURRENT VENDORS</p>                   
+                </div>
+            </div>  
+            </a> 
+        </div>
 
- --}}
+    </div>    
 
-
+  </section>
+           
+{{-- ----------------------------------------------------------------------------------------------------------------------- --}}
 
     {{-- employee table --}}
-    <div class="card mb-5">        
+    <div class="card mb-5 fade_out" id="currentEmp" style="display:none">        
         <div class="card-body">
             <h1 class="card-title mt-3">Current Employees</h1>
             <table id="emptable" class="table table-striped table-responsive-sm" cellspacing="0" width="100%">
@@ -73,11 +96,13 @@ fdf
                     </tr>
                 </tfoot>
             </table>
+
+            <a class="btn btn-sm btn-primary" onclick="print('employee')">Get Report</a>
         </div>
     </div>    
 
     {{-- vendors table --}}
-    <div class="card mb-5">        
+    <div class="card mb-5 fade_out" id="vendors" style="display:none">        
         <div class="card-body">
             <h1 class="card-title mt-3">Current Vendors</h1>
 
@@ -117,19 +142,14 @@ fdf
                     </tr>
                 </tfoot>
             </table>
+            <a class="btn btn-sm btn-primary" onclick="print('vendor')">Get Report</a>
         </div>
     </div>    
 
-    {{-- Income Variation through Past Week --}}
-    <div class="card mb-5">        
-        <div class="card-body">
-            <h1 class="mb-5">Income Variation through Past Week</h1>
-            <canvas id="myChart" style="max-width: 500px;"></canvas>
-        </div>
-    </div>      
+ 
 
     {{-- day table --}}
-    <div class="card mb-5">        
+    <div class="card mb-5 fade_out" id="daytble" style="display:none">        
             <div class="card-body">
             <h1 class="card-title mt-3">Food Items purchased on <span class="tohide">Today</span><span id="dateselect"></span></h1>                
         <div class="dropdown">        
@@ -184,19 +204,20 @@ fdf
                         </tr>
                     </tfoot>
                 </table>
+                <a class="btn btn-sm btn-primary" onclick="print('daytable')">Get Report</a>
             </div>
         </div>
     </div>    
     
 
     {{-- weekly monthly summery --}}
-    <div class="card mb-5">        
+    <div class="card mb-5 fade_out" id="weekmonthsummery" style="display:none">        
         <div class="card-body">
-            <h1 class="card-title mt-3">Weekly /  Monthly Summery <span id="weekstartselect"></span> to <span id="weekendselect"></span></h1>
-            <div class="row">
-                <div class="col-sm-3">
+            <h1 class="card-title mt-3">Weekly /  Monthly Summery <span class="ml-3 mr-3" id="weekstartselect"></span> <span id="to" style="display:none">To</span> <span class="ml-3" id="weekendselect"></span></h1>
+            <div class="row mt-5">
+                <div class="col-sm-2.5 ml-4 mr-3" style="width:174px;">
                     <div class="dropdown">        
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1-1" data-toggle="dropdown">Select Week</button>                   
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1-1"style="width:174px;" data-toggle="dropdown">Select Week</button>                   
                         <div class="dropdown-menu dropdown-primary" id="your-custom-id">
                             <input class="form-control" type="text" placeholder="Search" aria-label="Search">
                             @foreach($weeks as $week)
@@ -205,7 +226,7 @@ fdf
                         </div>
                     </div>  
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2.5">
                     <div class="dropdown">        
                         <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1-1" data-toggle="dropdown">Select Month</button>                   
                         <div class="dropdown-menu dropdown-primary" id="your-custom-id">
@@ -216,8 +237,24 @@ fdf
                         </div>
                     </div>  
                 </div>
-            </div>
-            
+                <div class="col-sm-2">
+                    <div class="md-form ml-3">
+                        <input placeholder="Selected date" type="text" id="strt_date" class="form-control datepicker">
+                        <label for="date-picker-example">Start Date</label>
+                      </div>
+                </div>
+                <div class="col-sm-2 ml-3">
+                    <div class="md-form">
+                        <input placeholder="Selected date" type="text" id="end_date" class="form-control datepicker">
+                        <label for="date-picker-example">End Date</label>
+                      </div>
+                </div>
+                <div class="col-sm-2.5 ml-5" style="margin-top:-18px">
+                    <div class="md-form">
+                        <a class="btn btn-primary" onclick="weeklytablemake(document.getElementById('strt_date').value,document.getElementById('end_date').value)">Custom Search</a>
+                      </div>
+                </div>
+            </div>            
             
             <div id="weektabledata"></div> 
             <div class="tohide1">    
@@ -230,7 +267,7 @@ fdf
                         </th>                           
                         <th class="th-lg">Quantity
                         </th>
-                        <th class="th-lg">Net Income
+                        <th class="th-lg">Net Income (Rs)
                         </th>                                         
                         </tr>
                     </thead>
@@ -252,19 +289,35 @@ fdf
                         </th>                           
                         <th>Quantity
                         </th>
-                        <th>Net Income
+                        <th>Net Income (Rs)
                         </th>                                            
                         </tr>
                     </tfoot>
                 </table>
+                <a class="btn btn-sm btn-primary" onclick="print('weektable')">Get Report</a>
             </div>            
 
         </div>
     </div>    
-    
+        {{-- Income Variation through Past Week --}}
+        <div class="card mb-5">        
+            <div class="card-body">
+                <h1 class="mb-5">Income Variation through Past Week</h1>
+                <canvas id="myChart" style=""></canvas>
+            </div>
+        </div>     
 <script>
  
     $(document).ready(function () {
+        // Data Picker Initialization
+        $('.datepicker').pickadate({
+            // Escape any “rule” characters with an exclamation mark (!).
+            format: 'yyyy-mm-dd',
+            formatSubmit: 'yyyy/mm/dd',
+            hiddenPrefix: 'prefix__',
+            hiddenSuffix: '__suffix'
+        });
+
         // emptable
         $('#emptable').dataTable({
             "aLengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
@@ -393,12 +446,10 @@ fdf
         $('#weeklytable_wrapper select').addClass('mdb-select');
         $('#weeklytable_wrapper .mdb-select').material_select();
         $('#weeklytable_wrapper .dataTables_filter').find('label').remove();
-
-        
-        
-
     });
 
+
+var daytabledata;
     // daytable ajax
     function daytablemake(date){                                     
         console.log(date);
@@ -411,7 +462,7 @@ fdf
                 $('.tohide').fadeOut();           
                 $('#daytabledata').html(data);         
                 $('#dateselect').html(document.getElementById('date').value);
-               
+                daytabledata = data;
                //Day table
                 $('#daytable').dataTable({
                     "aLengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
@@ -435,7 +486,7 @@ fdf
         })
         
     } 
-
+var weekstabledata;
     // weeklytable ajax
     function weeklytablemake(start, end){                                     
         console.log(start);
@@ -448,7 +499,9 @@ fdf
             success:function(data){                  
 
                 $('.tohide1').fadeOut();           
-                $('#weektabledata').html(data.output);                   
+                $('#weektabledata').html(data.output); 
+                weekstabledata = data.output;
+                document.getElementById('to').style.display='inline';                 
                 $('#weekstartselect').html(document.getElementById('startdate').value );
                 $('#weekendselect').html(document.getElementById('enddate').value);
 
@@ -476,6 +529,55 @@ fdf
         })
         
     }    
+
+    function loadcontent(content)
+    {   $('.fade_out').fadeOut();
+        if (content=='daytble'){
+            $('#daytble').fadeIn();
+        } 
+        if (content=='weekmonthsummery'){
+            $('#weekmonthsummery').fadeIn();
+        } 
+        if (content=='currentEmp'){
+            $('#currentEmp').fadeIn();
+        } 
+        if (content=='vendors'){
+            $('#vendors').fadeIn();
+        }       
+    }
+
+    function print(content)
+    {  
+        if (content=='employee'){
+            window.location = "http://localhost/restapp/public/emppdf"; 
+        } 
+        if (content=='daytable'){
+           // console.log('daytale');
+            
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url:"{{ route('PdfController.dayPdf')}}",    
+                method:"POST",
+                data:{ daytabledata:daytabledata ,_token:_token},           
+                success:function(data){   }
+            });          
+
+        } 
+        if (content=='weektable'){
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url:"{{ route('PdfController.weekPdf')}}",    
+                method:"POST",
+                data:{weekstabledata:weekstabledata ,_token:_token},           
+                success:function(data){   }
+            });   
+        } 
+        if (content=='vendor'){
+            window.location = "http://localhost/restapp/public/venpdf"; 
+        } 
+       
+        
+    }
 </script>
 
 @endsection

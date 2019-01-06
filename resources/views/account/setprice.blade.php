@@ -64,13 +64,14 @@
                     }           
                 })
             }
-        });
-        $(document).on('click', '#list2', function(){                
-                $('#dish_name').val($(this).text());
+        
+        $(document).on('click', '#list2', function(){     
+                document.getElementById('dish_name').value = $(this).text();         
+                //$('#dish_name').val($(this).text());
                 document.getElementById('dish_name1').value = '';
                 $('#name_list').fadeOut();               
         });
-        
+    });
         //when click the green check button
         function priceSet(dish_name,price){
             console.log(dish_name);
@@ -114,13 +115,13 @@
                     }           
                 })
             }
-        });
+        
         $(document).on('click', '#list2', function(){                
                 $('#dish_name1').val($(this).text());
                 document.getElementById('dish_name').value = '';
                 $('#name_list1').fadeOut();               
         });
-
+    });
         //when click the green check button
         function priceEdit(dish_name,price){
             console.log(dish_name);

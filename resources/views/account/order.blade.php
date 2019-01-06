@@ -15,7 +15,7 @@
             
             <div class="form-group" style="padding-left:10px; width:70%;">
                     {{Form::label('unit', 'Unit')}}
-                    {{Form::text('unit', '', ['class' =>'form-control','id'=>'unit', 'placeholder'=>'Unit Name', 'required'])}}
+                    {{Form::text('unit', '', ['class' =>'form-control','id'=>'unit', 'placeholder'=>'Unit Name', 'disabled','required'])}}
             </div>    
             {{ csrf_field() }} 
             <div class="form-group" style="padding-left:10px; width:70%;">
