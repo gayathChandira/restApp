@@ -26,6 +26,7 @@ Route::post('/admin/daytable', 'DashboardController@daytable')->name('DashboardC
 Route::post('/admin/weektable', 'DashboardController@weektable')->name('DashboardController.weektable');
 Route::post('/inventory/linegraph', 'DashboardController@linegraph')->name('DashboardController.linegraph');
 Route::post('/inventory/pricetable', 'DashboardController@pricetable')->name('DashboardController.pricetable');
+Route::post('/admin/expensetable', 'DashboardController@expensetable')->name('DashboardController.expensetable');
 Route::get('/cashier','BillController@index');
 
 Route::get('/accountant/setprice','PriceController@setPrice');

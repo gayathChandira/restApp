@@ -178,7 +178,7 @@
                         </th>                  
                         </tr>
                     </thead>  {{ csrf_field() }}  
-                    <tbody >                        
+                    <tbody ><div style="display:none">@php($total1 =0);</div>                     
                             @foreach($daytable as $day)
                             <tr>
                                 <td> {{$day->id}} </td>
@@ -187,6 +187,8 @@
                                 <td> {{$day->price}} </td>    
                                 <td> {{explode(" ",$day->created_at)[1]}} </td>                          
                             </tr>
+                            <div style="display:none">
+                            {{$total1 = $day->price + $total1}}</div>
                             @endforeach                   
                     </tbody>
                     <tfoot>
@@ -204,6 +206,7 @@
                         </tr>
                     </tfoot>
                 </table>
+                <h2>Total income - Rs.{{$total1}}</h2>
                 <a class="btn btn-sm btn-primary" onclick="print('daytable')">Get Report</a>
             </div>
         </div>
@@ -271,7 +274,9 @@
                         </th>                                         
                         </tr>
                     </thead>
-                    <tbody>{{ csrf_field() }}  
+                    <tbody>{{ csrf_field() }}
+                        <div style="display:none">
+                        @php($total =0);  </div>
                         @foreach($weeklytable as $weekly)
                         <tr>
                             <td> {{$weekly->dish_id}} </td>
@@ -279,6 +284,8 @@
                             <td> {{$weekly->totalQuantity}} </td>
                             <td> {{$weekly->totalPrice}} </td>                                          
                         </tr>
+                        <div style="display:none">
+                        {{$total += $weekly->totalPrice}}</div>
                         @endforeach
                     </tbody>
                     <tfoot>
@@ -292,8 +299,10 @@
                         <th>Net Income (Rs)
                         </th>                                            
                         </tr>
+                        
                     </tfoot>
                 </table>
+                <h2>Total income - Rs.{{$total}}</h2>
                 <a class="btn btn-sm btn-primary" onclick="print('weektable')">Get Report</a>
             </div>            
 
@@ -497,11 +506,13 @@ var weekstabledata;
             method:"POST",
             data:{ start:start,end:end, _token:_token},           
             success:function(data){                  
-
+                console.log(data.output);
                 $('.tohide1').fadeOut();           
                 $('#weektabledata').html(data.output); 
                 weekstabledata = data.output;
-                document.getElementById('to').style.display='inline';                 
+                document.getElementById('to').style.display='inline'; 
+                console.log('dfdf');
+                console.log(document.getElementById('enddate').value) ;               
                 $('#weekstartselect').html(document.getElementById('startdate').value );
                 $('#weekendselect').html(document.getElementById('enddate').value);
 

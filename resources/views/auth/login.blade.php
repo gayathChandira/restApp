@@ -78,7 +78,7 @@
                   <h1 class="display-4 font-weight-bold">Nishan Hotel Nivithigala</h1>
                   <hr class="hr-light">
                   <h6 class="mb-3">Nishan Hotel Started as a small restaurant in 2013 with an ambision of providing quality service to its customers. Today we have become a reputed business in Nivithigala area. Our future vision is to continue providing a good service to the customers while ensuring maximum customer satisfaction.</h6>
-                  <a class="btn btn-outline-white">Learn more</a>
+                  {{-- <a class="btn btn-outline-white">Learn more</a> --}}
                 </div>
                 <!--Grid column-->
                 <!--Grid column-->
