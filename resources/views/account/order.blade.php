@@ -65,7 +65,7 @@
                     success:function(data){   
                         $('#unit').val(data);
                     }        
-                    })
+                })
                     
             }
             $('#vendorName').keyup(function(){
