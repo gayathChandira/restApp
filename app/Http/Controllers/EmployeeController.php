@@ -31,6 +31,12 @@ class EmployeeController extends Controller
     }
     //add new employee to the db ----------------
     public function setEmployee(Request $request){
+
+        $validatedData = $request->validate([
+            'contact' => 'required|max:10',
+            'email' => 'required|string|email|max:255|unique:employees',            
+        ]);
+
         $employee = new Employee;
 
         $employee->fname = $request->input('fname');

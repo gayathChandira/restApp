@@ -31,6 +31,11 @@ class VendorController extends Controller
     }
     //add new vendor to the db ----------------
     public function setVendor(Request $request){
+
+        $validatedData = $request->validate([
+            'contact' => 'required|max:10',
+            'email' => 'required|string|email|max:255|unique:vendors',            
+        ]);
         $vendor = new Vendor;
         $fooditem = new FoodItem;
         $vendor->fname = $request->input('fname');
