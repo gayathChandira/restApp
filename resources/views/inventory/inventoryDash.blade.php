@@ -91,15 +91,7 @@
         <div class="card mb-5">        
             <div class="card-body">
                 <h1 class="card-title mt-3">Food Item's Inventory Levels</h1>
-        {{-- <div class="dropdown">        
-                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1-1" data-toggle="dropdown">Select Ingredient</button>                   
-                <div class="dropdown-menu dropdown-primary" id="your-custom-id">
-                    <input class="form-control" type="text"  placeholder="Search" aria-label="Search">
-                    @foreach($itemNames as $item)
-                        <a class="dropdown-item mdb-dropdownLink-1" id="selected" href="#" onclick="">{{$item->itemName}} </a>
-                    @endforeach                       
-                </div>
-            </div>   --}}
+  
             <div class="form-group">    
                 <label for="users">Select Ingredient </label>
                 <select name="id" id="users" class="form-control dropdown-menu dropdown-primary" onchange="selectedItem()">

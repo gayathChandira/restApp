@@ -52,12 +52,10 @@ class DashboardController extends Controller
         $employee =  Employee::all();
         $vendor = Vendor::all();
 
-
         $firstweek = BillPaid::select('created_at')->orderBy('created_at')->first()->created_at;
         $lastweek = BillPaid::select('created_at')->orderBy('created_at','desc')->first()->created_at;
         Log::info($firstweek);
         Log::info($lastweek);
-
         
         $firstweek= $firstweek->toDateString();
         $lastweek=$lastweek->toDateString();
@@ -67,12 +65,10 @@ class DashboardController extends Controller
 
         $weeks = floor(($interval->days) / 7);
         $weeksbetween =array();
-        for($i = 1; $i <= $weeks; $i++){    
-            
+        for($i = 1; $i <= $weeks; $i++){                
             $week = $date1->format("W");
             $date1->add(new DateInterval('P4D'));
-            $week." = ".$firstweek." - ".$date1->format('Y-m-d')."<br/>";
-           
+            $week." = ".$firstweek." - ".$date1->format('Y-m-d')."<br/>";           
             $date1->add(new DateInterval('P3D'));
             $darray = array(
                 'start'=> $firstweek,
@@ -81,63 +77,34 @@ class DashboardController extends Controller
             $firstweek = $date1->format('Y-m-d');
             array_push($weeksbetween,$darray);
         }
-        //Log::info($weeksbetween);
-
-
-        //$weeks = BillPaid::select(DB::raw('WEEK(created_at) as week,created_at'))->groupBy('week')->orderBy('week', 'desc')->get();  //this will get us the week numbers from start to end of data
-          //Log::info($weeks); 
+   
         $results = BillPaid::select('created_at')
         ->orderBy('created_at','desc')
         ->get()
         ->groupBy(function (BillPaid $item) {
             return $item->created_at->format('Y-m');
         });
-        //Log::info($results->keys());    //this will get the year and month 2019-01
-        $months = $results->keys();
-        //$date = Carbon::now(); 
-        //$weekarray = array();     //this array includes start date and end date of each weeks. 
-        
-        // foreach($weeks as $week){            
-        //     //Log::info($week->week);
-        //     $weekNumber = $week->week;
-        //     $year = $week->created_at;
-        //     $year = explode(' ',$year)[0];
-        //     $year = explode('-',$year)[0];
-        //     $date->setISODate($year,($weekNumber+1)); //when given a week number it returns start date of that week
-        //     $start = $date->startOfWeek()->toDateTimeString();    //get the start date of the week
-        //     $end =  $date->endOfWeek()->addDays(1)->toDateTimeString();      // get the end date of the week
-        //     $weekly = array(
-        //         "start" => explode(" ",$start)[0],
-        //         "end" => explode(" ",$end)[0]
-        //     );           
-        //     array_push($weekarray,$weekly);
-        // }
+    
+        $months = $results->keys();     
         $montharray = array();     //this array includes start date and end date of each month. 
         
         $monthswithyears = array();
         foreach($months as $month){             
             array_push($monthswithyears,$month);
-            $firstday = $month.'-01';          //first date of the month
-            $lastday = date("Y-m-t", strtotime($firstday));            //last date of the month
-               
+            $firstday = $month.'-01';                               //first date of the month
+            $lastday = date("Y-m-t", strtotime($firstday));           //last date of the month               
             $monthly = array(
                 "start" => $firstday,
                 "end" => $lastday
             );           
             array_push($montharray,$monthly);
-        }
-       // $monthswithyears = str_replace('"', '', json_encode($monthswithyears));
-        //Log::info($monthswithyears);
-        
+        }        
 
         $today = Carbon::now();
         $one_week_ago = Carbon::now()->subWeeks(1);
         $weeklytable = BillPaid::selectRaw( 'dish_id , dish_name ,sum(price) as totalPrice , sum(quantity) as totalQuantity')
             ->whereBetween('created_at', [$one_week_ago, $today])
-            ->groupBy('dish_id')->get();       
-
-                 
-        //Log::info($weeklytable);
+            ->groupBy('dish_id')->get();         
 
         $data = array(
             'employee' => $employee,
@@ -154,6 +121,8 @@ class DashboardController extends Controller
         return View ('admin.adminDash')->with($data);
     }
    
+
+
     //for day table admin dash
     public function daytable(Request $request){
         $selectedDate = $request->get('date');      
@@ -204,6 +173,8 @@ class DashboardController extends Controller
         echo $output; 
             
     }
+
+
     //for weekly table admin dash
     public function weektable(Request $request){
         $startday = $request->get('start');
@@ -236,9 +207,7 @@ class DashboardController extends Controller
             <td>'. $week->dish_name.' </td>                                
             <td>'. $week->totalQuantity.' </td>
             <td>'. $week->totalPrice.' </td>                              
-        </tr>
-       
-        
+        </tr>   
         <input type="hidden" id="startdate" value="'.$startday.'">
         <input type="hidden" id="enddate" value="'.$endday.'">';
         $total += $week->totalPrice;
@@ -266,13 +235,15 @@ class DashboardController extends Controller
     }
 
 
+
+
+    //for inventory dashboard
     public function inventoryIndex(){
+
         $today = Carbon::now()->toDateString();        
         $issuetable = IssueFoodItem::where('created_at','like','%'.$today.'%')->get();  //for today issued table
-        $allissue = IssueFoodItem::all();   //for all issued table
-
+        $allissue = IssueFoodItem::all();                                                 //for all issued table
         $itemNames = FoodItemQuantity::select('itemName')->groupBy('itemName')->get();
-
         $data = array(
             'issuetable' => $issuetable,
             'allissue' => $allissue,
@@ -281,47 +252,27 @@ class DashboardController extends Controller
         return view ('inventory.inventoryDash')->with($data);
     }
 
-    //inventory
+    //inventory graph
     public function linegraph(Request $request){
         $selected  = $request->get('selected');
-        Log::info($selected);
-        $weekly = FoodItemQuantity::where('itemName','like','%'.$selected.'%')->get();
-        Log::info($weekly);
-        //$linearray = array();
+        $weekly = FoodItemQuantity::where('itemName','like','%'.$selected.'%')->get();     
         $quantityarray = array();
         $datearray = array();
-        foreach ($weekly as $week){
-            Log::info($week);
+        foreach ($weekly as $week){          
             $quanti = 
             array_push($quantityarray, $week->quantity);
             array_push( $datearray, explode(" ", $week->created_at)[0]);           
-        }
-        Log::info($quantityarray);
+        }       
         return response()->json(array('quantity'=>$quantityarray,'dates'=>$datearray));
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-//---------------------------------------------------------
+    //for account dashboard
     public function accountIndex(){
-        $dish = Dish::all();        
-       
-        $firstweek = BillPaid::select('created_at')->orderBy('created_at')->first()->created_at;
-        $lastweek = BillPaid::select('created_at')->orderBy('created_at','desc')->first()->created_at;
-        Log::info($firstweek);
-        Log::info($lastweek);
 
+        $dish = Dish::all();               
+        $firstweek = BillPaid::select('created_at')->orderBy('created_at')->first()->created_at;
+        $lastweek = BillPaid::select('created_at')->orderBy('created_at','desc')->first()->created_at; 
         
         $firstweek= $firstweek->toDateString();
         $lastweek=$lastweek->toDateString();
@@ -331,12 +282,10 @@ class DashboardController extends Controller
 
         $weeks = floor(($interval->days) / 7);
         $weeksbetween =array();
-        for($i = 1; $i <= $weeks; $i++){    
-            
+        for($i = 1; $i <= $weeks; $i++){       
             $week = $date1->format("W");
             $date1->add(new DateInterval('P4D'));
-            $week." = ".$firstweek." - ".$date1->format('Y-m-d')."<br/>";
-           
+            $week." = ".$firstweek." - ".$date1->format('Y-m-d')."<br/>";           
             $date1->add(new DateInterval('P3D'));
             $darray = array(
                 'start'=> $firstweek,
@@ -345,8 +294,6 @@ class DashboardController extends Controller
             $firstweek = $date1->format('Y-m-d');
             array_push($weeksbetween,$darray);
         }
-
-
 
         $firstweek1 = PayVendor::select('created_at')->orderBy('created_at')->first()->created_at;
         $lastweek1 = PayVendor::select('created_at')->orderBy('created_at','desc')->first()->created_at;
@@ -359,12 +306,10 @@ class DashboardController extends Controller
 
         $weeks1 = floor(($interval1->days) / 7);
         $weeksbetween1 =array();
-        for($i = 1; $i <= $weeks1; $i++){    
-            
+        for($i = 1; $i <= $weeks1; $i++){                
             $week = $date1e->format("W");
             $date1e->add(new DateInterval('P4D'));
-            $week." = ".$firstweek1." - ".$date1e->format('Y-m-d')."<br/>";
-           
+            $week." = ".$firstweek1." - ".$date1e->format('Y-m-d')."<br/>";           
             $date1e->add(new DateInterval('P3D'));
             $darray = array(
                 'start'=> $firstweek1,
@@ -374,37 +319,26 @@ class DashboardController extends Controller
             array_push($weeksbetween1,$darray);
         }
 
-
-
-
-
-
-
-
         $results = BillPaid::select('created_at')
         ->orderBy('created_at','desc')
         ->get()
         ->groupBy(function (BillPaid $item) {
             return $item->created_at->format('Y-m');
         });
-        //Log::info($results->keys());    //this will get the year and month 2019-01
+   
         $months = $results->keys();
-        $montharray = array();     //this array includes start date and end date of each month. 
-        
+        $montharray = array();     //this array includes start date and end date of each month.         
         $monthswithyears = array();
         foreach($months as $month){             
             array_push($monthswithyears,$month);
             $firstday = $month.'-01';          //first date of the month
-            $lastday = date("Y-m-t", strtotime($firstday));            //last date of the month
-               
+            $lastday = date("Y-m-t", strtotime($firstday));            //last date of the month               
             $monthly = array(
                 "start" => $firstday,
                 "end" => $lastday
             );           
             array_push($montharray,$monthly);
         }
-
-
 
         $results1 = PayVendor::select('created_at')
         ->orderBy('created_at','desc')
@@ -414,45 +348,38 @@ class DashboardController extends Controller
         });
 
         $months1 = $results1->keys();
-        $montharray1 = array();     //this array includes start date and end date of each month. 
-        
+        $montharray1 = array();     //this array includes start date and end date of each month.         
         $monthswithyears1 = array();
         foreach($months1 as $month){             
             array_push($monthswithyears1,$month);
             $firstday = $month.'-01';          //first date of the month
-            $lastday = date("Y-m-t", strtotime($firstday));            //last date of the month
-               
+            $lastday = date("Y-m-t", strtotime($firstday));            //last date of the month               
             $monthly = array(
                 "start" => $firstday,
                 "end" => $lastday
             );           
             array_push($montharray1,$monthly);
         }
-        //Log::info($weekarray);
+   
         $today = Carbon::now();
         $one_week_ago = Carbon::now()->subWeeks(1);
         $weeklytable = BillPaid::selectRaw( 'dish_id , dish_name ,sum(price) as totalPrice , sum(quantity) as totalQuantity')
             ->whereBetween('created_at', [$one_week_ago, $today])
             ->groupBy('dish_id')->get();       
 
-        $expensetbl = PayVendor::whereBetween('created_at', [$one_week_ago, $today])->get();         
+        $expensetbl = PayVendor::whereBetween('created_at', [$one_week_ago, $today])->get();   
         
         $unitpriceData =array();
         $noOfUnits =array();
         $netexpense =array();
         foreach($expensetbl as $ex){
             $hello= $ex->data;            
-            $hello = explode(',',$hello);
-            
-            $res = preg_replace("/[^0-9.]/",'' , $hello);            
-            //Log::info($res);
+            $hello = explode(',',$hello);            
+            $res = preg_replace("/[^0-9.]/",'' , $hello);           
             array_push($unitpriceData,$res[0]);
             array_push($noOfUnits,$res[1]);
             array_push($netexpense,$res[2]);    
-        }
-        //Log::info($unitpriceData);
-        
-        
+        }   
        
         $data = array(
             'weeks' => $weeksbetween,
@@ -470,6 +397,8 @@ class DashboardController extends Controller
         );    
         return view('account.accountDash')->with($data);
     }
+
+
 
     //for price table account dash
     public function pricetable(Request $request){
@@ -517,24 +446,22 @@ class DashboardController extends Controller
         </tfoot>
         </tabel>';
         echo $output;
-
     }
 
+
+
     public function expensetable(Request $request){
+        
         $startday = $request->get('start');
-        $endday = $request->get('end');   
-        Log::info($startday);
-        Log::info( $endday);   
+        $endday = $request->get('end');     
         $expensetbl = PayVendor::whereBetween('created_at', [$startday, $endday])->get();          
         $unitpriceData =array();
         $noOfUnits =array();
         $netexpense =array();
         foreach($expensetbl as $ex){
             $hello= $ex->data;            
-            $hello = explode(',',$hello);
-            
-            $res = preg_replace("/[^0-9.]/",'' , $hello);            
-            //Log::info($res);
+            $hello = explode(',',$hello);            
+            $res = preg_replace("/[^0-9.]/",'' , $hello);             
             array_push($unitpriceData,$res[0]);
             array_push($noOfUnits,$res[1]);
             array_push($netexpense,$res[2]);    

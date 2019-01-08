@@ -32,7 +32,7 @@ class RecipeController extends Controller
         $ingri = $request->get('ingri');
         $amount = $request->get('amount');
         $length = $request->get('length');      
-        //Log::info("last one ". $last_id);
+  
         
         $result = Recipe::where('dish_id' , '=' , 1)->first();  //this is just to test the column empty or not
         if(!$result){    
@@ -77,7 +77,5 @@ class RecipeController extends Controller
         {{session("success")}}        
     </div> ';
     echo $output;
-        //return response()->json(['success' => 'Successfully Added!'], 200);   
-
     }
 }

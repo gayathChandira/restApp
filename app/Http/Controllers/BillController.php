@@ -19,13 +19,12 @@ class BillController extends Controller
     {
         $this->middleware('auth');
     } 
-    //Get dish name when user types dish name
-    public function fetchName(Request $request){       
 
-        
+    //Get dish name when user types dish name
+    public function fetchName(Request $request){  
+
         if($request->get('query')){            
-            $query = $request->get('query');  
-            
+            $query = $request->get('query');              
             $data = Recipe::where('dish_name','like', '%'.$query.'%')->select('dish_name')->groupBy('dish_name')->get();              
             $output = '<ul class="dropdown-menu"  style="display:block; position:relative">';
             foreach($data as $row){                
@@ -35,19 +34,18 @@ class BillController extends Controller
             echo $output;
         }
     }
+
+
     //set the data into bill table in db 
     public function store(Request $request){
         
         $billData = Bill::all();
-        $num = $request->num;
-        
+        $num = $request->num;        
         if($num == 0){
             Bill::truncate();  // delete all records in db 
         }
         $dish_name = $request->dish_name;
-        $quantity = $request->quantity; 
-       
-        
+        $quantity = $request->quantity;         
   
         $unit_price = Dish::where('dish_name','like', '%'.$dish_name.'%')->select('unit_price')->value('unit_price'); 
         $result = Bill::where('dish_name', '=',$dish_name)->first();
@@ -67,15 +65,13 @@ class BillController extends Controller
             $bill->dish_id = $dish_id;
             $bill->dish_name = $dish_name;
             $bill->save(); 
-        }     
-               
+        }                    
     }
 
     public function makeTable(Request $request){
         $bill = new Bill;
         $alldata = Bill::all();
         Log::info($alldata);
-
         $output ='<table style="width: -webkit-fill-available;">
         <tr>
             <td></td>
@@ -84,8 +80,7 @@ class BillController extends Controller
             <td class="font-weight-bold">Price</td>
         </tr>';
         $netprice=0;
-        foreach ($alldata as $row) {
-           // Log::info($row);
+        foreach ($alldata as $row) {         
             $output .='
             <tr>
                 <td>'.$row->id.'</td>
@@ -113,8 +108,7 @@ class BillController extends Controller
     public function storePaid(){
         $bill = new Bill;        
         $bill_data = Bill::all();
-       // Log::info('dfdf');
-        //Log::info($bill_data);
+      
         foreach ($bill_data as $row){
             $billPaid = new BillPaid;
             Log::info( $row->dish_id);
@@ -124,11 +118,7 @@ class BillController extends Controller
             $billPaid->quantity = $row->quantity;
             $billPaid->price = $row->price;
             $billPaid->save();
-
-
-
-            $food_items = Recipe::where('dish_id','=',$dish_id )->select('ingredients','amount')->get();
-       
+            $food_items = Recipe::where('dish_id','=',$dish_id )->select('ingredients','amount')->get();       
         }
         
         $pdf = PDF::loadView('invoice',compact('bill_data'));   
@@ -150,6 +140,5 @@ class BillController extends Controller
             'beverages' => $beverages
         );
         return view ('cashier.bill')->with($data);
-    }
-    
+    }    
 }

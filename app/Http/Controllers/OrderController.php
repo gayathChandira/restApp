@@ -29,15 +29,14 @@ class OrderController extends Controller
     //get the unit of food item
     public function fetchUnit(Request $request){    
         $fooditem =$request->get('query');    
-        $unit = FoodItem::where('itemName','=',$fooditem)->value('unit');
-        //Log::info($unit);
+        $unit = FoodItem::where('itemName','=',$fooditem)->value('unit');   
         echo $unit;
     }
+    
     //get the vendor of food item
     public function vendorLoad(Request $request){
         $fooditem =$request->get('query');    
-        $vendors = FoodItem::where('itemName','=',$fooditem)->value('vendor_id');
-        //Log::info($vendors);
+        $vendors = FoodItem::where('itemName','=',$fooditem)->value('vendor_id');       
         $arr =  explode(" ", $vendors);
         array_shift($arr);
         //Log::info($arr);

@@ -48,9 +48,7 @@
                     {{Form::submit('Submit', ['class' => 'btn btn-primary'])}} 
                 {!! Form::close() !!}
                
-                {{-- <div id="app">                        
-                        <notification></notification>                    
-                 </div> --}}
+                
                  
         </div>
 

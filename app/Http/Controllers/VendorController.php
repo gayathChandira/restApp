@@ -29,6 +29,8 @@ class VendorController extends Controller
         
         return view('admin.vendors');
     }
+    
+    
     //add new vendor to the db ----------------
     public function setVendor(Request $request){
 
@@ -45,27 +47,21 @@ class VendorController extends Controller
        
         $length = $request->input('length');  //length of the array (to the for loop)
         $foodids = $request->input('food_ids');  
-        $arrayy = explode(',', $foodids);   //array of food-ids 
-        
+        $arrayy = explode(',', $foodids);   //array of food-ids         
         $vendor->save();        
 
         //update fooditems table's vendor_id  
         for($i=0;$i<$length;$i++){
             $oldvendors = FoodItem::where('id', 'like', '%'.$arrayy[$i].'%')->value('vendor_id');
-            $oldvendors .= " $vendor->id";
-            //echo $oldvendors;
-
-            // $array2 = explode(',',$oldvendors);
-            // echo count($array2);
-            // $array2($vendor->id);
-            // echo $array2;
+            $oldvendors .= " $vendor->id";           
             FoodItem::where('id', 'like', '%'.$arrayy[$i].'%')->update(['vendor_id'=>$oldvendors]);
         }
         
         return redirect()->back()->with('success', 'Vendor Details Added!');
        
     }
-       // edit vendor----------------------
+     
+    // edit vendor----------------------
      //fetching vendor-id from the db
      public function fetchID(Request $request){
         if($request->get('query')){            
@@ -80,7 +76,8 @@ class VendorController extends Controller
             echo $output;
         }
     }
-     //fetching vendor name from the db when id select
+     
+    //fetching vendor name from the db when id select
      public function fetchVendorName(Request $request){       
         if($request->get('query')){            
             $query = $request->get('query');                   
@@ -89,6 +86,8 @@ class VendorController extends Controller
             echo $output;
         }
     }
+    
+    
     //fetching vendor-name when typing vendor name
     public function fetchNameWhenType(Request $request){
         if($request->get('query')){            
@@ -101,7 +100,9 @@ class VendorController extends Controller
             $output .= '</ul>';
             echo $output;
         }
-    }//fetching vendor-id from the db when vendor-name select
+    }
+    
+    //fetching vendor-id from the db when vendor-name select
     public function fetchvendorID(Request $request){       
         if($request->get('query')){            
             $query = $request->get('query');                   
@@ -110,6 +111,8 @@ class VendorController extends Controller
             echo $output;
         }
     }
+    
+    
     public function editVendor(Request $request){
         if($request->get('query')){                                 
             $query = $request->get('query'); 
@@ -142,6 +145,8 @@ class VendorController extends Controller
             }
         }   
     }
+    
+    
     //update vendor details query 
     public function updateVendor(Request $request){
        
@@ -153,10 +158,10 @@ class VendorController extends Controller
         'contact'=>$request->contact]);
         return redirect('./admin/vendors')->with('success', 'Vendor Details Updated!');
     }
+    
+    
     //Delete vendor from the db
-    public function removeVendor(Request $request){
-
-        
+    public function removeVendor(Request $request){      
         DB::table('vendors')->where('id', '=', $request->vendorid)->delete();
         return redirect('./admin/vendors')->with('error', 'Vendor Details Deleted!');
     }

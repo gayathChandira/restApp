@@ -52,28 +52,6 @@
 
 
 
-<script>
-//  $(document).ready(function () {
-//         // emptable
-//         $('#emptable').dataTable({
-//             "aLengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
-//             "iDisplayLength": 5
-//         });
-//         $('#emptable_wrapper').find('label').each(function () {
-//             $(this).parent().append($(this).children());
-//         });
-//         $('#emptable_wrapper .dataTables_filter').find('input').each(function () {
-//             $('input').attr("placeholder", "Search");
-//             $('input').removeClass('form-control-sm');
-//         });
-//         $('#emptable_wrapper .dataTables_length').addClass('d-flex flex-row');
-//         $('#emptable_wrapper .dataTables_filter').addClass('md-form');
-//         $('#emptable_wrapper select').removeClass(
-//             'custom-select custom-select-sm form-control form-control-sm');
-//         $('#emptable_wrapper select').addClass('mdb-select');
-//         $('#emptable_wrapper .mdb-select').material_select();
-//         $('#emptable_wrapper .dataTables_filter').find('label').remove();
-// });
-</script>
+
 
 @endsection

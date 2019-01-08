@@ -51,6 +51,7 @@ class FoodItemController extends Controller
     {
         //
     }
+    
     //fetching item-id from the db
     public function fetch(Request $request){
         if($request->get('query')){            

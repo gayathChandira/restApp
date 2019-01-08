@@ -12,12 +12,9 @@ use App\Vendor;
 use App\BillPaid;
 use Log;
 use DB;
-
-
 use App\IssueFoodItem;
 use App\FoodItemQuantity;
 use App\Dish;
-
 use DatePeriod;
 
 
@@ -26,8 +23,7 @@ class ExpenseController extends Controller
     //for expense table in admin
 
     public function expenseIndex(){
-        $dish = Dish::all();        
-       
+        $dish = Dish::all();       
         $firstweek = BillPaid::select('created_at')->orderBy('created_at')->first()->created_at;
         $lastweek = BillPaid::select('created_at')->orderBy('created_at','desc')->first()->created_at;
         Log::info($firstweek);
@@ -42,12 +38,10 @@ class ExpenseController extends Controller
 
         $weeks = floor(($interval->days) / 7);
         $weeksbetween =array();
-        for($i = 1; $i <= $weeks; $i++){    
-            
+        for($i = 1; $i <= $weeks; $i++){                
             $week = $date1->format("W");
             $date1->add(new DateInterval('P4D'));
-            $week." = ".$firstweek." - ".$date1->format('Y-m-d')."<br/>";
-           
+            $week." = ".$firstweek." - ".$date1->format('Y-m-d')."<br/>";           
             $date1->add(new DateInterval('P3D'));
             $darray = array(
                 'start'=> $firstweek,
@@ -70,12 +64,10 @@ class ExpenseController extends Controller
 
         $weeks1 = floor(($interval1->days) / 7);
         $weeksbetween1 =array();
-        for($i = 1; $i <= $weeks1; $i++){    
-            
+        for($i = 1; $i <= $weeks1; $i++){                
             $week = $date1e->format("W");
             $date1e->add(new DateInterval('P4D'));
-            $week." = ".$firstweek1." - ".$date1e->format('Y-m-d')."<br/>";
-           
+            $week." = ".$firstweek1." - ".$date1e->format('Y-m-d')."<br/>";           
             $date1e->add(new DateInterval('P3D'));
             $darray = array(
                 'start'=> $firstweek1,
@@ -84,13 +76,6 @@ class ExpenseController extends Controller
             $firstweek1 = $date1e->format('Y-m-d');
             array_push($weeksbetween1,$darray);
         }
-
-
-
-
-
-
-
 
         $results = BillPaid::select('created_at')
         ->orderBy('created_at','desc')
@@ -115,8 +100,6 @@ class ExpenseController extends Controller
             array_push($montharray,$monthly);
         }
 
-
-
         $results1 = PayVendor::select('created_at')
         ->orderBy('created_at','desc')
         ->get()
@@ -139,6 +122,7 @@ class ExpenseController extends Controller
             );           
             array_push($montharray1,$monthly);
         }
+        
         //Log::info($weekarray);
         $today = Carbon::now();
         $one_week_ago = Carbon::now()->subWeeks(1);
@@ -153,8 +137,7 @@ class ExpenseController extends Controller
         $netexpense =array();
         foreach($expensetbl as $ex){
             $hello= $ex->data;            
-            $hello = explode(',',$hello);
-            
+            $hello = explode(',',$hello);            
             $res = preg_replace("/[^0-9.]/",'' , $hello);            
             //Log::info($res);
             array_push($unitpriceData,$res[0]);

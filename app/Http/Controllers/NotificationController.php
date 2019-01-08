@@ -14,8 +14,7 @@ class NotificationController extends Controller
         $this->middleware('auth');
     } 
 
-    public function checkNotify(Request $request){
- 
+    public function checkNotify(Request $request){ 
         
         $user = $request->user;
         if ($user == 'accountant'){ 
@@ -27,8 +26,7 @@ class NotificationController extends Controller
                 $output .= '<a class="dropdown-item" style="text-align:center" href="#">No New Notifications</a>';
                 echo $output;
             }
-            else{                        
-                      
+            else{                     
                     foreach ($accountant as $row){   
                         $output ='';                                      
                         $output .= '<a class="dropdown-item" href="#" onclick="showNoti(\''.$row->data. '\',\''.$row->id.'\')">'.$row->data.'<br><small>'.$row->from.'</small></a>
@@ -37,11 +35,6 @@ class NotificationController extends Controller
                     }
             }
         }
-        
-
-
-
-
 
         if ($user == 'inventory manager'){ 
             $inventoryManager = Notification::where('read','=','0')->where('to','=','Inventory Manager')->select('to','from','data','id')->get();
@@ -52,8 +45,7 @@ class NotificationController extends Controller
                 $output .= '<a class="dropdown-item" style="text-align:center" href="#">No New Notifications</a>';
                 echo $output;
             }
-            else{                       
-                     
+            else{                          
                     foreach ($inventoryManager as $row){ 
                         
                         
@@ -76,18 +68,13 @@ class NotificationController extends Controller
                 $output .= '<a class="dropdown-item" style="text-align:center" href="#">No New Notifications</a>';
                 echo $output;
             }
-            else{                       
-                     
-                    foreach ($admin as $row){ 
-                        
-                        
+            else{                      
+                    foreach ($admin as $row){                   
                         $output ='';                                           
                         $output .= '<a class="dropdown-item" href="#" onclick="showNoti(\''.$row->data. '\',\''.$row->id.'\')">'.$row->data.'<br><small>'.$row->from.'</small></a>
-                        <input type="hidden" id="count" value="'.$admincount.'">';
-                        
+                        <input type="hidden" id="count" value="'.$admincount.'">';                        
                         echo $output;
-                    }         
-                
+                    }            
             }
         }
 

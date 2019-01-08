@@ -30,15 +30,13 @@ class IssueFoodItemsController extends Controller
         $temp->save();
     }
 
-    public function makeTable(Request $request){
-        
-       // $temp = new Issue_fd_temp;
+    public function makeTable(Request $request){        
+  
         $alldata =Issue_fd_temp::all();        
         Log::info($alldata);
         $output ='<table class="table">
                     <tr style=""><th scope="col">Item</th><th scope="col">Amount</th></tr>';//Added table headers for issued items
-        foreach ($alldata as $row) {
-           // Log::info($row);
+        foreach ($alldata as $row) {  
             $output .='
             <tr>                
                 <td>'.$row->food_item.'</td>
@@ -50,11 +48,13 @@ class IssueFoodItemsController extends Controller
         echo $output;        
         
     }
+    
     //when user wants to remove issuing items
     public function issueRemove(Request $request){
         $food_item = $request->food_item;
         Issue_fd_temp::where('food_item',$food_item)->delete();
     }
+   
     //save data in permanant table
     public function submit(){
         $tempdata = Issue_fd_temp::all();

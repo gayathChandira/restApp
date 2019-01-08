@@ -25,11 +25,14 @@ class EmployeeController extends Controller
     {
         $this->middleware('auth');
     }  
-    public function index(){
-        
+
+
+    public function index(){        
         return view('admin.employees');
     }
-    //add new employee to the db ----------------
+
+
+    //add new employee to the db------------- 
     public function setEmployee(Request $request){
 
         $validatedData = $request->validate([
@@ -38,7 +41,6 @@ class EmployeeController extends Controller
         ]);
 
         $employee = new Employee;
-
         $employee->fname = $request->input('fname');
         $employee->lname = $request->input('lname');
         $employee->age = $request->input('age');
@@ -63,6 +65,7 @@ class EmployeeController extends Controller
             echo $output;
         }
     }
+
      //fetching employee name from the db when id select
      public function fetchEmployeeName(Request $request){       
         if($request->get('query')){            
@@ -72,6 +75,7 @@ class EmployeeController extends Controller
             echo $output;
         }
     }
+
     //fetching employee-name when typing employee name
     public function fetchNameWhenType(Request $request){
         if($request->get('query')){            
@@ -84,7 +88,9 @@ class EmployeeController extends Controller
             $output .= '</ul>';
             echo $output;
         }
-    }//fetching employee-id from the db when employee-name select
+    }
+    
+    //fetching employee-id from the db when employee-name select
     public function fetchemployeeID(Request $request){       
         if($request->get('query')){            
             $query = $request->get('query');                   
@@ -93,10 +99,10 @@ class EmployeeController extends Controller
             echo $output;
         }
     }
+    
     public function editEmployee(Request $request){
         if($request->get('query')){                                 
-            $query = $request->get('query'); 
-                  
+            $query = $request->get('query');                   
             $data = DB::table('employees')->where('id','=', $query)->get();  
             foreach($data as $row){   
                             
@@ -129,6 +135,8 @@ class EmployeeController extends Controller
             }
         }   
     }
+
+
     //update employee details query
     public function updateEmployee(Request $request){
         
@@ -141,6 +149,8 @@ class EmployeeController extends Controller
         return redirect()->back()->with('success', 'Employee Details Updated!');
         
     }
+    
+    
     //Delete vendor from the db
     public function removeEmployee(Request $request){       
         DB::table('employees')->where('id', '=', $request->empid)->delete();

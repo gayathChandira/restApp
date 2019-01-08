@@ -16,16 +16,13 @@ class PdfController extends Controller
         $this->middleware('auth');
     } 
     public function employeePdf(){
-        $employee =  Employee::all();
-    
-        //return view('pdf.currentEmployees')->with('employee',$employee);
+        $employee =  Employee::all();    
         $pdf = PDF::loadView('pdf.currentEmployees',compact('employee'));   
         return $pdf->download('employee.pdf');       
     }
 
     public function vendorPdf(){
-        $vendor =  Vendor::all();
-    
+        $vendor =  Vendor::all();    
         //return view('pdf.vendors')->with('vendor',$vendor);
         $pdf = PDF::loadView('pdf.vendors',compact('vendor'));   
         return $pdf->download('vendor.pdf');       
@@ -45,8 +42,7 @@ class PdfController extends Controller
         $data = $request->get('weekstabledata');
         //Log::info($data);
         $pdf = PDF::loadView('pdf.weektable',compact('data'));   
-        return $pdf->download('weektable.pdf');  
-      
+        return $pdf->download('weektable.pdf');        
              
     }
    
