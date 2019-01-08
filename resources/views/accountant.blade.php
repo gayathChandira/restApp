@@ -153,7 +153,8 @@
                 url:"{{ route('OrderController.fillForm')}}",   
                 method:"POST",
                 data:{food:food,_token:_token,nid:nid},                      
-                success:function(data){  
+                success:function(data){ 
+                    console.log('notifi'); 
                     console.log(data)   ;
                     window.location = "http://localhost/restapp/public/accountant/order/"+data;               
                 }        

@@ -5,7 +5,7 @@
 {{-- expense table --}}    
 <div class="card mb-5">        
     <div class="card-body">
-        <h1 class="card-title mt-3">Expese Data <span class="ml-3 mr-3" id="weekstartselect1"></span> <span id="to1" style="display:none">To</span> <span class="ml-3" id="weekendselect1"></span></h1>
+        <h1 class="card-title mt-3">Expense Data <span class="ml-3 mr-3" id="weekstartselect1"></span> <span id="to1" style="display:none">To</span> <span class="ml-3" id="weekendselect1"></span></h1>
         <div class="row mt-5">
             <div class="col-sm-2.5 ml-4 mr-3" style="width:174px;">
                 <div class="dropdown">        
@@ -101,7 +101,7 @@
                     </tr>
                 </tfoot>
             </table>
-            <h2>Total income - Rs.{{$total1}}</h2>
+            <h2>Total Expense - Rs.{{$total1}}</h2>
         </div>            
 
     </div>

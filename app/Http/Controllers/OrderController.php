@@ -21,6 +21,7 @@ class OrderController extends Controller
         return view ('account.order');
     }
     public function index1($id){
+        Log::info('order controller');
         $foodname = FoodItem::where('id','=',$id)->value('itemName');
         return view ('account.order')->with('foodname',$foodname);
     }

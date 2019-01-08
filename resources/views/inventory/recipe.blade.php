@@ -45,7 +45,7 @@
                 </div> 
                 <div class="col-md-4 form-group ">
                     {{Form::label('amounts', 'Amounts')}}
-                    {{Form::text('amount[0]', '', ['class' =>'form-control', 'placeholder'=>'Amount (grams)', 'id'=>'amount', 'required'])}}
+                    {{Form::text('amount[0]', '', ['class' =>'form-control', 'placeholder'=>'Amount (grams/units)', 'id'=>'amount', 'required'])}}
                 </div> 
                 <a class="btn btn-primary btn-lg" style="height: fit-content;top: 9px;" id="more_fields" onclick="add_fields();">Add More</a> 
                 <div class="col-md-4 card mb-4" style="display: none" id="card">
@@ -172,10 +172,7 @@
         //when click submit button
         var recipe_name = document.getElementById("item_ID").value;
         function submit(){
-            if(recipe_name==""){
-                window.alert("Name of recipe cannot be empty!");
-            }
-            else{
+            
                 console.log('submit');
                 var success = '<div class="alert alert-success">\
                 Successfully Added!       \
@@ -184,7 +181,7 @@
                 setTimeout(function() {
                     location.reload();
                 }, 1000);
-            }
+            
         }
     </script>
     

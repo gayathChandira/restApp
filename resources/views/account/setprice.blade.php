@@ -65,10 +65,11 @@
                 })
             }
         
-        $(document).on('click', '#list2', function(){     
+        $(document).on('click', '#list2', function(){
+            document.getElementById('dish_name1').value = '';     
                 document.getElementById('dish_name').value = $(this).text();         
                 //$('#dish_name').val($(this).text());
-                document.getElementById('dish_name1').value = '';
+               
                 $('#name_list').fadeOut();               
         });
     });
@@ -76,7 +77,13 @@
         function priceSet(dish_name,price){
             console.log(dish_name);
             console.log(price);
-            var _token = $('input[name="_token"]').val();
+            if(document.getElementById('name_list')=='' || document.getElementById('price')==''){
+                var fail = '<div class="alert alert-danger">\
+            Please Fill out all fields !       \
+            </div> ';
+            $('#message').html(fail);
+            } else{
+                var _token = $('input[name="_token"]').val();
             $.ajax({
                 url: "{{ route('PriceController.store') }}",
                 type: "POST",
@@ -96,6 +103,8 @@
             setTimeout(function() {
                 location.reload();
             }, 1000);
+            }
+            
         } 
 
 
@@ -117,8 +126,9 @@
             }
         
         $(document).on('click', '#list2', function(){                
-                $('#dish_name1').val($(this).text());
+               
                 document.getElementById('dish_name').value = '';
+                $('#dish_name1').val($(this).text());
                 $('#name_list1').fadeOut();               
         });
     });

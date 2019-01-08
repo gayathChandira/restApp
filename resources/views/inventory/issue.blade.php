@@ -1,5 +1,6 @@
 @extends('inventoryMgr')
 @section('content')
+<div id="message"></div>
 <h1 class="card-title">Issue Food-Items to Kitchen</h1>
 <form>
     <div class="form-row mt-5">
@@ -9,7 +10,7 @@
         </div>
         {{ csrf_field() }}  
         <div class="col-md-5 form-group" style="padding-top:7px;">
-            <input type="text" id="quantity" class="form-control" placeholder="Quantity">
+            <input type="text" id="quantity" class="form-control" placeholder="Quantity (kg/Units)">
         </div>            
         <div class="form-group col-md-2">
             <a href="#" onclick="store(document.getElementById('item_name').value, document.getElementById('quantity').value)" class="btn btn-success btn-md"><i class="fa fa-check" aria-hidden="true"></i></a>
@@ -117,6 +118,15 @@
             success:function(data){                            
                 $('#name_list').fadeIn();
                 $('#name_list').html(data);
+                
+                console.log('submit');
+                var success = '<div class="alert alert-success">\
+                Successfully Added!       \
+                </div> ';
+                $('#message').html(success);
+                setTimeout(function() {
+                    location.reload();
+                }, 1000);
             }           
         })
     }    

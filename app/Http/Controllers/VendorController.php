@@ -65,7 +65,8 @@ class VendorController extends Controller
      public function fetchID(Request $request){
         if($request->get('query')){            
             $query = $request->get('query');                   
-            $data = DB::table('vendors')->where('id', 'like', '%'.$query.'%')->get();            
+            $data = DB::table('vendors')->where('id', 'like', '%'.$query.'%')->get();    
+            Log::info($data);        
             $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
             foreach($data as $row){                
                 $output .= '<li id="list1"><a class="black-text dropdown-item" href="#">'.$row->id.'</a></li>';

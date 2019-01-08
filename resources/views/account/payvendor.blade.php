@@ -3,6 +3,7 @@
 <div class="card mb-4 wow fadeIn ">        
         
 <div class="card-body">
+    <div id="message"></div>
     <h2>Pay For Vendor</h2>  
     {!! Form::open(['action'=> 'FoodItemController@storenew', 'method' =>'POST','autocomplete' =>'off'])!!}
         
@@ -169,9 +170,18 @@
                 url:"{{ route('PayVendorController.store')}}",   
                 method:"POST",
                 data:{values:values,ven_id:ven_id,ven_name:ven_name,data:data,_token:_token}                     
-                // success:function(data){        
+                // success:function(){ 
+                       
                 // }        
             })
+            var success = '<div class="alert alert-success">\
+                    Successfully Set the Price!       \
+                    </div> ';
+                    $('#message').html(success);
+                    
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1000);    
         }
     }
 

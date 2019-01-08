@@ -5,7 +5,7 @@
     {{-- today issued food item table --}}
     <div class="card mb-5">        
         <div class="card-body">
-            <h1 class="card-title mt-3">Today Issued Food ingredients</h1>
+            <h1 class="card-title mt-3">Today Issued Food Ingredients</h1>
             <table id="issuetable" class="table table-striped table-responsive-sm" cellspacing="0" width="100%">
                 <thead>
                     <tr>
